@@ -1,0 +1,12 @@
+{
+  "version": "0.2",
+  "language": "en,es",
+  "ignorePaths": [
+    "./.github/**",
+    "./.vscode/**",
+    "*/node_modules/**",
+    "*/public/**",
+    "*/coverage/**",
+    "*/package-lock.json"
+  ]
+}

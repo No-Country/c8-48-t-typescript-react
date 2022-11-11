@@ -1,0 +1,72 @@
+{
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.language": "en,es",
+  "cSpell.words": [
+    "nestjs"
+  ],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.insertSpaces": true,
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#ffaa0080"
+    },
+    {
+      "column": 120,
+      "color": "#ff0000"
+    }
+  ],
+  "editor.tabSize": 2,
+  "editor.wordWrapColumn": 120,
+  "editor.wordWrap": "wordWrapColumn",
+  "emmet.excludeLanguages": [],
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "markdown": "html",
+    "javascript": "javascriptreact"
+  },
+  "eslint.format.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onSave",
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "coverage": true
+  },
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "scss.validate": false,
+  "search.exclude": {
+    "**/coverage": true,
+    "**/node_modules": true
+  },
+  "stylelint.validate": ["css", "scss", ".module.scss"],
+  "prettier.configPath": "./server/.prettierrc.js"
+}

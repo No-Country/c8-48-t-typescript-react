@@ -1,0 +1,46 @@
+---
+name: Lint Code Base
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install package
+        run: yarn install
+      - name: spelling
+        run: yarn spelling:ci .
+      - name: eslint
+        run: yarn eslint:ci components containers controllers hooks pages services utils views
+      - name: prettier
+        run: yarn prettier:ci components containers controllers hooks pages services utils views
+      # - name: test
+      #   run: yarn test
+      - name: build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_GRAPHQL_URL: ${{ secrets.NEXT_PUBLIC_GRAPHQL_URL }}
+          NEXT_PUBLIC_MAGIC_PK: ${{ secrets.NEXT_PUBLIC_MAGIC_PK }}
+          MAGIC_SK: ${{ secrets.MAGIC_SK }}
+        run: yarn build
+    env:
+      CI: true

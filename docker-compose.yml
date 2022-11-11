@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  server-production:
+    build:
+      context: ./
+      target: server-production
+    ports:
+      - "3000:8080"
+    environment:
+      NODE_ENV: production
+networks:
+  services:
+    name: ${DATABASE_NETWORK:-c8-48}
+  default:
+    ipam:
+      config:
+      - subnet: 172.32.0.0/18

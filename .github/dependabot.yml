@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: monthly
+      time: '04:00'
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'
+      - dependency-name: '@arkweid/lefthook'
+      - dependency-name: '@commitlint/cli'
+      - dependency-name: '@commitlint/config-conventional'
+      - dependency-name: 'cspell'
+      - dependency-name: 'eslint'
+      - dependency-name: 'eslint-config-prettier'
+      - dependency-name: 'eslint-config-standard'
+      - dependency-name: 'eslint-plugin-import'
+      - dependency-name: 'eslint-plugin-node'
+      - dependency-name: 'eslint-plugin-promise'
+      - dependency-name: 'eslint-plugin-react'
+      - dependency-name: 'prettier'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'

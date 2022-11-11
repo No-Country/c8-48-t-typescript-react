@@ -2,6 +2,9 @@ name: Security
 on:
   push:
     branches: [dev]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, dev, release-*]
 jobs:
   Security-And-Code-Scanning:
     runs-on: ubuntu-latest

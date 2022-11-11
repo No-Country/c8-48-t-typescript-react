@@ -1,0 +1,54 @@
+---
+name: Lint Code Base
+on:
+  push:
+    branches: [dev, main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install package - server
+        working-directory: ./server
+        run: yarn install --frozen-lockfile
+      # - name: spelling
+      #   run: yarn spelling:ci .
+      # - name: eslint
+      #   run: yarn lint #eslint:ci components containers controllers hooks pages services utils views
+      # - name: prettier
+      #   run: yarn prettier:ci components containers controllers hooks pages services utils views
+      - name: test - server
+        working-directory: ./server
+        run: yarn test
+      - name: build - server
+        working-directory: ./server
+        env:
+          NODE_ENV: production
+        run: yarn build
+      - name: Install package - client
+        working-directory: ./client
+        run: yarn install --frozen-lockfile
+      - name: build - client
+        working-directory: ./client
+        env:
+          NODE_ENV: production
+        run: yarn build
+    env:
+      CI: true

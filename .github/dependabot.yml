@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/server'
+    schedule:
+      interval: monthly
+      time: '04:00'
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: '@nestjs/common'
+      - dependency-name: '@nestjs/core'
+      - dependency-name: '@nestjs/platform-express'
+  - package-ecosystem: npm
+    directory: '/client'
+    schedule:
+      interval: monthly
+      time: '04:00'
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'
+      - dependency-name: '@types/react'
+      - dependency-name: '@types/react-dom'
+      - dependency-name: '@vitejs/plugin-react'
+      - dependency-name: 'typescript'
+      - dependency-name: 'vite'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'

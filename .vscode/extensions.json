@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "joshbolduc.commitlint",
+    "usernamehw.errorlens",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "stateful.runme",
+    "streetsidesoftware.code-spell-checker-spanish",
+    "stylelint.vscode-stylelint"
+  ]
+}

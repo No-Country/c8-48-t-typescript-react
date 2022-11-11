@@ -1,0 +1,16 @@
+name: Security
+on:
+  push:
+    branches: [dev]
+jobs:
+  Security-And-Code-Scanning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: nodejsscan scan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: '.'

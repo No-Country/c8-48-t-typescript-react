@@ -1,7 +1,5 @@
 # c8-48-t-typescript-react
 
-Nuestra plataforma , permite a los jóvenes deportistas mostrar su talento y lograr obtener becas universitarias. Sin necesidad de utilizar distintos puntos de contacto.
-
 ## Start from scratch
 First let's make some boilerplate
 
@@ -33,4 +31,15 @@ Now let's try on docker (check first it's installed using `docker -v`)
 
 ```sh
 docker build -t c8-48 .
+docker 
 ```
+
+Using `docker-compose` you can do this:
+
+```sh
+docker compose build
+docker compose up pgadmin
+docker compose up run-server
+```
+
+if you inspect the [Dockerfile][./Dockerfile] you can notice it have several stages, you can run all of them using `docker-compose`.

@@ -8,7 +8,7 @@ Just to be sure we can install stuff using node. We are using
 ```sh
 nvm install 18
 nvm use 18
-node -v #should output something about using node v18
+node -v # should output something about using node v18
 ```
 
 ```sh

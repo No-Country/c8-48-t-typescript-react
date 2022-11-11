@@ -10,7 +10,7 @@ COPY --chown=node:node ./server/yarn.lock ./
 
 RUN yarn install
 
-COPY --chown=node:node ./server/  ./
+COPY --chown=node:node ./server/ ./
 
 USER node
 
@@ -58,7 +58,7 @@ COPY --chown=node:node ./client/yarn.lock ./
 
 RUN yarn install
 
-COPY --chown=node:node ./client/  ./
+COPY --chown=node:node ./client/ ./
 
 ## CLIENT BUILD FOR PRODUCTION
 FROM node:18-alpine AS build-client
@@ -71,7 +71,7 @@ COPY --chown=node:node ./client/ .
 
 RUN yarn build
 
-RUN yarn install --frozen-lockfile && npm cache clean --force
+RUN yarn install --frozen-lockfile && yarn cache clean
 
 USER node
 

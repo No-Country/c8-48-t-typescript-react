@@ -47,6 +47,7 @@ COPY --chown=node:node --from=build-server /c8-48-server/node_modules ./node_mod
 COPY --chown=node:node --from=build-server /c8-48-server/dist ./dist
 
 CMD node dist/main.js
+# TODO: let's try to move this one to docker-compose like in https://github.com/thanhpt-25/hrm-backend/blob/master/docker-compose.yml
 
 ## CLIENT BUILD FOR DEVELOPMENT
 FROM node:18-alpine AS dev-client
@@ -84,3 +85,4 @@ COPY --from=build-client /c8-48-client/node_modules ./node_modules
 COPY --from=build-client /c8-48-client/dist /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
+# TODO: let's try to move this one to docker-compose like in https://github.com/thanhpt-25/hrm-backend/blob/master/docker-compose.yml

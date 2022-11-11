@@ -28,8 +28,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
           cache-dependency-path: |
-            server/yarn.lock.json
-            client/yarn.lock.json
+            ./server/yarn.lock.json
+            ./client/yarn.lock.json
 
       - name: Install package - server
         working-directory: ./server

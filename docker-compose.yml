@@ -5,9 +5,18 @@ services:
       context: ./
       target: server-production
     ports:
-      - "3000:8080"
+      - 8080:3000
     environment:
       NODE_ENV: production
+  run-server:
+    build:
+      context: ./
+      target: run-server
+    ports:
+      - 8080:3000
+    command: yarn start:dev
+    volumes:
+      - ./server:/server
 networks:
   services:
     name: ${DATABASE_NETWORK:-c8-48}

@@ -16,11 +16,10 @@ USER node
 
 ## SERVER DEV
 FROM node:18-alpine AS run-server
-WORKDIR /
+WORKDIR /server
 EXPOSE 3000
 
 COPY --chown=node:node --from=dev-server /c8-48-dev-server/node_modules ./node_modules
-COPY --chown=node:node ./server/  ./
 
 USER node
 
@@ -30,10 +29,8 @@ FROM node:18-alpine AS build-server
 WORKDIR /c8-48-server
 ENV NODE_ENV=production
 
-COPY --chown=node:node ./server/package.json ./
-COPY --chown=node:node ./server/yarn.lock ./
 COPY --chown=node:node --from=dev-server /c8-48-dev-server/node_modules ./node_modules
-COPY --chown=node:node ./server/ .
+COPY --chown=node:node ./server/ . 
 
 RUN yarn build
 
@@ -49,8 +46,7 @@ EXPOSE 3000
 COPY --chown=node:node --from=build-server /c8-48-server/node_modules ./node_modules
 COPY --chown=node:node --from=build-server /c8-48-server/dist ./dist
 
-# TODO Explore using new node for clusters
-CMD [ "node", "dist/main.js" ]
+CMD node dist/main.js
 
 ## CLIENT BUILD FOR DEVELOPMENT
 FROM node:18-alpine AS dev-client
@@ -70,8 +66,6 @@ FROM node:18-alpine AS build-client
 WORKDIR /c8-48-client
 ENV NODE_ENV=production
 
-COPY --chown=node:node ./client/package.json ./
-COPY --chown=node:node ./client/yarn.lock ./
 COPY --chown=node:node --from=dev-client /c8-48-dev-client/node_modules ./node_modules
 COPY --chown=node:node ./client/ .
 

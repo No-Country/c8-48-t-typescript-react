@@ -3,6 +3,9 @@ name: Lint Code Base
 on:
   push:
     branches: [dev, main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, dev, release-*]
   workflow_dispatch:
 
 jobs:

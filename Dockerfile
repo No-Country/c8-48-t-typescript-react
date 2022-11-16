@@ -76,6 +76,15 @@ RUN yarn install --frozen-lockfile && yarn cache clean
 
 USER node
 
+## CLIENT DEV
+FROM node:18-alpine AS run-client
+WORKDIR /client
+EXPOSE 3000
+
+COPY --chown=node:node --from=dev-client /c8-48-dev-client/node_modules ./node_modules
+
+USER node
+
 ## CLIENT PRODUCTION
 FROM nginx:1.22-alpine AS client-production
 

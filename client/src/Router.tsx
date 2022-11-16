@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import routesApp from './routes/app.routes';
 import routesAuth from './routes/auth.routes';
 
-const Landing = lazy(() => import('./views/error/Error404'));
+const Landing = lazy(() => import('./views/Home'));
 const DefaultLayout = lazy(() => import('./views/DefaultLayout'));
 
 export default function Router() {
@@ -19,7 +19,7 @@ export default function Router() {
         }
       />
       {routesApp}
-      <Route path="*" element={<Navigate to="/auth/error/404" replace />} />
+      <Route path="*" element={<Navigate to="/error-404" replace />} />
     </Routes>
   );
 }

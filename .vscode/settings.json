@@ -16,7 +16,8 @@
   },
   "cSpell.language": "en,es",
   "cSpell.words": [
-    "nestjs"
+    "nestjs",
+    "pgadmin"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {
@@ -67,6 +68,10 @@
     "**/coverage": true,
     "**/node_modules": true
   },
-  "stylelint.validate": ["css", "scss", ".module.scss"],
+  "stylelint.validate": [
+    "css",
+    "scss",
+    ".module.scss"
+  ],
   "prettier.configPath": "./server/.prettierrc.js"
 }

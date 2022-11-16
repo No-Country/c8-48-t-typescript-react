@@ -3,10 +3,13 @@ name: Lint Code Base
 on:
   push:
     branches: [dev, main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, dev, release-*]
   workflow_dispatch:
 
 jobs:
-  build:
+  server:
     name: Lint Code Base
     runs-on: ubuntu-latest
     strategy:
@@ -24,6 +27,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+          cache-dependency-path: |
+            ./server/yarn.lock
+            ./client/yarn.lock
 
       - name: Install package - server
         working-directory: ./server

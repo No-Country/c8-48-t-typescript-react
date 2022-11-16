@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Suspense, StrictMode, lazy, useEffect } from 'react';
 
-import { theme as darkTheme } from './constants/mui/dark-theme';
 import { theme as defaultTheme } from './constants/mui/default-theme';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import CenteredSpinner from './components/CenteredSpinner';

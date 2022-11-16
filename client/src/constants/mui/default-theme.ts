@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import palette from '@src/constants/mui/default-palette';
+import palette from './default-palette';
 
 // TODO: figure out defaults for: font family, font size
 // TODO: extract out common items with dark theme

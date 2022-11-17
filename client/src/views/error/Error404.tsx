@@ -1,5 +1,8 @@
 import { Box, styled, Typography } from '@mui/material';
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
+import {
+  Link,
+} from "react-router-dom";
 
 export default function Error404() {
   return (
@@ -8,7 +11,7 @@ export default function Error404() {
         <NotListedLocationIcon sx={{ fontSize: 80, color: 'text.black' }} />
         <Title>Page not Found</Title>
         <Details>The page you’re looking for no longer exists.</Details>
-        {/* <img src={Logo} alt="" width={250} /> */}
+        <Link to="/">Return to Home</Link>
       </Content>
     </Container>
   );

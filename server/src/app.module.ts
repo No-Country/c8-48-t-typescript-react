@@ -21,6 +21,7 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       synchronize: process.env.NODE_ENV === 'dev',
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

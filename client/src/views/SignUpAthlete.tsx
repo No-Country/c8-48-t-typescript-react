@@ -4,13 +4,13 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object({
-  email: yup.string().email('Enter a valid email').required('Email is required'),
-  name: yup.string().required('Name is required'),
-  lastName: yup.string().required('Name is required'),
+  email: yup.string().email('Ingresa un email válido').required('Email es requerido'),
+  name: yup.string().required('Nombre es requerido'),
+  lastName: yup.string().required('Nombre es requerido'),
   password: yup
     .string()
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
+    .min(8, 'La contraseña debería tener un mínimo de 8 carácteres')
+    .required('Contraseña es requerida'),
 });
 
 export default function SignUpAthlete() {

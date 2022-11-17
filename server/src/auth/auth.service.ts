@@ -2,12 +2,14 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +26,29 @@ export class AuthService {
         password: bcrypt.hashSync(password, 10),
       });
       await this.userRepository.save(user);
-      return user;
+
+      return userDate;
+    } catch (error) {
+      this.handleDBErrors(error);
+    }
+  }
+
+  async login(loginUserDto: LoginUserDto) {
+    try {
+      const { email, password } = loginUserDto;
+
+      const user = await this.userRepository.findOne({
+        where: { email },
+        select: { email: true, password: true },
+      });
+
+      if (!user || !bcrypt.compareSync(password, user.password))
+        throw new UnauthorizedException('Credenciales no validas');
+
+      return {
+        ok: true,
+        jwt: '',
+      };
     } catch (error) {
       this.handleDBErrors(error);
     }

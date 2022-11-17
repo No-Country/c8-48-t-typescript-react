@@ -13,7 +13,7 @@ export class User {
   fullName: string;
   @Column('text', { unique: true })
   email: string;
-  @Column('text')
+  @Column('text', { select: false })
   @Length(8, 16)
   password: string;
   @Column('bool', { default: true })

@@ -34,24 +34,20 @@ export class AuthService {
   }
 
   async login(loginUserDto: LoginUserDto) {
-    try {
-      const { email, password } = loginUserDto;
+    const { email, password } = loginUserDto;
 
-      const user = await this.userRepository.findOne({
-        where: { email },
-        select: { email: true, password: true },
-      });
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: { email: true, password: true },
+    });
 
-      if (!user || !bcrypt.compareSync(password, user.password))
-        throw new UnauthorizedException('Credenciales no validas');
-
-      return {
-        ok: true,
-        jwt: '',
-      };
-    } catch (error) {
-      this.handleDBErrors(error);
-    }
+    if (!user) throw new UnauthorizedException('Credenciales no validas');
+    if (!bcrypt.compareSync(password, user.password))
+      throw new UnauthorizedException('Credenciales no validas');
+    return {
+      ok: true,
+      jwt: '',
+    };
   }
 
   private handleDBErrors(error: any): never {

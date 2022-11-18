@@ -48,8 +48,13 @@ Our platform allows young athletes to show their talent and obtain university sc
 
 ## Features
 
-- example
-- example
+- Docker for reproducibility
+- React 18 in the frontend
+- NestJS in backend
+- PostgreSQL as data base
+- Material UI as style framework
+- JS modules and ES6+ available for most browsers
+- Sets eslint rules
 
 ## Prerequisites
 
@@ -78,7 +83,7 @@ Now let's be sure we have the environmental variables
 cp .env.example .env
 ```
 
-Now, let's prepare the way for using the data base in the backend
+Now, let's prepare the way for using the data base in the backend, without it the docker build won't work.
 
 ```sh
 sudo rm -rf pgadmin
@@ -89,7 +94,6 @@ Now let's try on docker (check first it's installed using `docker -v`)
 
 ```sh
 docker build -t c8-48 .
-docker 
 ```
 
 Using `docker-compose` you can do this:

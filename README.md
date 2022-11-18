@@ -21,7 +21,7 @@
     A bridge between young dreamers and an opportunity
     <br />
 	  🖊️
-    <a href="[https://](https://www.figma.com/file/c3t2klUdEqJbUXWingUCbx/Dise%C3%B1o-pagian-para-deportistas?node-id=33%3A90)">Check the design</a>
+    <a href="https://www.figma.com/file/c3t2klUdEqJbUXWingUCbx/Dise%C3%B1o-pagian-para-deportistas?node-id=33%3A90">Check the design</a>
     🐞
     <a href="https://github.com/No-Country/c8-48-t-typescript-react/issues">Report a Bug</a>
     🙋‍♂️

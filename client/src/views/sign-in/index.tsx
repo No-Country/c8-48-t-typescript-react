@@ -26,22 +26,24 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universitie'
     },
   });
   return (
-    <MainContainer>
-      <CustomTextField formik={formik} name={'name'} label={'Nombre'} />
-      <CustomTextField formik={formik} name={'lastName'} label={'Apellido'} />
-      <CustomTextField formik={formik} name={'email'} label={'Email'} />
-      <CustomTextField formik={formik} name={'password'} label={'Contraseña'} />
-      <Button
-        color="primary"
-        variant="contained"
-        fullWidth
-        type="submit"
-        sx={{ width: '80%' }}
-        onSubmit={() => alert(formik.errors)}
-      >
-        Ingresar como {variation}
-      </Button>
-    </MainContainer>
+    <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px">
+      <MainContainer>
+        <CustomTextField formik={formik} name={'name'} label={'Nombre'} />
+        <CustomTextField formik={formik} name={'lastName'} label={'Apellido'} />
+        <CustomTextField formik={formik} name={'email'} label={'Email'} />
+        <CustomTextField formik={formik} name={'password'} label={'Contraseña'} />
+        <Button
+          color="primary"
+          variant="contained"
+          fullWidth
+          type="submit"
+          sx={{ width: '80%' }}
+          onSubmit={() => alert(formik.errors)}
+        >
+          Ingresar como {variation}
+        </Button>
+      </MainContainer>
+    </Box>
   );
 };
 

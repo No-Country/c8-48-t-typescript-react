@@ -73,5 +73,5 @@
     "scss",
     ".module.scss"
   ],
-  "prettier.configPath": "./server/.prettierrc.js"
+  "prettier.configPath": "./server/.prettierrc.json"
 }

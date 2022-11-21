@@ -10,7 +10,15 @@ export default function Layout(props: any) {
       <AppBar position="static" sx={{ color: 'text.primary', backgroundColor: 'background.paper' }}>
         <Toolbar>{/* <img src={AppLogo} alt="logo-text" width={150} /> */}</Toolbar>
       </AppBar>
-      <Container maxWidth={false} sx={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>
+      <Container
+        maxWidth={false}
+        sx={{
+          height: 'calc(100vh - 64px)',
+          overflow: 'auto',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         <Suspense fallback={<CenteredSpinner />}>
           <Outlet />
           {props.children}

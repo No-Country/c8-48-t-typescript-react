@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import routesApp from './routes/app.routes';
 import routesAuth from './routes/auth.routes';
 
-const Landing = lazy(() => import('./views/Home'));
+const Landing = lazy(() => import('./views/home'));
 const DefaultLayout = lazy(() => import('./views/DefaultLayout'));
 
 export default function Router() {

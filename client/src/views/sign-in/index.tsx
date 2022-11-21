@@ -47,22 +47,20 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universitie'
 
 export default Login;
 
-const CustomTextField = ({ formik, name, label }: { formik: any; name: string; label: string }) => {
-  return (
-    <TextField
-      fullWidth
-      id={name}
-      name={name}
-      label={label}
-      sx={{ mb: '20px' }}
-      color="primary"
-      value={formik.values[name]}
-      onChange={formik.handleChange}
-      error={formik.touched[name] && Boolean(formik.errors[name])}
-      helperText={formik.touched[name] && formik.errors[name]}
-    />
-  );
-};
+const CustomTextField = ({ formik, name, label }: { formik: any; name: string; label: string }) => (
+  <TextField
+    fullWidth
+    id={name}
+    name={name}
+    label={label}
+    sx={{ mb: '20px' }}
+    color="primary"
+    value={formik.values[name]}
+    onChange={formik.handleChange}
+    error={formik.touched[name] && Boolean(formik.errors[name])}
+    helperText={formik.touched[name] && formik.errors[name]}
+  />
+);
 
 const MainContainer = styled(Box)(() => ({
   padding: 10,

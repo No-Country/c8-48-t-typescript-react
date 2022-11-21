@@ -12,7 +12,7 @@ const validationSchema = yup.object({
     .required('Contraseña es requerida'),
 });
 
-const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universities' }) => {
+const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universitie' }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -31,7 +31,14 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universities
       <CustomTextField formik={formik} name={'lastName'} label={'Apellido'} />
       <CustomTextField formik={formik} name={'email'} label={'Email'} />
       <CustomTextField formik={formik} name={'password'} label={'Contraseña'} />
-      <Button color="primary" variant="contained" fullWidth type="submit" sx={{ width: '80%' }}>
+      <Button
+        color="primary"
+        variant="contained"
+        fullWidth
+        type="submit"
+        sx={{ width: '80%' }}
+        onSubmit={() => alert(formik.errors)}
+      >
         Ingresar como {variation}
       </Button>
     </MainContainer>

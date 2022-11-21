@@ -35,17 +35,13 @@ interface. The pgAdmin solves this problem. Moreover, Docker makes the entire pr
 
 ## Setup
 
-1. Make sure you have docker installed and running.
-   First of all, follow the instructions in the following steps to setup Postgres with Docker:
-
-We will use a Docker compose file for our first method, and we need to put the docker-compose.yml inside a folder. In
-this case, the name of the folder is pgAdmin. Let’s break down the individual ingredients of the
-docker-compose.yml file.
+Make sure you have docker installed and running.
 
 Now run the following command from the same directory where the docker-compose.yml file is located.
 
 ```sh
-docker-compose up pgadmin
+docker compose build
+docker compose up pgadmin
 ```
 
 The command docker compose up starts and runs the entire app. Congratulations!, you are successfully running a
@@ -53,7 +49,7 @@ PostgreSQL database and pgadmin4 on your machine using Docker. Now let’s conne
 database server.
 
 First, access the pgadmin4 via your favorite web browser by vising the URL http://localhost:5050/. Use the
-admin@admin.com for the email address and `password` as the password to log in.
+`admin@admin.com` for the email address and `password` as the password to log in.
 
 Click Servers > Create > Server to create a new server. Select the General tab. For the name field, use any name. In
 this case, I’ll use `c8-48`. Now move to the Connection tab. To get the value for of Host, use the name of
@@ -61,7 +57,7 @@ container name. So our current configuration would be the following.
 
 ![pgadmin-connection](pgadmin-connection.jpg)
 
-You can find the PostgreSQL database server’s container name using the docker ps command and grab the name from
+You can find the PostgreSQL database server’s container name using the `docker ps` command and grab the name from
 the NAMES column.
 
 You can connect a pgAdmin docker container to a running PostgreSQL container. It is helpful when you don’t have a

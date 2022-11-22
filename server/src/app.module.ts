@@ -10,6 +10,7 @@ import EnvConfiguration from './config/configuration';
   imports: [
     AuthModule,
     ConfigModule.forRoot({
+      envFilePath: ['.env', '../.env'],
       load: [EnvConfiguration],
     }),
     TypeOrmModule.forRootAsync({

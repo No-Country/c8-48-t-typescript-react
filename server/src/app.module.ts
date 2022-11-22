@@ -10,8 +10,6 @@ import EnvConfiguration from './config/configuration';
   imports: [
     AuthModule,
     ConfigModule.forRoot({
-      //isGlobal: true,
-      //envFilePath: '../.env',
       load: [EnvConfiguration],
     }),
     TypeOrmModule.forRootAsync({
@@ -20,7 +18,7 @@ import EnvConfiguration from './config/configuration';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get('database.host'),
-        port: +configService.get('database.port'),
+        port: configService.get('database.port'),
         database: configService.get('database.name'),
         username: configService.get('database.username'),
         password: configService.get('database.password'),
@@ -28,16 +26,6 @@ import EnvConfiguration from './config/configuration';
         synchronize: configService.get('database.synchronize'),
       }),
     }),
-    /* TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_DB_HOST,
-      port: Number(process.env.POSTGRES_DB_PORT),
-      database: process.env.POSTGRES_DB_NAME,
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      autoLoadEntities: true,
-      synchronize: process.env.NODE_ENV === 'dev',
-    }), */
   ],
   controllers: [AppController],
   providers: [AppService],

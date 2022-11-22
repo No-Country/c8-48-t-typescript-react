@@ -9,6 +9,9 @@ import {
 export class LoginUserDto {
   @IsString()
   @IsEmail()
+  @Matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, {
+    message: 'Debe ingresar un mail correcto',
+  })
   email: string;
   @IsString()
   @MinLength(8)

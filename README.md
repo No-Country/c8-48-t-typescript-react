@@ -90,6 +90,9 @@ sudo rm -rf pgadmin
 mkdir pgadmin_data && sudo chown -R 5050:5050 pgadmin_data
 ```
 
+If you want to know more about pgadmin and how to run it, please check
+[the documentation about how to run pgadmin](docs/pgadmin.md).
+
 Now let's try on docker (check first it's installed using `docker -v`)
 
 ```sh

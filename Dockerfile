@@ -1,5 +1,11 @@
 # C8-48 TypeScript NestJS and React with Vite, also POSTGRES as DB
 
+## POSTGRES
+### Adapted from https://dev.to/karanpratapsingh/seeding-postgres-with-docker-19n7
+FROM postgres:15-alpine as db
+WORKDIR /app
+COPY ./db_init.sh /docker-entrypoint-initdb.d
+
 ## SERVER BUILD FOR DEVELOPMENT
 FROM node:18-alpine AS dev-server
 
@@ -30,7 +36,7 @@ WORKDIR /c8-48-server
 ENV NODE_ENV=production
 
 COPY --chown=node:node --from=dev-server /c8-48-dev-server/node_modules ./node_modules
-COPY --chown=node:node ./server/ . 
+COPY --chown=node:node ./server/ .
 
 RUN yarn build
 

@@ -2,18 +2,23 @@ version: '3.5'
 services:
   postgres:
     container_name: postgres
-    image: postgres:15-alpine
     networks:
       - dev-network
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: "${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME}"
-      PG_DATA: /var/lib/postgresql/data
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: "${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME:-postgres}"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_DB_SSLMODE: ${POSTGRES_DB_SSLMODE:-disable}
     ports:
       - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
+    image: db
+    build:
+      context: .
+      target: db
     volumes:
-      - ./pgdata/data:/var/lib/postgresql/data
+      - 'postgres-server_data:/var/lib/postgresql/data'
+    hostname: postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -46,6 +51,9 @@ services:
     container_name: "c8-48_api_${NODE_ENV}"
     environment:
       - NODE_ENV:${NODE_ENV}
+      - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
+      - POSTGRES_USER:${POSTGRES_USER}
+      - POSTGRES_DB:"${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME}"
     env_file:
       - .env
     build:
@@ -91,3 +99,7 @@ networks:
     ipam:
       config:
       - subnet: 172.32.0.0/18
+volumes:
+  postgres-server_data:
+    driver: local
+    name: postgres-server_data

@@ -1,9 +1,8 @@
 import './index.css';
 
-import { createRoot } from 'react-dom/client';
+import * as ReactDOM from 'react-dom/client';
 
 import { BrowserRouter } from 'react-router-dom';
-import { render } from 'react-dom';
 import { Suspense, StrictMode, lazy } from 'react';
 
 import { theme as defaultTheme } from './constants/mui/default-theme';
@@ -33,8 +32,15 @@ function App() {
   );
 }
 
-const container: any = document.getElementById('root');
-const root = createRoot(container);
-root.render(<App />);
+let container: any = null;
 
-// render(<App />, document.getElementById('root'));
+document.addEventListener('DOMContentLoaded', function (event) {
+  if (!container) {
+    container = document.getElementById('root') as HTMLElement;
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  }
+});
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);

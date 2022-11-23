@@ -5,7 +5,7 @@ import * as yup from 'yup';
 const validationSchema = yup.object({
   email: yup.string().email('Ingresa un email válido').required('Email es requerido'),
   name: yup.string().required('Nombre es requerido'),
-  lastName: yup.string().required('Nombre es requerido'),
+  lastName: yup.string().required('Apellido es requerido'),
   password: yup
     .string()
     .min(8, 'La contraseña debería tener un mínimo de 8 carácteres')
@@ -28,20 +28,15 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universitie'
   return (
     <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px">
       <MainContainer>
-        <CustomTextField formik={formik} name={'name'} label={'Nombre'} />
-        <CustomTextField formik={formik} name={'lastName'} label={'Apellido'} />
-        <CustomTextField formik={formik} name={'email'} label={'Email'} />
-        <CustomTextField formik={formik} name={'password'} label={'Contraseña'} />
-        <Button
-          color="primary"
-          variant="contained"
-          fullWidth
-          type="submit"
-          sx={{ width: '80%' }}
-          onSubmit={() => alert(formik.errors)}
-        >
-          Ingresar como {variation}
-        </Button>
+        <form onSubmit={formik.handleSubmit}>
+          <CustomTextField formik={formik} name={'name'} label={'Nombre'} />
+          <CustomTextField formik={formik} name={'lastName'} label={'Apellido'} />
+          <CustomTextField formik={formik} name={'email'} label={'Email'} />
+          <CustomTextField formik={formik} name={'password'} label={'Contraseña'} />
+          <Button color="primary" variant="contained" fullWidth type="submit" sx={{ width: '80%' }}>
+            Ingresar como {variation}
+          </Button>
+        </form>
       </MainContainer>
     </Box>
   );

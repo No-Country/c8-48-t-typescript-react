@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "lint": "eslint . --cache -f table",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:fix": "prettier --check \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

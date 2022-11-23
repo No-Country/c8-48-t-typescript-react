@@ -1,5 +1,7 @@
 import './index.css';
 
+import { createRoot } from 'react-dom/client';
+
 import { BrowserRouter } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Suspense, StrictMode, lazy } from 'react';
@@ -31,4 +33,8 @@ function App() {
   );
 }
 
-render(<App />, document.getElementById('root'));
+const container: any = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
+
+// render(<App />, document.getElementById('root'));

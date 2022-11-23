@@ -12,7 +12,7 @@ const validationSchema = yup.object({
     .required('Contraseña es requerida'),
 });
 
-const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'universitie' }) => {
+const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' }) => {
   const formik = useFormik({
     initialValues: {
       email: '',

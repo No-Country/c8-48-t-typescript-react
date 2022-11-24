@@ -1,10 +1,10 @@
+import { useTheme } from "@mui/material"
+// const theme = useTheme()
 export const InputLabelPropsCustom = {
   style: {
     fontSize: 15,
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    paddingLeft: 4,
-    paddingRight: 4,
-    color: '#383838',
+    // For some reason I can't access to the palette from this file
+    backgroundColor: `#ffffff`,
   },
 }
 

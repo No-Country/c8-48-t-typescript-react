@@ -1,42 +1,31 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  TextField,
-  Typography,
-  Button,
-  Divider,
-  CardMedia,
-  Checkbox,
-} from '@mui/material';
+import { Box, TextField, Typography, Button, Divider, CardMedia, Checkbox } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ImageIcon from '@mui/icons-material/Image';
 import { useFormik, Field } from 'formik';
 import * as yup from 'yup';
-import {
-  InputLabelPropsCustom,
-  InputPropsCustom,
-} from '../constants/mui/textFieldCustom';
+import { InputLabelPropsCustom, InputPropsCustom } from '../constants/mui/textFieldCustom';
 
 const validationSchema = yup.object({
   universityName: yup.string().required('Campo obligatorio'),
   country: yup.string().required('Campo obligatorio'),
   email: yup
     .string()
-    .email('Ingresar un email válido')
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un mail correcto')
     .required('Email es requerido'),
   password: yup
     .string()
-    .min(8, 'La contraseña debería tener un mínimo de 8 carácteres')
-    .required('Contraseña es requerida'),
+    .required('Contraseña es requerida')
+    .matches(
+      /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+      'La contraseña debe tener una letra mayúscula, minúscula y un número',
+    ),
   linkedin: yup.string().required('Campo obligatorio'),
   website: yup.string().required('Campo obligatorio'),
   description: yup.string().required('Campo obligatorio'),
   termsAndConditions: yup
     .bool()
-    .oneOf(
-      [true],
-      'Necesitas acpetar los terminos y condiciones antes de continuar',
-    ),
+    .oneOf([true], 'Necesitas acpetar los terminos y condiciones antes de continuar'),
 });
 
 export default function SignUpAthlete() {
@@ -64,9 +53,7 @@ export default function SignUpAthlete() {
       onSubmit={formik.handleSubmit}
       sx={{ width: '100vw', height: '100vh', mt: 5, p: 11 }}
     >
-      <Typography sx={{ mb: 7, fontSize: 36 }}>
-        Registra tu universidad
-      </Typography>
+      <Typography sx={{ mb: 7, fontSize: 36 }}>Registra tu universidad</Typography>
       {/* University Name */}
       <Box sx={{ display: 'flex', alignItems: 'center', my: 4 }}>
         <Typography sx={textStyle}>Nombre de la universidad</Typography>
@@ -81,13 +68,8 @@ export default function SignUpAthlete() {
           sx={textFieldStyle}
           value={formik.values.universityName}
           onChange={formik.handleChange}
-          error={
-            formik.touched.universityName &&
-            Boolean(formik.errors.universityName)
-          }
-          helperText={
-            formik.touched.universityName && formik.errors.universityName
-          }
+          error={formik.touched.universityName && Boolean(formik.errors.universityName)}
+          helperText={formik.touched.universityName && formik.errors.universityName}
         />
       </Box>
       <Divider />
@@ -132,11 +114,7 @@ export default function SignUpAthlete() {
           >
             {/* <ImageIcon sx={{ opacity: '0.1', height: 150, width: '100%' }} /> */}
           </CardMedia>
-          <Button
-            variant="contained"
-            component="label"
-            startIcon={<CloudUploadIcon />}
-          >
+          <Button variant="contained" component="label" startIcon={<CloudUploadIcon />}>
             Selecciona una imagen
             <input
               name="avatar"
@@ -183,6 +161,8 @@ export default function SignUpAthlete() {
           fullWidth
           id="password"
           name="password"
+          type="password"
+          autoComplete="current-password"
           label="Ingresa tu contraseña"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
@@ -208,10 +188,10 @@ export default function SignUpAthlete() {
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
           sx={textFieldStyle}
-          value={formik.values.linkedin}
+          value={formik.values.website}
           onChange={formik.handleChange}
-          error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
-          helperText={formik.touched.linkedin && formik.errors.linkedin}
+          error={formik.touched.website && Boolean(formik.errors.website)}
+          helperText={formik.touched.website && formik.errors.website}
         />
       </Box>
       <Divider />
@@ -228,17 +208,17 @@ export default function SignUpAthlete() {
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
           sx={textFieldStyle}
-          value={formik.values.website}
+          value={formik.values.linkedin}
           onChange={formik.handleChange}
-          error={formik.touched.website && Boolean(formik.errors.website)}
-          helperText={formik.touched.website && formik.errors.website}
+          error={formik.touched.linkedin && Boolean(formik.errors.linkedin)}
+          helperText={formik.touched.linkedin && formik.errors.linkedin}
         />
       </Box>
       <Divider />
 
       {/* Description */}
       <Box sx={{ display: 'flex', my: 4 }}>
-        <Typography sx={textStyle}>Description de la universidad</Typography>
+        <Typography sx={textStyle}>Descripción de la universidad</Typography>
         <TextField
           multiline
           rows={7}
@@ -248,13 +228,10 @@ export default function SignUpAthlete() {
           label="En resumen somos..."
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
-          // inputProps={InputPropsCustom}
           sx={{ width: '65%' }}
           value={formik.values.description}
           onChange={formik.handleChange}
-          error={
-            formik.touched.description && Boolean(formik.errors.description)
-          }
+          error={formik.touched.description && Boolean(formik.errors.description)}
           helperText={formik.touched.description && formik.errors.description}
         />
       </Box>
@@ -270,8 +247,7 @@ export default function SignUpAthlete() {
           value={formik.values.termsAndConditions}
         />
         <Typography>
-          He leído y acepto la Politica de privacidad y la Politica de
-          moderación de becas
+          He leído y acepto la Politica de privacidad y la Politica de moderación de becas
         </Typography>
       </Box>
 

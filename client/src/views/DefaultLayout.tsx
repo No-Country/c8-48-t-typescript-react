@@ -28,6 +28,8 @@ const pages = ['Iniciar Sesión', 'Registrate', 'Becas', 'Planes', 'Ayuda'];
 
 export default function Layout(props: any) {
   const navigate = useNavigate();
+  // pages
+  const pages = ['BECAS', 'PLANES', 'AYUDA'];
   // Responsive Menu
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -45,9 +47,7 @@ export default function Layout(props: any) {
   };
   const handleCloseSignup = (route: string) => {
     setSignupEl(null);
-    route === 'uni'
-      ? navigate('/sign-up/university')
-      : navigate('/sign-up/athlete');
+    route === 'university' ? navigate('/sign-up/university') : navigate('/sign-up/athlete');
   };
 
   // Login button
@@ -57,7 +57,7 @@ export default function Layout(props: any) {
       <CssBaseline />
       <AppBar
         position="static"
-        sx={{ color: 'text.primary', backgroundColor: 'primary', px: 10 }}
+        sx={{ color: 'text.primary', backgroundColor: 'primary', px: 10, py: 1 }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -66,6 +66,7 @@ export default function Layout(props: any) {
               sx={{
                 display: { xs: 'none', md: 'flex', color: '#6543FF' },
                 mr: 1,
+                fontSize: 30,
               }}
             />
             <Typography
@@ -80,6 +81,7 @@ export default function Layout(props: any) {
                 fontWeight: 700,
                 color: '#FFFFFF',
                 textDecoration: 'none',
+                fontSize: 25,
               }}
             >
               Becco
@@ -156,10 +158,7 @@ export default function Layout(props: any) {
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Buscar…"
-                  inputProps={{ 'aria-label': 'search' }}
-                />
+                <StyledInputBase placeholder="Buscar…" inputProps={{ 'aria-label': 'search' }} />
               </Search>
             </Box>
             {/* close search bar */}
@@ -183,22 +182,16 @@ export default function Layout(props: any) {
                   gap: 3,
                 }}
               >
-                <Link color="secondary" sx={linkStyle}>
-                  BECAS
-                </Link>
-                <Link color="secondary" sx={linkStyle}>
-                  PLANES
-                </Link>
-                <Link color="secondary" sx={linkStyle}>
-                  AYUDA
-                </Link>
+                {pages.map((page) => {
+                  return (
+                    <Link color="secondary" sx={linkStyle}>
+                      {page}
+                    </Link>
+                  );
+                })}
               </Box>
 
-              <Button
-                sx={{ letterSpacing: '0.46px', fontSize: 13 }}
-                color="secondary"
-                size="small"
-              >
+              <Button sx={{ letterSpacing: '0.46px', fontSize: 13 }} color="secondary" size="small">
                 INICIAR SESIÓN
               </Button>
               <Button
@@ -222,12 +215,8 @@ export default function Layout(props: any) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={() => handleCloseSignup('athlete')}>
-                  Deportista
-                </MenuItem>
-                <MenuItem onClick={() => handleCloseSignup('uni')}>
-                  Universidad
-                </MenuItem>
+                <MenuItem onClick={() => handleCloseSignup('athlete')}>Deportista</MenuItem>
+                <MenuItem onClick={() => handleCloseSignup('uni')}>Universidad</MenuItem>
               </Menu>
             </Box>
             {/* Close right side */}
@@ -257,9 +246,9 @@ export default function Layout(props: any) {
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.25),
+  backgroundColor: alpha(theme.palette.common.white, 0.6),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.35),
+    backgroundColor: alpha(theme.palette.common.white, 0.8),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,

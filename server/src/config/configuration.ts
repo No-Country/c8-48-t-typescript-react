@@ -1,5 +1,7 @@
 export default () => ({
   PORT: Number(process.env.BACKEND_PORT),
+  jwtSecret: process.env.JWT_SECRET,
+  jwtExpires: process.env.JWT_EXPIRES,
   database: {
     host: process.env.POSTGRES_DB_HOST,
     port: Number(process.env.POSTGRES_USER),

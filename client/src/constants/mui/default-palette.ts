@@ -1,6 +1,6 @@
 export default {
   primary: {
-    main: '#034D64', // Dark Blue
+    main: '#000', // Dark Blue
     contrastText: '#FFFFFF', // White
   },
   secondary: {
@@ -14,7 +14,7 @@ export default {
     contrastText: '#FFFFFF', // White
   },
   text: {
-    primary: '#2A121E', // Purple
+    primary: '#000000', // Purple
     secondary: '#AEAEBD', // MUI Grey
     black: '#212221', // Black
   },

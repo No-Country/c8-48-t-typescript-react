@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextField, Typography, Button, Divider, CardMedia, Checkbox } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import ImageIcon from '@mui/icons-material/Image';
-import { useFormik, Field } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { InputLabelPropsCustom, InputPropsCustom } from '../constants/mui/textFieldCustom';
 

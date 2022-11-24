@@ -1,8 +1,6 @@
 import { Box, styled, Typography } from '@mui/material';
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
-import {
-  Link,
-} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function Error404() {
   return (

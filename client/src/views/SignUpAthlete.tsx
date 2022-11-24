@@ -2,16 +2,10 @@ import React from 'react';
 import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import {
-  InputLabelPropsCustom,
-  InputPropsCustom,
-} from '../constants/mui/textFieldCustom';
+import { InputLabelPropsCustom, InputPropsCustom } from '../constants/mui/textFieldCustom';
 
 const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Ingresa un email válido')
-    .required('Email es requerido'),
+  email: yup.string().email('Ingresa un email válido').required('Email es requerido'),
   name: yup.string().required('Nombre es requerido'),
   lastName: yup.string().required('Nombre es requerido'),
   password: yup
@@ -34,9 +28,7 @@ export default function SignUpAthlete() {
     },
   });
   return (
-    <Box
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography sx={{ fontSize: 40, fontWeight: 700, mb: 5 }}>
         Deja que las becas lleguen a tí
       </Typography>
@@ -53,14 +45,8 @@ export default function SignUpAthlete() {
           justifyContent: 'center',
         }}
       >
-        <Box
-          component="form"
-          onSubmit={formik.handleSubmit}
-          sx={{ width: '100%', height: '100%' }}
-        >
-          <Typography sx={{ fontSize: '24px', mb: '16px' }}>
-            Continuar con Email
-          </Typography>
+        <Box component="form" onSubmit={formik.handleSubmit} sx={{ width: '100%', height: '100%' }}>
+          <Typography sx={{ fontSize: '24px', mb: '16px' }}>Continuar con Email</Typography>
           <TextField
             variant="outlined"
             id="email"
@@ -76,11 +62,9 @@ export default function SignUpAthlete() {
             helperText={formik.touched.email && formik.errors.email}
           ></TextField>
 
-          <Typography
-            sx={{ my: 3, fontSize: '12px', color: 'rgba(0,0,0,0.6)' }}
-          >
-            By continuing, you agree that we create an account for you (unless
-            already created), and accept our{' '}
+          <Typography sx={{ my: 3, fontSize: '12px', color: 'rgba(0,0,0,0.6)' }}>
+            By continuing, you agree that we create an account for you (unless already created), and
+            accept our{' '}
             <Link href="#" sx={linkStyle}>
               Terms and Conditions
             </Link>{' '}

@@ -1,11 +1,14 @@
 export default {
   primary: {
-    main: '#034D64', // Dark Blue
+    main: '#060606', // Dark Blue
     contrastText: '#FFFFFF', // White
   },
   secondary: {
-    main: '#7A797A', // Grey
+    main: '#FFFFFF', // Grey
     tagBg: '#DADADE', // Light Grey
+  },
+  tertiary:{
+    main:'#6543FF'
   },
   neutral: {
     dark: '#212221', // Black
@@ -14,7 +17,7 @@ export default {
     contrastText: '#FFFFFF', // White
   },
   text: {
-    primary: '#2A121E', // Purple
+    primary: '#000000', // Purple
     secondary: '#AEAEBD', // MUI Grey
     black: '#212221', // Black
   },
@@ -24,7 +27,7 @@ export default {
   },
   divider: '#DADADE', // Light Grey
   error: {
-    main: '#DE7862', // Error Red
+    main: '#6543FF', // Error Purple
     dark: '#B76767', // Error Text
     tagBg: '#F8E4E0', // MUI Light Red
     tooltip: '#F8E4E0', // MUI Light Red

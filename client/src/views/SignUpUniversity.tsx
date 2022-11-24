@@ -106,7 +106,7 @@ export default function SignUpAthlete() {
               mr: 5,
               bgcolor: 'rgba(0,0,0,0.1)',
               display: 'flex',
-              jusitfyContent: 'center',
+              justifyContent: 'center',
               alignItems: 'center',
             }}
             src={universityImage !== '' && universityImage}

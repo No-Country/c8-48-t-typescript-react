@@ -7,8 +7,8 @@ export default {
     main: '#FFFFFF', // Grey
     tagBg: '#DADADE', // Light Grey
   },
-  tertiary:{
-    main:'#6543FF'
+  tertiary: {
+    main: '#6543FF',
   },
   neutral: {
     dark: '#212221', // Black

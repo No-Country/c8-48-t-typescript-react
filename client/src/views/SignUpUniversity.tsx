@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextField, Typography, Button, Divider, CardMedia, Checkbox } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import ImageIcon from '@mui/icons-material/Image';
-import { useFormik, Field } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { InputLabelPropsCustom, InputPropsCustom } from '../constants/mui/textFieldCustom';
 
@@ -25,7 +24,7 @@ const validationSchema = yup.object({
   description: yup.string().required('Campo obligatorio'),
   termsAndConditions: yup
     .bool()
-    .oneOf([true], 'Necesitas acpetar los terminos y condiciones antes de continuar'),
+    .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
 export default function SignUpAthlete() {
@@ -107,7 +106,7 @@ export default function SignUpAthlete() {
               mr: 5,
               bgcolor: 'rgba(0,0,0,0.1)',
               display: 'flex',
-              jusitfyContent: 'center',
+              justifyContent: 'center',
               alignItems: 'center',
             }}
             src={universityImage !== '' && universityImage}
@@ -238,7 +237,7 @@ export default function SignUpAthlete() {
       <Divider />
 
       {/* Terms and conditions */}
-      <Typography sx={{ mt: 3 }}>Aceptar terminos y condiciones</Typography>
+      <Typography sx={{ mt: 3 }}>Aceptar términos y condiciones</Typography>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Checkbox
           id="term"
@@ -247,7 +246,7 @@ export default function SignUpAthlete() {
           value={formik.values.termsAndConditions}
         />
         <Typography>
-          He leído y acepto la Politica de privacidad y la Politica de moderación de becas
+          He leído y acepto la Política de privacidad y la Política de moderación de becas
         </Typography>
       </Box>
 

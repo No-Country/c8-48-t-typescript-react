@@ -1,4 +1,4 @@
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export default function ErrorMessage({ message }: { message: string }) {
   return (

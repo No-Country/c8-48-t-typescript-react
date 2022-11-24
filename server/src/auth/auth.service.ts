@@ -10,11 +10,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -38,7 +40,7 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true },
+      select: { email: true, password: true, fullName: true },
     });
 
     if (!user) throw new UnauthorizedException('Credenciales no validas');
@@ -46,7 +48,11 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales no validas');
     return {
       ok: true,
-      jwt: '',
+      user: {
+        email: user.email,
+        fullName: user.fullName,
+      },
+      jwt: this.jwtService.sign({ email }),
     };
   }
 

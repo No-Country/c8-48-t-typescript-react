@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import CenteredSpinner from '../components/CenteredSpinner';
-import AdbIcon from '@mui/icons-material/Adb';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
@@ -14,17 +13,13 @@ import {
   Toolbar,
   Typography,
   Menu,
-  Avatar,
   Button,
-  Tooltip,
   MenuItem,
   InputBase,
   styled,
   alpha,
   Link,
 } from '@mui/material';
-
-const pages = ['Iniciar Sesión', 'Registrate', 'Becas', 'Planes', 'Ayuda'];
 
 export default function Layout(props: any) {
   const navigate = useNavigate();

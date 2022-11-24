@@ -25,7 +25,7 @@ const validationSchema = yup.object({
   description: yup.string().required('Campo obligatorio'),
   termsAndConditions: yup
     .bool()
-    .oneOf([true], 'Necesitas acpetar los terminos y condiciones antes de continuar'),
+    .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
 export default function SignUpAthlete() {
@@ -238,7 +238,7 @@ export default function SignUpAthlete() {
       <Divider />
 
       {/* Terms and conditions */}
-      <Typography sx={{ mt: 3 }}>Aceptar terminos y condiciones</Typography>
+      <Typography sx={{ mt: 3 }}>Aceptar términos y condiciones</Typography>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Checkbox
           id="term"
@@ -247,7 +247,7 @@ export default function SignUpAthlete() {
           value={formik.values.termsAndConditions}
         />
         <Typography>
-          He leído y acepto la Politica de privacidad y la Politica de moderación de becas
+          He leído y acepto la Política de privacidad y la Política de moderación de becas
         </Typography>
       </Box>
 

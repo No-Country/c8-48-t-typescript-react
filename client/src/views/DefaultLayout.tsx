@@ -24,8 +24,6 @@ import {
   Link,
 } from '@mui/material';
 
-const pages = ['Iniciar Sesión', 'Registrate', 'Becas', 'Planes', 'Ayuda'];
-
 export default function Layout(props: any) {
   const navigate = useNavigate();
   // pages

@@ -1,6 +1,6 @@
 {
   "version": "0.2",
-  "language": "en,es",
+  "language": "es,en",
   "flagWords": [],
   "ignorePaths": [
     "./.github/**",
@@ -13,9 +13,32 @@
     "yarn.lock"
   ],
   "words": [
+    "",
+    "appbar",
+    "AYUDA",
+    "BECAS",
+    "Becco",
+    "Buscar",
+    "contraseña",
+    "debería",
+    "Deportista",
+    "Enviar",
     "formik",
     "Formik",
+    "Ingresa",
+    "INICIAR",
+    "linkedin",
     "listbox",
-    "Multioption"
+    "Multioption",
+    "Nombre",
+    "REGISTRATE",
+    "requerido",
+    "SESIÓN",
+    "signup",
+    "Signup",
+    "Universidad",
+    "válido",
+    "tener",
+    "mínimo"
   ]
 }

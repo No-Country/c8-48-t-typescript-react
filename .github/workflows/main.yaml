@@ -35,11 +35,13 @@ jobs:
         working-directory: ./server
         run: yarn install --frozen-lockfile
       # - name: spelling
-      #   run: yarn spelling:ci .
-      # - name: eslint
-      #   run: yarn lint #eslint:ci components containers controllers hooks pages services utils views
-      # - name: prettier
-      #   run: yarn prettier:ci components containers controllers hooks pages services utils views
+        # run: yarn spelling:ci .
+      - name: eslint - server
+        working-directory: ./server
+        run: yarn lint
+      - name: prettier - server
+        working-directory: ./server
+        run: yarn format
       - name: test - server
         working-directory: ./server
         run: yarn test
@@ -51,6 +53,12 @@ jobs:
       - name: Install package - client
         working-directory: ./client
         run: yarn install --frozen-lockfile
+      - name: eslint - client
+        working-directory: ./client
+        run: yarn lint
+      - name: prettier - client
+        working-directory: ./client
+        run: yarn format
       - name: build - client
         working-directory: ./client
         env:

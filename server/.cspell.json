@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "language": "en,es",
+  "ignorePaths": [
+    "./.github/**",
+    "./.vscode/**",
+    "*/node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "yarn.lock"
+  ],
+  "words": [
+    "Kamil",
+    "Myśliwiec",
+    "nestframework",
+    "nestjs",
+    "typeorm"
+  ]
+}

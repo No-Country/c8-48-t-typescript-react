@@ -6,7 +6,7 @@ const SignUpAthlete = lazy(() => import('../views/SignUpAthlete'));
 const SignUpUniversity = lazy(() => import('../views/SignUpUniversity'));
 const Error404 = lazy(() => import('../views/error/Error404'));
 const Error50X = lazy(() => import('../views/error/Error50X'));
-const Login = lazy(() => import('../views/sign-in'));
+const Login = lazy(() => import('../views/login'));
 
 export const routesApp: JSX.Element = (
   <Route path="/" element={<DefaultLayout />}>

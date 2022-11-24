@@ -1,6 +1,6 @@
 export default {
   primary: {
-    main: '#000', // Dark Blue
+    main: '#060606', // Dark Blue
     contrastText: '#FFFFFF', // White
   },
   secondary: {

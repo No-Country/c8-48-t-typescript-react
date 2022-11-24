@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "language": "en,es",
+  "flagWords": [],
+  "ignorePaths": [
+    "./.github/**",
+    "./.vscode/**",
+    "node_modules/**",
+    "dist/**",
+    "public/**",
+    "coverage/**",
+    "package.json",
+    "yarn.lock"
+  ],
+  "words": [
+    "formik",
+    "Formik",
+    "listbox",
+    "Multioption"
+  ]
+}

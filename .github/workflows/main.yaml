@@ -34,8 +34,6 @@ jobs:
       - name: Install package - server
         working-directory: ./server
         run: yarn install --frozen-lockfile
-      # - name: spelling
-        # run: yarn spelling:ci .
       - name: eslint - server
         working-directory: ./server
         run: yarn lint
@@ -59,6 +57,9 @@ jobs:
       - name: prettier - client
         working-directory: ./client
         run: yarn format
+      - name: spelling - client
+        working-directory: ./client
+        run: yarn spelling
       - name: build - client
         working-directory: ./client
         env:

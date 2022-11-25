@@ -7,7 +7,7 @@ const Home = () => {
     <Box display="flex" flexDirection="column">
       <Typography variant="h5">Home view</Typography>
       {links.map((value, i) => (
-        <Link to={value} key={i}>
+        <Link to={value} key={`link-${value}-${i}`}>
           <Typography variant="h6">{value}</Typography>
         </Link>
       ))}

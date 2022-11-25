@@ -2,8 +2,8 @@ import { Route } from 'react-router-dom';
 import { lazy } from 'react';
 
 const DefaultLayout = lazy(() => import('../views/DefaultLayout'));
-const SignUpAthlete = lazy(() => import('../views/SignUpAthlete'));
-const SignUpUniversity = lazy(() => import('../views/SignUpUniversity'));
+const SignUpAthlete = lazy(() => import('../views/register/SignUpAthlete'));
+const SignUpUniversity = lazy(() => import('../views/register/SignUpUniversity'));
 const Error404 = lazy(() => import('../views/error/Error404'));
 const Error50X = lazy(() => import('../views/error/Error50X'));
 const Login = lazy(() => import('../views/login'));

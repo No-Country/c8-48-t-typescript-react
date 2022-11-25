@@ -1,14 +1,12 @@
 export default {
   primary: {
-    main: '#060606', // Dark Blue
+    main: '#060606', // Dark Black
     contrastText: '#FFFFFF', // White
   },
   secondary: {
-    main: '#FFFFFF', // Grey
-    tagBg: '#DADADE', // Light Grey
-  },
-  tertiary: {
-    main: '#6543FF',
+    main: '#FFFFFF', // white
+    light: 'rgba(0,0,0,0.6)', // white opacity 60%
+    dark: '#6543FF',
   },
   neutral: {
     dark: '#212221', // Black

@@ -20,11 +20,14 @@ import {
   alpha,
   Link,
 } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 export default function Layout(props: any) {
+  const theme = useTheme();
   const navigate = useNavigate();
   // pages
   const pages = ['BECAS', 'PLANES', 'AYUDA'];
+  const menuResponsivePages = ['Iniciar Sesión', 'Registrarse', 'Becas', 'Planes', 'Ayuda'];
   // Responsive Menu
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,24 +47,38 @@ export default function Layout(props: any) {
     setSignupEl(null);
     route === 'university' ? navigate('/sign-up/university') : navigate('/sign-up/athlete');
   };
-
   // Login button
+  const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
+  const openLogin = Boolean(loginEl);
+  const handleClickLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setLoginEl(event.currentTarget);
+  };
+  const handleCloseLogin = (route: string) => {
+    setLoginEl(null);
+    route === 'university' ? navigate('login/universities') : navigate('login/athletes');
+  };
 
   return (
     <Box>
       <CssBaseline />
       <AppBar
         position="static"
-        sx={{ color: 'text.primary', backgroundColor: 'primary', px: 10, py: 1 }}
+        sx={{
+          color: 'text.primary',
+          backgroundColor: 'primary',
+          px: { lg: 10, md: 1, sm: 8, xs: 4 },
+          py: 1,
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo Becco */}
             <RocketLaunchIcon
               sx={{
-                display: { xs: 'none', md: 'flex', color: '#6543FF' },
+                display: { xs: 'none', md: 'flex' },
                 mr: 1,
                 fontSize: 30,
+                color: theme.palette.secondary.dark,
               }}
             />
             <Typography
@@ -74,7 +91,7 @@ export default function Layout(props: any) {
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                color: '#FFFFFF',
+                color: 'secondary.main',
                 textDecoration: 'none',
                 fontSize: 25,
               }}
@@ -88,7 +105,7 @@ export default function Layout(props: any) {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 mr: 1,
-                color: '#6543FF',
+                color: 'secondary.dark',
               }}
             />
             <Typography
@@ -102,7 +119,7 @@ export default function Layout(props: any) {
                 flexGrow: 1,
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                color: '#ffffff',
+                color: 'secondary.main',
                 textDecoration: 'none',
               }}
             >
@@ -138,7 +155,7 @@ export default function Layout(props: any) {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
+                {menuResponsivePages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -174,7 +191,7 @@ export default function Layout(props: any) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 3,
+                  gap: { lg: 3, md: 1 },
                 }}
               >
                 {pages.map((page) => {
@@ -185,16 +202,34 @@ export default function Layout(props: any) {
                   );
                 })}
               </Box>
-
-              <Button sx={{ letterSpacing: '0.46px', fontSize: 13 }} color="secondary" size="small">
+              {/* Login */}
+              <Button
+                sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
+                color="secondary"
+                size="small"
+                onClick={handleClickLogin}
+              >
                 INICIAR SESIÓN
               </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={loginEl}
+                open={openLogin}
+                onClose={handleCloseLogin}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem onClick={() => handleCloseLogin('athlete')}>Deportista</MenuItem>
+                <MenuItem onClick={() => handleCloseLogin('university')}>Universidad</MenuItem>
+              </Menu>
+              {/* Register */}
               <Button
                 color="secondary"
                 sx={{
                   letterSpacing: '0.46px',
-                  fontSize: 13,
-                  border: '1px solid #fff',
+                  fontSize: { lg: 13, md: 12 },
+                  border: `1px solid ${theme.palette.secondary.main}`,
                 }}
                 onClick={handleClickSignup}
                 size="small"
@@ -211,7 +246,7 @@ export default function Layout(props: any) {
                 }}
               >
                 <MenuItem onClick={() => handleCloseSignup('athlete')}>Deportista</MenuItem>
-                <MenuItem onClick={() => handleCloseSignup('uni')}>Universidad</MenuItem>
+                <MenuItem onClick={() => handleCloseSignup('university')}>Universidad</MenuItem>
               </Menu>
             </Box>
             {/* Close right side */}
@@ -265,7 +300,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: '#000000',
+  color: 'primary',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -273,9 +308,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '30ch',
+    },
+    [theme.breakpoints.up('lg')]: {
       width: '40ch',
     },
   },
 }));
 
-const linkStyle = { fontSize: 13, letterSpacing: '0.46px' };
+const linkStyle = { fontSize: { lg: 13, md: 12 }, letterSpacing: '0.46px' };

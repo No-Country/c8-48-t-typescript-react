@@ -34,7 +34,8 @@ function App() {
 
 let container: any = null;
 
-document.addEventListener('DOMContentLoaded', function (event) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+document.addEventListener('DOMContentLoaded', function (_) {
   if (!container) {
     container = document.getElementById('root') as HTMLElement;
     const root = ReactDOM.createRoot(container);

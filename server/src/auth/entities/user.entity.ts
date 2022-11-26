@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Length } from 'class-validator';
+import { Deportista } from 'src/deportista/entities/deportista.entity';
 @Entity('Users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -21,5 +23,9 @@ export class User {
   @CreateDateColumn()
   createAt: Date;
 
+  @OneToOne(() => Deportista, (deportista) => deportista.user, {
+    cascade: true,
+  })
+  deportista: Deportista;
   /* idRol: number; */
 }

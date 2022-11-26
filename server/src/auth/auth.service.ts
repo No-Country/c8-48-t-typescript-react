@@ -56,6 +56,17 @@ export class AuthService {
     };
   }
 
+  /* async findOne(id: string) {
+    const user = await this.userRepository.findOne({
+      where: { idUser: id },
+      relations: { deportista: true },
+    });
+
+    if (!user) throw new BadRequestException('User not found');
+
+    return user;
+  } */
+
   private handleDBErrors(error: any): never {
     if (error.code === '23505') {
       throw new BadRequestException(error.detail);

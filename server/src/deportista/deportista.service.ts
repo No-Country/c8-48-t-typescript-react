@@ -19,6 +19,23 @@ export class DeportistaService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
+
+  private readonly select = {
+    idDeportista: true,
+    age: true,
+    altura: true,
+    peso: true,
+    idPais: true,
+    fortaleza: true,
+    visionJuego: true,
+    liderazgo: true,
+    templaza: true,
+    user: {
+      fullName: true,
+      email: true,
+    },
+  };
+
   create(createDeportistaDto: CreateDeportistaDto) {
     return 'This action adds a new deportista';
   }
@@ -28,31 +45,22 @@ export class DeportistaService {
   }
 
   async findOne(id: string) {
-    const deportista = await this.userRepository.findOne({
-      where: { idUser: id },
-      select: {
-        idUser: true,
-        fullName: true,
-        email: true,
-        deportista: {
-          age: true,
-          idPais: true,
-          altura: true,
-          peso: true,
-          liderazgo: true,
-          templaza: true,
-          visionJuego: true,
-          fortaleza: true,
-        },
-      },
-      relations: {
-        deportista: true,
-      },
+    const deportista = await this.deportistaRepository.findOne({
+      where: { idDeportista: id },
+      relations: { user: true },
+      select: this.select,
     });
 
     if (!deportista) throw new BadRequestException('Deportista not found');
 
-    return deportista;
+    const { user, idDeportista, ...deportistaDetails } = deportista;
+
+    return {
+      idDeportista,
+      fullName: user.fullName,
+      email: user.email,
+      ...deportistaDetails,
+    };
   }
 
   async update(id: string, updateDeportistaDto: UpdateDeportistaDto) {

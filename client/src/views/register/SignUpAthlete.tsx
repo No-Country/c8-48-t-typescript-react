@@ -7,8 +7,8 @@ import { useTheme } from '@mui/material';
 const validationSchema = yup.object({
   email: yup
     .string()
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un mail correcto')
-    .required('Email es requerido'),
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un correo electrónico válido')
+    .required('Correo electrónico es requerido'),
 });
 
 export default function SignUpAthlete() {

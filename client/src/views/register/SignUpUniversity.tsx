@@ -10,7 +10,7 @@ const validationSchema = yup.object({
   country: yup.string(),
   email: yup
     .string()
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un mail correcto')
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un correo electrónico valido')
     .required('Email es requerido'),
   password: yup
     .string()
@@ -24,7 +24,7 @@ const validationSchema = yup.object({
   description: yup.string(),
   termsAndConditions: yup
     .bool()
-    .oneOf([true], 'Necesitas acpetar los terminos y condiciones antes de continuar'),
+    .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
 export default function SignUpAthlete() {
@@ -108,7 +108,7 @@ export default function SignUpAthlete() {
               mr: 5,
               bgcolor: 'rgba(0,0,0,0.1)',
               display: 'flex',
-              jusitfyContent: 'center',
+              justifyContent: 'center',
               alignItems: 'center',
             }}
             src={universityImage !== '' && universityImage}
@@ -256,7 +256,7 @@ export default function SignUpAthlete() {
           value={formik.values.termsAndConditions}
         />
         <Typography sx={{ fontSize: { sm: '14px', xs: '12px' } }}>
-          He leído y acepto la Politica de privacidad y la Politica de moderación de becas.
+          He leído y acepto la Política de privacidad y la Politica de moderación de becas.
         </Typography>
       </Box>
 

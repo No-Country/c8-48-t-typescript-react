@@ -4,12 +4,16 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthService } from 'src/auth/auth.service';
+
 import { Repository } from 'typeorm';
 import { CreateDeportistaDto } from './dto/create-deportista.dto';
 import { UpdateDeportistaDto } from './dto/update-deportista.dto';
 import { Deportista } from './entities/deportista.entity';
 import { User } from '../auth/entities/user.entity';
+import { iFile } from 'src/shared/interfaces/file-interfaces';
+import { ValidatorService } from 'src/shared/services/validator.service';
+import { AwsS3Service } from 'src/shared/services/aws-s3.service';
+import { GeneratorService } from 'src/shared/services/generator.service';
 
 @Injectable()
 export class DeportistaService {
@@ -18,6 +22,9 @@ export class DeportistaService {
     private readonly deportistaRepository: Repository<Deportista>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private validatorService: ValidatorService,
+    private awsS3Service: AwsS3Service,
+    private generatorService: GeneratorService,
   ) {}
 
   private readonly select = {
@@ -98,6 +105,12 @@ export class DeportistaService {
         'Error interno, contacte al administrador',
       );
     }
+  }
+
+  async uploadFile(file: iFile, idUser: string) {
+    if (file && !this.validatorService.isImage(file.mimetype))
+      throw new BadRequestException('file, not found ');
+    const key = await this.awsS3Service.uploadImage(file);
   }
 
   remove(id: number) {

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { iFile } from '../interfaces/file-interfaces';
 import { GeneratorService } from './generator.service';
-import AWS from 'aws-sdk';
-import mime from 'mime-types';
+import * as AWS from 'aws-sdk';
+import { extension } from 'mime-types';
 
 @Injectable()
 export class AwsS3Service {
@@ -20,11 +20,11 @@ export class AwsS3Service {
 
   async uploadImage(file: iFile) {
     const fileName = this.generatorService.fileName(
-      <string>mime.extension(file.mimetype),
+      <string>extension(file.mimetype) || '',
     );
 
     const key = 'images/' + fileName;
-    const image = await this.s3
+    await this.s3
       .putObject({
         Bucket: this.configService.get('AWS.bucketName') || '',
         Body: file.buffer,
@@ -33,7 +33,6 @@ export class AwsS3Service {
       })
       .promise();
 
-    console.log(image);
     return key;
   }
 }

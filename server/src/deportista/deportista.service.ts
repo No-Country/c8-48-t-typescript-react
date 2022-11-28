@@ -103,7 +103,7 @@ export class DeportistaService {
     }
   }
 
-  async uploadImage(file: iFile, idUser: string) {
+  /*  async uploadImage(file: iFile, idUser: string) {
     if (file && !this.validatorService.isImage(file.mimetype))
       throw new BadRequestException('file, error not ext jpeg or png');
     const key = await this.awsS3Service.uploadImage(file);
@@ -114,5 +114,5 @@ export class DeportistaService {
       throw new BadRequestException('file, error not ext pdf');
 
     const key = await this.awsS3Service.uploadDocument(file);
-  }
+  } */
 }

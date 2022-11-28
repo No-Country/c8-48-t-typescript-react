@@ -2,11 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Length } from 'class-validator';
 import { Deportista } from 'src/deportista/entities/deportista.entity';
+import { Multimedia } from '../../multimedia/entities/multimedia.entity';
 @Entity('Users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -18,6 +20,10 @@ export class User {
   @Column('text', { select: false })
   @Length(8, 16)
   password: string;
+
+  @Column('text')
+  urlPerfil: string;
+
   @Column('bool', { default: true })
   isActive: boolean;
   @CreateDateColumn()
@@ -27,5 +33,9 @@ export class User {
     cascade: true,
   })
   deportista: Deportista;
-  /* idRol: number; */
+
+  @OneToMany(() => Multimedia, (multimedia) => multimedia.user, {
+    cascade: true,
+  })
+  multimedia: Multimedia[];
 }

@@ -16,10 +16,14 @@ import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { DeportistaService } from './deportista.service';
 
 import { UpdateDeportistaDto } from './dto/update-deportista.dto';
+import { MultimediaService } from '../multimedia/multimedia.service';
 
 @Controller('deportista')
 export class DeportistaController {
-  constructor(private readonly deportistaService: DeportistaService) {}
+  constructor(
+    private readonly deportistaService: DeportistaService,
+    private readonly multimediaService: MultimediaService,
+  ) {}
 
   @Post('image/:id')
   @UseInterceptors(FileInterceptor('file'))
@@ -28,7 +32,17 @@ export class DeportistaController {
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.deportistaService.uploadImage(file, idUser);
+    return this.multimediaService.uploadImage(file, idUser);
+  }
+
+  @Post('perfil/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
+  uploadPerfil(
+    @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string,
+  ) {
+    return this.multimediaService.uploadPerfil(file, idUser);
   }
 
   @Post('document/:id')
@@ -38,7 +52,7 @@ export class DeportistaController {
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.deportistaService.uploadDocument(file, idUser);
+    return this.multimediaService.uploadDocument(file, idUser);
   }
 
   @Get()

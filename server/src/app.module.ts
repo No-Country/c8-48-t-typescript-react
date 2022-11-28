@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { DeportistaModule } from './deportista/deportista.module';
 import { SharedModule } from './shared/shared.module';
+import { MultimediaModule } from './multimedia/multimedia.module';
 import EnvConfiguration from './config/configuration';
 
 @Module({
@@ -31,6 +32,7 @@ import EnvConfiguration from './config/configuration';
       }),
     }),
     SharedModule,
+    MultimediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

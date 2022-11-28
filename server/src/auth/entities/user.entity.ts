@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Length } from 'class-validator';
+import { IsOptional, Length } from 'class-validator';
 import { Deportista } from 'src/deportista/entities/deportista.entity';
 import { Multimedia } from '../../multimedia/entities/multimedia.entity';
 @Entity('Users')
@@ -21,8 +21,8 @@ export class User {
   @Length(8, 16)
   password: string;
 
-  @Column('text')
-  urlPerfil: string;
+  @Column('text', { nullable: true })
+  urlPerfil?: string;
 
   @Column('bool', { default: true })
   isActive: boolean;

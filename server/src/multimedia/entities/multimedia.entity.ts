@@ -1,3 +1,4 @@
+import { IsOptional } from 'class-validator';
 import { User } from 'src/auth/entities/user.entity';
 import {
   Column,
@@ -21,8 +22,8 @@ export class Multimedia {
   @CreateDateColumn()
   createAt: Date;
 
-  @Column('date')
-  updateAt: Date;
+  @Column('date', { nullable: true })
+  updateAt?: Date;
 
   @ManyToOne(() => User, (user) => user.multimedia)
   user: User;

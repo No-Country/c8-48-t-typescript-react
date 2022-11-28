@@ -65,8 +65,13 @@ export class MultimediaService {
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return multimedia;
+      return {
+        idMultimedia: multimedia.idMultimedia,
+        url: multimedia.url,
+        type: multimedia.type,
+      };
     } catch (error) {
+      console.log(error);
       throw new BadRequestException('Error');
     }
   }
@@ -80,6 +85,11 @@ export class MultimediaService {
   async findAllVideos(idUser: string) {
     return this.multimediaRepository.find({
       where: { user: { idUser }, type: 'V' },
+      select: {
+        idMultimedia: true,
+        url: true,
+        createAt: true,
+      },
     });
   }
 

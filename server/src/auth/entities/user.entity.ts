@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { IsOptional, Length } from 'class-validator';
+import { Length } from 'class-validator';
 import { Deportista } from 'src/deportista/entities/deportista.entity';
 import { Multimedia } from '../../multimedia/entities/multimedia.entity';
 @Entity('Users')

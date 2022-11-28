@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { DeportistaModule } from './deportista/deportista.module';
+import { SharedModule } from './shared/shared.module';
 import EnvConfiguration from './config/configuration';
 
 @Module({
@@ -29,6 +30,7 @@ import EnvConfiguration from './config/configuration';
         synchronize: configService.get('database.synchronize'),
       }),
     }),
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -35,16 +35,6 @@ export class DeportistaController {
     return this.multimediaService.uploadImage(file, idUser);
   }
 
-  @Post('perfil/:id')
-  @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(AuthGuard('jwt'))
-  uploadPerfil(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadPerfil(file, idUser);
-  }
-
   @Post('document/:id')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))

@@ -38,7 +38,7 @@ export class AwsS3Service {
 
   async uploadDocument(file: iFile) {
     const fileName = this.generatorService.fileName(
-      <string>mime.extension(file.fieldname),
+      <string>mime.extension(file.mimetype) || '',
     );
 
     const key = 'documents/' + fileName;

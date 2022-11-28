@@ -6,6 +6,7 @@ import { ValidatorService } from 'src/shared/services/validator.service';
 import { Repository } from 'typeorm';
 import { AuthService } from '../auth/auth.service';
 import { Multimedia } from './entities/multimedia.entity';
+import { GeneratorService } from '../shared/services/generator.service';
 
 @Injectable()
 export class MultimediaService {
@@ -15,6 +16,7 @@ export class MultimediaService {
     private validatorService: ValidatorService,
     private awsS3Service: AwsS3Service,
     private authService: AuthService,
+    private generadorService: GeneratorService,
   ) {}
 
   async uploadImage(file: iFile, idUser: string) {
@@ -31,7 +33,11 @@ export class MultimediaService {
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return multimedia;
+      return {
+        idMultiMedia: multimedia.idMultimedia,
+        url: this.generadorService.getS3PublicUrl(key),
+        createAt: multimedia.createAt,
+      };
     } catch (error) {
       throw new BadRequestException('Error');
     }
@@ -43,14 +49,18 @@ export class MultimediaService {
       throw new BadRequestException('file, error not ext pdf');
 
     try {
-      const key = await this.awsS3Service.uploadImage(file);
+      const key = await this.awsS3Service.uploadDocument(file);
       const multimedia = this.multimediaRepository.create({
         url: key,
         type: 'D',
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return multimedia;
+      return {
+        idMultimedia: multimedia.idMultimedia,
+        url: this.generadorService.getS3PublicUrl(key),
+        createAt: multimedia.createAt,
+      };
     } catch (error) {
       throw new BadRequestException('Error');
     }

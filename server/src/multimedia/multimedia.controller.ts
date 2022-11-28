@@ -8,8 +8,12 @@ import {
   Delete,
   ParseUUIDPipe,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { MultimediaService } from './multimedia.service';
 
 @Controller('multimedia')
@@ -29,5 +33,15 @@ export class MultimediaController {
   @UseGuards(AuthGuard('jwt'))
   findAllVideo(@Param('id', ParseUUIDPipe) idUser: string) {
     return this.multimediaService.findAllVideos(idUser);
+  }
+
+  @Post('perfil/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
+  uploadPerfil(
+    @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string,
+  ) {
+    return this.multimediaService.uploadPerfil(file, idUser);
   }
 }

@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   ParseUUIDPipe,
   UploadedFile,
   UseGuards,
@@ -24,14 +23,26 @@ export class DeportistaController {
 
   @Post('image/:id')
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
   uploadImage(
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.deportistaService.uploadFile(file, idUser);
+    return this.deportistaService.uploadImage(file, idUser);
+  }
+
+  @Post('document/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
+  uploadDocument(
+    @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string,
+  ) {
+    return this.deportistaService.uploadDocument(file, idUser);
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.deportistaService.findAll();
   }
@@ -49,10 +60,5 @@ export class DeportistaController {
     @Body() updateDeportistaDto: UpdateDeportistaDto,
   ) {
     return this.deportistaService.update(id, updateDeportistaDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.deportistaService.remove(+id);
   }
 }

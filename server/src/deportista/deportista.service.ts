@@ -43,10 +43,6 @@ export class DeportistaService {
     },
   };
 
-  create(createDeportistaDto: CreateDeportistaDto) {
-    return 'This action adds a new deportista';
-  }
-
   findAll() {
     return `This action returns all deportista`;
   }
@@ -107,13 +103,16 @@ export class DeportistaService {
     }
   }
 
-  async uploadFile(file: iFile, idUser: string) {
+  async uploadImage(file: iFile, idUser: string) {
     if (file && !this.validatorService.isImage(file.mimetype))
-      throw new BadRequestException('file, not found ');
+      throw new BadRequestException('file, error not ext jpeg or png');
     const key = await this.awsS3Service.uploadImage(file);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} deportista`;
+  async uploadDocument(file: iFile, idUser: string) {
+    if (file && !this.validatorService.isDocument(file.mimetype))
+      throw new BadRequestException('file, error not ext pdf');
+
+    const key = await this.awsS3Service.uploadDocument(file);
   }
 }

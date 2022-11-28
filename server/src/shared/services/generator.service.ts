@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { v4 as UUID } from 'uuid';
 @Injectable()
 export class GeneratorService {
+  constructor(private readonly configService: ConfigService) {}
+
   uuid(): string {
     return UUID();
   }
@@ -14,6 +17,8 @@ export class GeneratorService {
     if (!key) {
       throw new TypeError('key is required');
     }
-    return `https://s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_S3_BUCKET_NAME}/${key}`;
+    return `https://s3.${this.configService.get(
+      'AWS.region',
+    )}.amazonaws.com/${this.configService.get('AWS.bucketName')}/${key}`;
   }
 }

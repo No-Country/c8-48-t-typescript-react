@@ -17,7 +17,8 @@
   "cSpell.language": "en,es",
   "cSpell.words": [
     "nestjs",
-    "pgadmin"
+    "pgadmin",
+    "postgres"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {

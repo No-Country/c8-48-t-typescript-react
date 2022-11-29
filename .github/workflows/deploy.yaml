@@ -1,0 +1,41 @@
+name: Lint Code Base
+on:
+  push:
+    branches: [feat/deploy-backend]
+  workflow_dispatch:
+
+jobs:
+  server:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          cache-dependency-path: |
+            ./server/yarn.lock
+            
+      - name: build - server
+        working-directory: ./server
+        env:
+          NODE_ENV: production
+        run: yarn build
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: ./server/dist
+          remote_path: /var/www/my-app/
+          remote_host: ec2-54-80-18-152.compute-1.amazonaws.com
+          remote_user: ubuntu
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"

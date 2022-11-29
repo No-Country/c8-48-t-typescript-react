@@ -10,15 +10,17 @@ export class GeneratorService {
   }
 
   fileName(ext: string): string {
-    return this.uuid() + '.' + ext;
+    const fileName = this.uuid() + '.' + ext;
+    return fileName;
   }
 
   getS3PublicUrl(key: string): string {
     if (!key) {
       throw new TypeError('key is required');
     }
-    return `https://s3.${this.configService.get(
+    const UrlS3 = `https://s3.${this.configService.get(
       'AWS.region',
     )}.amazonaws.com/${this.configService.get('AWS.bucketName')}/${key}`;
+    return UrlS3;
   }
 }

@@ -7,5 +7,5 @@ export class UpdateUserDto {
 
   @IsString()
   @MinLength(1)
-  urlPerfil?: string;
+  urlProfile?: string;
 }

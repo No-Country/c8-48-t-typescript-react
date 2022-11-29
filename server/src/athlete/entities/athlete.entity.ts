@@ -8,10 +8,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('Deportistas')
-export class Deportista {
+@Entity('Athletes')
+export class Athlete {
   @PrimaryGeneratedColumn('uuid')
-  idDeportista: string;
+  idAthlete: string;
 
   @Column('smallint')
   age: number;
@@ -47,7 +47,7 @@ export class Deportista {
   @CreateDateColumn()
   updateAt: Date;
 
-  @OneToOne(() => User, (user) => user.deportista)
+  @OneToOne(() => User, (user) => user.athlete)
   @JoinColumn()
   user: User;
 }

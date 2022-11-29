@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { DeportistaModule } from './deportista/deportista.module';
+import { AthleteModule } from './athlete/athlete.module';
 import { SharedModule } from './shared/shared.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
 import EnvConfiguration from './config/configuration';
@@ -12,7 +12,7 @@ import EnvConfiguration from './config/configuration';
 @Module({
   imports: [
     AuthModule,
-    DeportistaModule,
+    AthleteModule,
     ConfigModule.forRoot({
       envFilePath: ['.env', '../.env'],
       load: [EnvConfiguration],

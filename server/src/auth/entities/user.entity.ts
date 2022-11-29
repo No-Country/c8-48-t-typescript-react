@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Length } from 'class-validator';
-import { Deportista } from 'src/deportista/entities/deportista.entity';
+import { Athlete } from 'src/athlete/entities/athlete.entity';
 import { Multimedia } from '../../multimedia/entities/multimedia.entity';
 @Entity('Users')
 export class User {
@@ -22,17 +22,17 @@ export class User {
   password: string;
 
   @Column('text', { nullable: true })
-  urlPerfil?: string;
+  urlProfile?: string;
 
   @Column('bool', { default: true })
   isActive: boolean;
   @CreateDateColumn()
   createAt: Date;
 
-  @OneToOne(() => Deportista, (deportista) => deportista.user, {
+  @OneToOne(() => Athlete, (athlete) => athlete.user, {
     cascade: true,
   })
-  deportista: Deportista;
+  athlete: Athlete;
 
   @OneToMany(() => Multimedia, (multimedia) => multimedia.user, {
     cascade: true,

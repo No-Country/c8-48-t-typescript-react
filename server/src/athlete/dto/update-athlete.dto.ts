@@ -7,7 +7,7 @@ import {
   Min,
 } from 'class-validator';
 
-export class UpdateDeportistaDto {
+export class UpdateAthleteDto {
   @IsNumber()
   @IsPositive({
     message: 'El $property debe de ser un numero positivo',

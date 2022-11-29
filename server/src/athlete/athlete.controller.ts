@@ -13,15 +13,14 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
-import { DeportistaService } from './deportista.service';
-
-import { UpdateDeportistaDto } from './dto/update-deportista.dto';
+import { AthleteService } from './athlete.service';
+import { UpdateAthleteDto } from './dto/update-athlete.dto';
 import { MultimediaService } from '../multimedia/multimedia.service';
 
-@Controller('deportista')
-export class DeportistaController {
+@Controller('athlete')
+export class AthleteController {
   constructor(
-    private readonly deportistaService: DeportistaService,
+    private readonly athleteService: AthleteService,
     private readonly multimediaService: MultimediaService,
   ) {}
 
@@ -48,21 +47,21 @@ export class DeportistaController {
   @Get()
   @UseGuards(AuthGuard('jwt'))
   findAll() {
-    return this.deportistaService.findAll();
+    return this.athleteService.findAll();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.deportistaService.findOne(id);
+    return this.athleteService.findOne(id);
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
   update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateDeportistaDto: UpdateDeportistaDto,
+    @Body() updateAthletesDto: UpdateAthleteDto,
   ) {
-    return this.deportistaService.update(id, updateDeportistaDto);
+    return this.athleteService.update(id, updateAthletesDto);
   }
 }

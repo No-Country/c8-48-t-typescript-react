@@ -115,7 +115,7 @@ export class MultimediaService {
     try {
       const key = await this.awsS3Service.uploadImage(file);
       const user = await this.authService.updateUser(
-        { urlPerfil: key },
+        { urlProfile: key },
         idUser,
       );
       return user;

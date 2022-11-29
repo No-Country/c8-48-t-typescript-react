@@ -60,7 +60,7 @@ export class AuthService {
   async findOne(id: string) {
     const user = await this.userRepository.findOne({
       where: { idUser: id },
-      relations: { deportista: true },
+      relations: { athlete: true },
     });
 
     if (!user) throw new BadRequestException('User not found');
@@ -70,7 +70,7 @@ export class AuthService {
 
   async updateUser(updateUserDto: UpdateUserDto, idUser: string) {
     const user = await this.findOne(idUser);
-    if (updateUserDto.urlPerfil) user.urlPerfil = updateUserDto.urlPerfil;
+    if (updateUserDto.urlProfile) user.urlProfile = updateUserDto.urlProfile;
     if (updateUserDto.fullName) user.fullName = updateUserDto.fullName;
 
     try {

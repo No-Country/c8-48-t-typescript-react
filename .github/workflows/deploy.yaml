@@ -24,12 +24,18 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: |
             ./server/yarn.lock
-            
+
+        
+      - name: Install package - server
+        working-directory: ./server
+        run: yarn install --frozen-lockfile      
       - name: build - server
         working-directory: ./server
         env:
           NODE_ENV: production
         run: yarn build
+
+
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
         with:
@@ -39,3 +45,5 @@ jobs:
           remote_host: ec2-54-80-18-152.compute-1.amazonaws.com
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+    env:
+      CI: true

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 19.x]
+        node-version: [18.x]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
-          path: ./server/dist
+          path: ./server
           remote_path: /var/www/my-app/
           remote_host: ec2-54-80-18-152.compute-1.amazonaws.com
           remote_user: ubuntu

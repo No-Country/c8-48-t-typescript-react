@@ -4,11 +4,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { AthleteModule } from './athlete/athlete.module';
+import { SharedModule } from './shared/shared.module';
+import { MultimediaModule } from './multimedia/multimedia.module';
 import EnvConfiguration from './config/configuration';
 
 @Module({
   imports: [
     AuthModule,
+    AthleteModule,
     ConfigModule.forRoot({
       envFilePath: ['.env', '../.env'],
       load: [EnvConfiguration],
@@ -27,6 +31,8 @@ import EnvConfiguration from './config/configuration';
         synchronize: configService.get('database.synchronize'),
       }),
     }),
+    SharedModule,
+    MultimediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

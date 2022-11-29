@@ -11,6 +11,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -54,6 +55,29 @@ export class AuthService {
       },
       jwt: this.jwtService.sign({ email }),
     };
+  }
+
+  async findOne(id: string) {
+    const user = await this.userRepository.findOne({
+      where: { idUser: id },
+      relations: { athlete: true },
+    });
+
+    if (!user) throw new BadRequestException('User not found');
+
+    return user;
+  }
+
+  async updateUser(updateUserDto: UpdateUserDto, idUser: string) {
+    const user = await this.findOne(idUser);
+    if (updateUserDto.urlProfile) user.urlProfile = updateUserDto.urlProfile;
+    if (updateUserDto.fullName) user.fullName = updateUserDto.fullName;
+
+    try {
+      this.userRepository.save(user);
+    } catch (error) {}
+
+    return user;
   }
 
   private handleDBErrors(error: any): never {

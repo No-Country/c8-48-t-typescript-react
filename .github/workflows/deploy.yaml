@@ -6,7 +6,7 @@ on:
 
 jobs:
   server:
-    name: Lint Code Base
+    name: AWS
     runs-on: ubuntu-latest
     strategy:
       matrix:

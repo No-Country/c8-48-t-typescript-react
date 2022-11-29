@@ -1,14 +1,13 @@
 export default {
   primary: {
-    main: '#060606', // Dark Blue
+    main: '#220B39', // Dark Purple
     contrastText: '#FFFFFF', // White
   },
   secondary: {
-    main: '#FFFFFF', // Grey
-    tagBg: '#DADADE', // Light Grey
-  },
-  tertiary: {
-    main: '#6543FF',
+    main: '#FFFFFF', // white
+    contrastText: '#E7E7E7',
+    light: 'rgba(0,0,0,0.6)', // white opacity 60%
+    dark: '#27F49E', // green
   },
   neutral: {
     dark: '#212221', // Black
@@ -17,7 +16,7 @@ export default {
     contrastText: '#FFFFFF', // White
   },
   text: {
-    primary: '#000000', // Purple
+    primary: '#220B39', // Purple
     secondary: '#AEAEBD', // MUI Grey
     black: '#212221', // Black
   },

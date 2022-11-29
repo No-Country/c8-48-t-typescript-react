@@ -20,11 +20,14 @@ import {
   alpha,
   Link,
 } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 export default function Layout(props: any) {
+  const theme = useTheme();
   const navigate = useNavigate();
   // pages
   const pages = ['BECAS', 'PLANES', 'AYUDA'];
+  const menuResponsivePages = ['Iniciar Sesión', 'Registrarse', 'Becas', 'Planes', 'Ayuda'];
   // Responsive Menu
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -40,28 +43,46 @@ export default function Layout(props: any) {
   const handleClickSignup = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSignupEl(event.currentTarget);
   };
-  const handleCloseSignup = (route: string) => {
+  const handleCloseSignup = () => {
     setSignupEl(null);
-    route === 'university' ? navigate('/sign-up/university') : navigate('/sign-up/athlete');
   };
-
+  const handleNavigateSignUp = (route: string) => {
+    route === 'university' ? navigate('sign-up/university') : navigate('sign-up/athlete');
+  };
   // Login button
+  const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
+  const openLogin = Boolean(loginEl);
+  const handleClickLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setLoginEl(event.currentTarget);
+  };
+  const handleCloseLogin = () => {
+    setLoginEl(null);
+  };
+  const handleNavigateLogin = (route: string) => {
+    route === 'university' ? navigate('login/university') : navigate('login/athlete');
+  };
 
   return (
     <Box>
       <CssBaseline />
       <AppBar
         position="static"
-        sx={{ color: 'text.primary', backgroundColor: 'primary', px: 10, py: 1 }}
+        sx={{
+          color: 'primary.main',
+          backgroundColor: 'primary.contrastText',
+          px: { lg: 10, md: 1, sm: 8, xs: 4 },
+          py: 1,
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo Becco */}
             <RocketLaunchIcon
               sx={{
-                display: { xs: 'none', md: 'flex', color: '#6543FF' },
+                display: { xs: 'none', md: 'flex' },
                 mr: 1,
                 fontSize: 30,
+                color: theme.palette.primary.main,
               }}
             />
             <Typography
@@ -74,7 +95,7 @@ export default function Layout(props: any) {
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                color: '#FFFFFF',
+                color: 'primary.main',
                 textDecoration: 'none',
                 fontSize: 25,
               }}
@@ -88,7 +109,7 @@ export default function Layout(props: any) {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 mr: 1,
-                color: '#6543FF',
+                color: 'primary.main',
               }}
             />
             <Typography
@@ -102,7 +123,7 @@ export default function Layout(props: any) {
                 flexGrow: 1,
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                color: '#ffffff',
+                color: 'primary.main',
                 textDecoration: 'none',
               }}
             >
@@ -116,7 +137,7 @@ export default function Layout(props: any) {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="secondary"
+                color="primary"
               >
                 <MenuIcon />
               </IconButton>
@@ -138,7 +159,7 @@ export default function Layout(props: any) {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
+                {menuResponsivePages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -174,27 +195,47 @@ export default function Layout(props: any) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 3,
+                  gap: { lg: 3, md: 1 },
                 }}
               >
                 {pages.map((page) => {
                   return (
-                    <Link color="secondary" sx={linkStyle}>
+                    <Link color="primary" sx={linkStyle}>
                       {page}
                     </Link>
                   );
                 })}
               </Box>
-
-              <Button sx={{ letterSpacing: '0.46px', fontSize: 13 }} color="secondary" size="small">
+              {/* Login */}
+              <Button
+                sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
+                color="primary"
+                size="small"
+                onClick={handleClickLogin}
+              >
                 INICIAR SESIÓN
               </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={loginEl}
+                open={openLogin}
+                onClose={handleCloseLogin}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem color="primary.main" onClick={() => handleNavigateLogin('athlete')}>
+                  Deportista
+                </MenuItem>
+                <MenuItem onClick={() => handleNavigateLogin('university')}>Universidad</MenuItem>
+              </Menu>
+              {/* Register */}
               <Button
-                color="secondary"
+                color="primary"
                 sx={{
                   letterSpacing: '0.46px',
-                  fontSize: 13,
-                  border: '1px solid #fff',
+                  fontSize: { lg: 13, md: 12 },
+                  border: `1px solid ${theme.palette.primary.main}`,
                 }}
                 onClick={handleClickSignup}
                 size="small"
@@ -210,29 +251,28 @@ export default function Layout(props: any) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={() => handleCloseSignup('athlete')}>Deportista</MenuItem>
-                <MenuItem onClick={() => handleCloseSignup('uni')}>Universidad</MenuItem>
+                <MenuItem onClick={() => handleNavigateSignUp('athlete')}>Deportista</MenuItem>
+                <MenuItem onClick={() => handleNavigateSignUp('university')}>Universidad</MenuItem>
               </Menu>
             </Box>
             {/* Close right side */}
           </Toolbar>
         </Container>
       </AppBar>
-      <Container
-        maxWidth={false}
+      <Box
         sx={{
           height: 'calc(100vh - 64px)',
           overflow: 'auto',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'start',
         }}
       >
         <Suspense fallback={<CenteredSpinner />}>
           <Outlet />
           {props.children}
         </Suspense>
-      </Container>
+      </Box>
     </Box>
   );
 }
@@ -241,9 +281,9 @@ export default function Layout(props: any) {
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.6),
+  backgroundColor: alpha(theme.palette.primary.main, 0.1),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.8),
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -265,7 +305,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: '#000000',
+  color: theme.palette.primary.main,
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -273,9 +313,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '30ch',
+    },
+    [theme.breakpoints.up('lg')]: {
       width: '40ch',
     },
   },
 }));
 
-const linkStyle = { fontSize: 13, letterSpacing: '0.46px' };
+const linkStyle = { fontSize: { lg: 13, md: 12 }, letterSpacing: '0.46px' };

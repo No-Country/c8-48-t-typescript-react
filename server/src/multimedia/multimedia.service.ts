@@ -23,7 +23,7 @@ export class MultimediaService {
     const user = await this.authService.findOne(idUser);
 
     if (file && !this.validatorService.isImage(file.mimetype))
-      throw new BadRequestException('file, error not ext jpeg or png');
+      throw new BadRequestException('File extension should be jpeg or png');
 
     try {
       const key = await this.awsS3Service.uploadImage(file);
@@ -46,7 +46,7 @@ export class MultimediaService {
   async uploadDocument(file: iFile, idUser: string) {
     const user = await this.authService.findOne(idUser);
     if (file && !this.validatorService.isDocument(file.mimetype))
-      throw new BadRequestException('file, error not ext pdf');
+      throw new BadRequestException('File extension should be pdf');
 
     try {
       const key = await this.awsS3Service.uploadDocument(file);
@@ -109,9 +109,9 @@ export class MultimediaService {
     });
   }
 
-  async uploadPerfil(file: iFile, idUser: string) {
+  async uploadProfile(file: iFile, idUser: string) {
     if (file && !this.validatorService.isImage(file.mimetype))
-      throw new BadRequestException('file, error not ext jpeg or png');
+      throw new BadRequestException('File extension should be jpeg or png');
     try {
       const key = await this.awsS3Service.uploadImage(file);
       const user = await this.authService.updateUser(

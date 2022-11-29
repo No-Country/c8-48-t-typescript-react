@@ -17,29 +17,29 @@ export class Athlete {
   age: number;
 
   @Column('int')
-  idPais: number;
+  idCountry: number;
 
   @Column({ type: 'numeric', precision: 5, scale: 2 })
-  altura: number;
+  height: number;
 
   @Column('numeric', { precision: 5, scale: 2 })
-  peso: number;
+  weight: number;
 
   @Column('bool')
-  liderazgo: boolean;
+  leadership: boolean;
 
   @Column('bool')
-  templaza: boolean;
+  temperance: boolean;
 
   @Column('varchar', {
     length: 255,
   })
-  visionJuego: string;
+  gameVision: string;
 
   @Column('varchar', {
     length: 255,
   })
-  fortaleza: string;
+  strength: string;
 
   @CreateDateColumn()
   createAt: Date;

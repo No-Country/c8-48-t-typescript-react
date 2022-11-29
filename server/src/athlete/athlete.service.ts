@@ -22,13 +22,13 @@ export class AthleteService {
   private readonly select = {
     idAthletes: true,
     age: true,
-    altura: true,
-    peso: true,
-    idPais: true,
-    fortaleza: true,
-    visionJuego: true,
-    liderazgo: true,
-    templaza: true,
+    height: true,
+    weight: true,
+    idCountry: true,
+    strength: true,
+    gameVision: true,
+    leadership: true,
+    temperance: true,
     user: {
       fullName: true,
       email: true,
@@ -36,7 +36,7 @@ export class AthleteService {
   };
 
   findAll() {
-    return `This action returns all Athlete`;
+    return `This action returns all athlete`;
   }
 
   async findOne(id: string) {

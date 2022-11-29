@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
@@ -40,6 +41,6 @@ export class MultimediaController {
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.multimediaService.uploadPerfil(file, idUser);
+    return this.multimediaService.uploadProfile(file, idUser);
   }
 }

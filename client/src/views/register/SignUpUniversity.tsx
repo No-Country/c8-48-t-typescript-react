@@ -256,7 +256,7 @@ export default function SignUpAthlete() {
           value={formik.values.termsAndConditions}
         />
         <Typography sx={{ fontSize: { sm: '14px', xs: '12px' } }}>
-          He leído y acepto la Política de privacidad y la Politica de moderación de becas.
+          He leído y acepto la Política de privacidad y la Política de moderación de becas.
         </Typography>
       </Box>
 

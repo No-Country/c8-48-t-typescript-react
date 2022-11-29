@@ -36,7 +36,7 @@ export default function HeroSection() {
       <Box sx={{ position: 'relative' }}>
         <CardMedia
           component="img"
-          image="src\assets\images\deportista.png"
+          image="src\assets\images\athlete-hero.png"
           alt="athlete"
           sx={{
             position: 'absolute',

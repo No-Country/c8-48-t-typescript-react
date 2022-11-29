@@ -47,7 +47,7 @@ export default function Layout(props: any) {
     setSignupEl(null);
   };
   const handleNavigateSignUp = (route: string) => {
-    route === 'university' ? navigate('sign-up/universities') : navigate('sign-up/athletes');
+    route === 'university' ? navigate('sign-up/university') : navigate('sign-up/athlete');
   };
   // Login button
   const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
@@ -59,7 +59,7 @@ export default function Layout(props: any) {
     setLoginEl(null);
   };
   const handleNavigateLogin = (route: string) => {
-    route === 'university' ? navigate('login/universities') : navigate('login/athletes');
+    route === 'university' ? navigate('login/university') : navigate('login/athlete');
   };
 
   return (

@@ -1,26 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { Repository } from 'typeorm';
 import { CreateUniversityDto } from './dto/create-university.dto';
-import { UpdateUniversityDto } from './dto/update-university.dto';
+import { University } from './entities/university.entity';
 
 @Injectable()
 export class UniversityService {
-  create(createUniversityDto: CreateUniversityDto) {
-    return 'This action adds a new university';
-  }
+  constructor(
+    @InjectRepository(University)
+    private readonly universityRepository: Repository<University>,
+  ) {}
 
-  findAll() {
-    return `This action returns all university`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} university`;
-  }
-
-  update(id: number, updateUniversityDto: UpdateUniversityDto) {
-    return `This action updates a #${id} university`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} university`;
+  async create(createUniversityDto: CreateUniversityDto, user: User) {
+    try {
+      const university = this.universityRepository.create({
+        ...createUniversityDto,
+      });
+      await this.universityRepository.save(university);
+      return university;
+    } catch (error) {
+      throw new InternalServerErrorException('Error, internal server');
+    }
   }
 }

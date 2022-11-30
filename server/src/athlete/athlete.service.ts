@@ -69,6 +69,7 @@ export class AthleteService {
       idAthlete,
       fullName: user.fullName,
       email: user.email,
+      urlProfile: user.urlProfile,
       ...athleteDetails,
     };
   }

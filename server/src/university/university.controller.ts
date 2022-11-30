@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   ParseUUIDPipe,
   Patch,
@@ -13,7 +14,11 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('university')
 export class UniversityController {
   constructor(private readonly universityService: UniversityService) {}
-
+  @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    return this.universityService.findOne(id);
+  }
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
   updateUniversity(

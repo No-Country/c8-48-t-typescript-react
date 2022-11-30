@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -39,5 +43,28 @@ export class UniversityService {
     }
 
     return updateUniversityDto;
+  }
+
+  async findOne(id: string) {
+    try {
+      const university = await this.universityRepository.findOne({
+        where: { idUniversity: id },
+        relations: { user: true },
+      });
+
+      if (!university) throw new BadRequestException('University not found');
+
+      const { user, idUniversity, ...universityDetails } = university;
+
+      return {
+        idUniversity,
+        fullName: user.fullName,
+        email: user.email,
+        urlProfile: user.urlProfile,
+        ...universityDetails,
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Error, internal server');
+    }
   }
 }

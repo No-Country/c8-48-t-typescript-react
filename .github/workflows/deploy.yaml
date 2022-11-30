@@ -2,6 +2,8 @@ name: AWS
 on:
   push:
     branches: [feat/deploy-backend]
+  paths-ignore:
+      - 'node_modules/**'
   workflow_dispatch:
 
 jobs:

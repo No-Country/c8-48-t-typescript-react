@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('Universities')
 export class University {
@@ -8,17 +15,21 @@ export class University {
   @Column('int')
   idCountry: number;
 
-  @Column({ type: 'text', length: 255 })
+  @Column('text')
   linkedin: string;
 
-  @Column({ type: 'text', length: 255 })
+  @Column('text')
   website: string;
 
-  @Column({ type: 'text', length: 255 })
+  @Column('text')
   description: string;
 
   @Column('bool')
   acceptConditions: boolean;
+
+  @OneToOne(() => User, (user) => user.university)
+  @JoinColumn()
+  user: User;
 
   //TODO: Relación con user
 }

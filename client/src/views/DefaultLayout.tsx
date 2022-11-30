@@ -27,13 +27,7 @@ const Layout = (props: any) => {
   const navigate = useNavigate();
   // pages
   const pages = ['BECAS', 'PLANES', 'AYUDA'];
-  const menuResponsivePages = [
-    'Iniciar Sesión',
-    'Registrarse',
-    'Becas',
-    'Planes',
-    'Ayuda',
-  ];
+  const menuResponsivePages = ['Iniciar Sesión', 'Registrarse', 'Becas', 'Planes', 'Ayuda'];
   // Responsive Menu
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -177,10 +171,7 @@ const Layout = (props: any) => {
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Buscar…"
-                  inputProps={{ 'aria-label': 'search' }}
-                />
+                <StyledInputBase placeholder="Buscar…" inputProps={{ 'aria-label': 'search' }} />
               </Search>
             </Box>
             {/* close search bar */}

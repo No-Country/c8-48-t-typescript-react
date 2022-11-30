@@ -18,6 +18,7 @@ const postLogin = async (body: postLogin) => {
       body: JSON.stringify(body),
     });
     const data = await _data.json();
+    console.log(data);
   } catch (e) {
     console.log(e);
   }

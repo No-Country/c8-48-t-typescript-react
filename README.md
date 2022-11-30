@@ -10,11 +10,11 @@
 <br />
 <p align="center">
   <a href="https://">
-	  <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-football-football-soccer-flaticons-lineal-color-flat-icons.png" alt="Logo"/>
+	  <img src="https://user-images.githubusercontent.com/36519478/204613346-bdc156d0-c15c-409f-b0da-d838cc6bf867.png" alt="Logo"/>
   </a>
 
   <h1 align="center">
-	Football Connect
+	BECCO - Connecting opportunities
   </h1>
 
   <p align="center">
@@ -34,7 +34,8 @@
 - [c8-48-t-typescript-react](#c8-48-t-typescript-react)
   - [Table of Contents](#table-of-contents)
   - [The Project](#the-project)
-  - [Features](#features)
+  - [Deploy link](#deploy-link)
+  - [Features and tech used](#features-and-tech-used)
   - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
   - [Author](#author)
@@ -46,7 +47,11 @@
 
 Our platform allows young athletes to show their talent and obtain university scholarships. No need to use different contact points.
 
-## Features
+## Deploy link
+
+TBD
+
+## Features and tech used
 
 - Docker for reproducibility
 - React 18 in the frontend
@@ -116,6 +121,41 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
   <tr>
     <td>
         <div align="center">
+            <a href="./docs/img/photo.png" target="_blank" rel="author">
+                <img src="https://avatars2.githubusercontent.com/u/80177586?s=460&v=4" style="border-radius: 10%; min-width: 100px;" alt="Israel Laguan's Photo" width="200px">
+            </a>
+            <h2>
+                <a href="https://github.com/RicardoPoma" target="_blank" rel="author">
+                    Ricardo Poma
+                </a>
+            </h2>
+        </div>
+    </td>
+    <td>
+        <div align="center">
+            <h3>Roles:</h3>
+            <h5>Designer, UI/UX</h5>
+        </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <div align="center">
+            <h2>
+                Juan Miquelarena
+            </h2>
+        </div>
+    </td>
+    <td>
+        <div align="center">
+            <h3>Roles:</h3>
+            <h5>Designer, UI/UX</h5>
+        </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <div align="center">
             <a href="https://github.com/Eduardo-L-R" target="_blank" rel="author">
                 <img src="https://avatars2.githubusercontent.com/u/60417224?s=460&v=4" style="border-radius: 10%; min-width: 100px;" alt="Eduardo Leiva's Photo" width="200px">
             </a>
@@ -128,6 +168,8 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
     </td>
     <td>
         <div align="center">
+            <h3>Roles:</h3>
+            <h5>Frontend</h5>
             <a href="https://github.com/Eduardo-L-R" target="_blank" rel="author">
                 <img src="https://img.icons8.com/color/48/000000/github--v1.png" 
 			style="border-radius: 10%" alt="My GitHub" height="45px"
@@ -154,6 +196,8 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
     </td>
     <td>
         <div align="center">
+            <h3>Roles: </h3>
+            <h5>Backend</h5>
             <a href="https://github.com/Turyfay" target="_blank" rel="author">
                 <img src="https://img.icons8.com/color/48/000000/github--v1.png" 
 			style="border-radius: 10%" alt="My GitHub" height="45px"
@@ -180,6 +224,8 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
     </td>
     <td>
         <div align="center">
+            <h3>Roles:</h3>
+            <h5>Frontend</h5>
             <a href="https://github.com/garzo94" target="_blank" rel="author">
                 <img src="https://img.icons8.com/color/48/000000/github--v1.png" 
 			style="border-radius: 10%" alt="My GitHub" height="45px"
@@ -206,6 +252,8 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
     </td>
     <td>
         <div align="center">
+            <h3>Roles:</h3>
+            <h5>DevOps, QA, Frontend</h5>
             <a href="mailto:israellaguan@gmail.com" target="_blank" rel="author">
                 <img src="https://img.icons8.com/color/48/000000/message-squared.png" style="border-radius: 10%" alt="My GitHub" height="45px">
                 <h3>
@@ -218,7 +266,7 @@ if you inspect the [Dockerfile](./Dockerfile) you can notice it have several sta
             <a href="https://www.linkedin.com/in/israellaguan/" target="_blank" rel="author">
                 <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="My Linkedin" height="45px">
                 <h3>
-                    Connect to my Linkedin
+                    Connect to my LinkedIn
                 </h3>
             </a>
             <a href="https://github.com/Israel-Laguan" target="_blank" rel="author">

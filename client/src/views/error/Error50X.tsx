@@ -1,18 +1,17 @@
 import { Box, styled, Typography } from '@mui/material';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
-export default function Error50X() {
-  return (
-    <Container>
-      <Content>
-        <SentimentVeryDissatisfiedIcon sx={{ fontSize: 80, color: 'text.black' }} />
-        <Title>An error Occurred</Title>
-        <Details>Please refresh the page or, if the issue persists, contact an admin</Details>
-        {/* <img src={Logo} alt="" width={250} /> */}
-      </Content>
-    </Container>
-  );
-}
+const Error50X = () => (
+  <Container>
+    <Content>
+      <SentimentVeryDissatisfiedIcon sx={{ fontSize: 80, color: 'text.black' }} />
+      <Title>An error Occurred</Title>
+      <Details>Please refresh the page or, if the issue persists, contact an admin</Details>
+    </Content>
+  </Container>
+);
+
+export default Error50X;
 
 const Container = styled(Box)({
   display: 'flex',

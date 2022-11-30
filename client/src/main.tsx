@@ -12,25 +12,23 @@ import DefaultLayout from './views/DefaultLayout';
 
 const Router = lazy(() => import('./Router'));
 
-function App() {
-  return (
-    <MuiThemeProvider theme={defaultTheme}>
-      <BrowserRouter>
-        <Suspense
-          fallback={
-            <DefaultLayout>
-              <CenteredSpinner />
-            </DefaultLayout>
-          }
-        >
-          <StrictMode>
-            <Router />
-          </StrictMode>
-        </Suspense>
-      </BrowserRouter>
-    </MuiThemeProvider>
-  );
-}
+const App = () => (
+  <MuiThemeProvider theme={defaultTheme}>
+    <BrowserRouter>
+      <Suspense
+        fallback={
+          <DefaultLayout>
+            <CenteredSpinner />
+          </DefaultLayout>
+        }
+      >
+        <StrictMode>
+          <Router />
+        </StrictMode>
+      </Suspense>
+    </BrowserRouter>
+  </MuiThemeProvider>
+);
 
 let container: any = null;
 

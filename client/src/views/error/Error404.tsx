@@ -2,18 +2,18 @@ import { Box, styled, Typography } from '@mui/material';
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
 import { Link } from 'react-router-dom';
 
-export default function Error404() {
-  return (
-    <Container>
-      <Content>
-        <NotListedLocationIcon sx={{ fontSize: 80, color: 'text.black' }} />
-        <Title>Page not Found</Title>
-        <Details>The page you’re looking for no longer exists.</Details>
-        <Link to="/">Return to Home</Link>
-      </Content>
-    </Container>
-  );
-}
+const Error404 = () => (
+  <Container>
+    <Content>
+      <NotListedLocationIcon sx={{ fontSize: 80, color: 'text.black' }} />
+      <Title>Page not Found</Title>
+      <Details>The page you’re looking for no longer exists.</Details>
+      <Link to="/">Return to Home</Link>
+    </Content>
+  </Container>
+);
+
+export default Error404;
 
 const Container = styled(Box)({
   display: 'flex',

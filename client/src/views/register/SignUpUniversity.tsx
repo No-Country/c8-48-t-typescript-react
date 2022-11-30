@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, TextField, Typography, Button, Divider, CardMedia, Checkbox } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useFormik } from 'formik';
@@ -27,7 +27,7 @@ const validationSchema = yup.object({
     .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
-export default function SignUpAthlete() {
+const SignUpUniversity = () => {
   const [universityImage, setUniversityImage] = useState<any>('');
   const formik = useFormik({
     initialValues: {
@@ -271,7 +271,9 @@ export default function SignUpAthlete() {
       </Button>
     </Box>
   );
-}
+};
+
+export default SignUpUniversity;
 
 const textFieldStyle = { width: { lg: '25%', md: '30%', sm: '60%', xs: '80%' } };
 const textStyle = {

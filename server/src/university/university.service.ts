@@ -26,7 +26,7 @@ export class UniversityService {
       await this.universityRepository.save(university);
       return university;
     } catch (error) {
-      throw new InternalServerErrorException('Error, internal server');
+      throw new InternalServerErrorException('Error interno en server');
     }
   }
 

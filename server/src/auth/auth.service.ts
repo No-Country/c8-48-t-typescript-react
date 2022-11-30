@@ -58,7 +58,7 @@ export class AuthService {
       await this.universityService.create(createUniversityDto, user);
       return { fullName, email };
     } catch (error) {
-      throw new InternalServerErrorException('Error, interno server');
+      throw new InternalServerErrorException('Error interno en server');
     }
   }
 

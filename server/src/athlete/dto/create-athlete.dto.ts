@@ -11,7 +11,7 @@ import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 export class CreateAthleteDto extends CreateUserDto {
   @IsNumber()
   @IsPositive({
-    message: 'El $property debe de ser un numero positivo',
+    message: '$property debe de ser un numero positivo',
   })
   @Min(1)
   @IsOptional()
@@ -30,7 +30,7 @@ export class CreateAthleteDto extends CreateUserDto {
     },
   )
   @IsPositive({
-    message: 'La $property debe de ser un numero positivo',
+    message: '$property debe de ser un numero positivo',
   })
   @IsOptional()
   height?: number;
@@ -42,7 +42,7 @@ export class CreateAthleteDto extends CreateUserDto {
     },
   )
   @IsPositive({
-    message: 'La $property debe de ser un numero positivo',
+    message: '$property debe de ser un numero positivo',
   })
   @IsOptional()
   weight?: number;
@@ -56,14 +56,14 @@ export class CreateAthleteDto extends CreateUserDto {
   @IsString()
   @Length(1, 255, {
     message:
-      'La $property debe de ingresar un mínimo de 1 y un máximo de 255 caracteres.',
+      '$property debe de ingresar un mínimo de 1 y un máximo de 255 caracteres.',
   })
   @IsOptional()
   visionGame?: string;
   @IsString()
   @Length(1, 255, {
-    message: 'La $property debe de ingresar un máximo de 255 caracteres.',
+    message: '$property debe de ingresar un máximo de 255 caracteres.',
   })
   @IsOptional()
-  fortress?: string;
+  strenght?: string;
 }

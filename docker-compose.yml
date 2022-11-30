@@ -17,7 +17,7 @@ services:
       context: .
       target: db
     volumes:
-      - 'postgres-server_data:/var/lib/postgresql/data'
+      - ./postgres-server_data:/var/lib/postgresql/data
     hostname: postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]

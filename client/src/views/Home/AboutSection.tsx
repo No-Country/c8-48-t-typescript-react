@@ -1,4 +1,4 @@
-import React from 'react';
+import StudentImage from '../../assets/images/student.png';
 import { Box, CardMedia, Typography } from '@mui/material';
 
 export default function AboutSection() {
@@ -7,8 +7,8 @@ export default function AboutSection() {
       <Box sx={{ position: 'relative', width: '50%' }}>
         <CardMedia
           component="img"
-          image="src\assets\images\student.png"
-          alt="athlete"
+          image={StudentImage}
+          alt="Student"
           sx={{
             position: 'absolute',
             height: 450,
@@ -28,7 +28,7 @@ export default function AboutSection() {
           ¿Que Hacemos?
         </Typography>
         <Typography sx={{ position: 'absolute', left: 50, top: 225 }}>
-          A short description introducing your <br /> business and services to visitors.{' '}
+          A short description introducing your <br /> business and services to visitors.
         </Typography>
       </Box>
     </Box>

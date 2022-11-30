@@ -13,7 +13,7 @@ export default function HeroSection() {
     >
       <Box sx={{ pt: 24, pl: 20 }}>
         <Typography sx={{ color: 'secondary.main', fontWeight: 700, fontSize: 40 }}>
-          ¿Quienes Somos?
+          ¿Quiénes Somos?
         </Typography>
         <Typography
           sx={{

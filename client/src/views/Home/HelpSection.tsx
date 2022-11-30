@@ -1,3 +1,4 @@
+import SoccerPlayerImage from '../../assets/images/soccerPlayer.png';
 import { Box, CardMedia, Typography } from '@mui/material';
 
 export default function HelpSection() {
@@ -38,8 +39,8 @@ export default function HelpSection() {
       <Box sx={{ width: '50%', height: '100vh', mt: 10 }}>
         <CardMedia
           component="img"
-          image="src\assets\images\soccerPlayer.png"
-          alt="athlete"
+          image={SoccerPlayerImage}
+          alt="Soccer player"
           sx={{
             objectFit: 'cover',
             height: 700,

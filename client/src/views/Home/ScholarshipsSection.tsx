@@ -1,4 +1,4 @@
-import React from 'react';
+import UniversityLogo from '../../assets/images/university.png';
 import { Box, Typography, CardMedia } from '@mui/material';
 
 export default function ScholarshipsSection() {
@@ -33,8 +33,8 @@ export default function ScholarshipsSection() {
       >
         <CardMedia
           component="img"
-          image="src\assets\images\logos\university.png"
-          alt="athlete"
+          image={UniversityLogo}
+          alt="University"
           sx={{
             height: 200,
             width: 250,
@@ -64,8 +64,8 @@ export default function ScholarshipsSection() {
       >
         <CardMedia
           component="img"
-          image="src\assets\images\logos\university.png"
-          alt="athlete"
+          image={UniversityLogo}
+          alt="University"
           sx={{
             height: 200,
             width: 250,
@@ -96,8 +96,8 @@ export default function ScholarshipsSection() {
       >
         <CardMedia
           component="img"
-          image="src\assets\images\logos\university.png"
-          alt="athlete"
+          image={UniversityLogo}
+          alt="University"
           sx={{
             height: 200,
             width: 250,

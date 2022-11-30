@@ -13,7 +13,7 @@ export default function Footer() {
       <Box sx={{ width: '36%', py: 5, px: 10 }}>
         <Typography sx={titleStyle}>Redes Sociales</Typography>
         <Typography sx={{ mb: 2 }}>
-          Summarize your business so the visitor can <br /> learn about your offerings from any page{' '}
+          Summarize your business so the visitor can <br /> learn about your offerings from any page
           <br /> on your website.
         </Typography>
         <Stack direction="row" spacing={1}>
@@ -32,8 +32,8 @@ export default function Footer() {
       <Box>
         <Typography sx={titleStyle}>Navegación</Typography>
         <Stack direction="column" spacing={0.5}>
-          {navigation.map((nav) => {
-            return <Link>{nav}</Link>;
+          {navigation.map((link, id) => {
+            return <Link key={`nav-link-${id}`}>{link}</Link>;
           })}
         </Stack>
       </Box>

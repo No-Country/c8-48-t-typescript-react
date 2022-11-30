@@ -5,7 +5,7 @@ export default function ErrorMessage({ message }: { message: string }) {
     <Typography variant="fetchError" color="error.dark">
       <Typography display="inline" fontWeight="bold">
         Oops!
-      </Typography>{' '}
+      </Typography>
       {message}
     </Typography>
   );

@@ -13,7 +13,7 @@ export default function PackagesSection() {
       }}
     >
       <Typography variant="h4" color="secondary.main" sx={{ fontWeight: 700, mb: 10 }}>
-        Nuestros Planes{' '}
+        Nuestros Planes
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>

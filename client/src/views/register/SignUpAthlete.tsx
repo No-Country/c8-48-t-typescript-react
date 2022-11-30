@@ -71,11 +71,11 @@ export default function SignUpAthlete() {
 
           <Typography sx={{ my: 3, fontSize: '12px', color: theme.palette.secondary.light }}>
             By continuing, you agree that we create an account for you (unless already created), and
-            accept our{' '}
+            accept our&nbsp;
             <Link href="#" sx={linkStyle}>
               Terms and Conditions
-            </Link>{' '}
-            and{' '}
+            </Link>
+            &nbsp;and&nbsp;
             <Link href="#" sx={linkStyle}>
               Privacy Policy.
             </Link>

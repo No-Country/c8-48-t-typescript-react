@@ -30,6 +30,4 @@ export class University {
   @OneToOne(() => User, (user) => user.university)
   @JoinColumn()
   user: User;
-
-  //TODO: Relación con user
 }

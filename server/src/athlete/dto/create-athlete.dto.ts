@@ -2,26 +2,27 @@ import { OmitType } from '@nestjs/mapped-types';
 import {
   IsBoolean,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
   Length,
   Min,
 } from 'class-validator';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
-export class CreateAthleteDto extends OmitType(CreateUserDto, [
-  'password',
-] as const) {
+export class CreateAthleteDto extends CreateUserDto {
   @IsNumber()
   @IsPositive({
     message: 'El $property debe de ser un numero positivo',
   })
   @Min(1)
-  age: number;
+  @IsOptional()
+  age?: number;
 
   @IsNumber()
   @IsPositive()
   @Min(1)
-  idCountry: number;
+  @IsOptional()
+  idCountry?: number;
 
   @IsNumber(
     { maxDecimalPlaces: 2 },
@@ -32,7 +33,8 @@ export class CreateAthleteDto extends OmitType(CreateUserDto, [
   @IsPositive({
     message: 'La $property debe de ser un numero positivo',
   })
-  height: number;
+  @IsOptional()
+  height?: number;
 
   @IsNumber(
     { maxDecimalPlaces: 2 },
@@ -43,21 +45,26 @@ export class CreateAthleteDto extends OmitType(CreateUserDto, [
   @IsPositive({
     message: 'La $property debe de ser un numero positivo',
   })
-  weight: number;
+  @IsOptional()
+  weight?: number;
 
   @IsBoolean()
-  leadership: boolean;
+  @IsOptional()
+  leadership?: boolean;
   @IsBoolean()
-  temperance: boolean;
+  @IsOptional()
+  temperance?: boolean;
   @IsString()
   @Length(1, 255, {
     message:
       'La $property debe de ingresar un mínimo de 1 y un máximo de 255 caracteres.',
   })
-  visionGame: string;
+  @IsOptional()
+  visionGame?: string;
   @IsString()
   @Length(1, 255, {
     message: 'La $property debe de ingresar un máximo de 255 caracteres.',
   })
-  fortress: string;
+  @IsOptional()
+  fortress?: string;
 }

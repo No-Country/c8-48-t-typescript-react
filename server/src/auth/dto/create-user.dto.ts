@@ -4,6 +4,7 @@ import {
   MinLength,
   MaxLength,
   Matches,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -16,6 +17,11 @@ export class CreateUserDto {
   //   message: 'Debe ingresar un mail correcto',
   // })
   email: string;
+
+  @IsString()
+  @IsOptional()
+  urlProfile?: string;
+
   @IsString()
   @MinLength(8)
   @MaxLength(16)

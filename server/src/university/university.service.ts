@@ -16,6 +16,7 @@ export class UniversityService {
     try {
       const university = this.universityRepository.create({
         ...createUniversityDto,
+        user,
       });
       await this.universityRepository.save(university);
       return university;

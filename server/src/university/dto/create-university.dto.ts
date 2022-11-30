@@ -1,4 +1,5 @@
 import { OmitType } from '@nestjs/mapped-types';
+import { Transform } from 'class-transformer';
 import {
   IsBoolean,
   IsNumber,
@@ -7,9 +8,7 @@ import {
   Length,
 } from 'class-validator';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
-export class CreateUniversityDto extends OmitType(CreateUserDto, [
-  'password',
-] as const) {
+export class CreateUniversityDto extends CreateUserDto {
   @IsNumber()
   @IsPositive()
   idCountry: number;

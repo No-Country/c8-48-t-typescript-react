@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material';
 
-export default function Layout(props: any) {
+const Layout = (props: any) => {
   const theme = useTheme();
   const navigate = useNavigate();
   // pages
@@ -47,7 +47,7 @@ export default function Layout(props: any) {
     setSignupEl(null);
   };
   const handleNavigateSignUp = (route: string) => {
-    route === 'university' ? navigate('sign-up/university') : navigate('sign-up/athlete');
+    route === 'university' ? navigate('auth/sign-up/university') : navigate('auth/sign-up/athlete');
   };
   // Login button
   const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
@@ -57,9 +57,6 @@ export default function Layout(props: any) {
   };
   const handleCloseLogin = () => {
     setLoginEl(null);
-  };
-  const handleNavigateLogin = (route: string) => {
-    route === 'university' ? navigate('login/university') : navigate('login/athlete');
   };
 
   return (
@@ -229,10 +226,16 @@ export default function Layout(props: any) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem color="primary.main" onClick={() => handleNavigateLogin('athlete')}>
-                  Deportista
+                <MenuItem>
+                  <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
+                    Deportista
+                  </Link>
                 </MenuItem>
-                <MenuItem onClick={() => handleNavigateLogin('university')}>Universidad</MenuItem>
+                <MenuItem>
+                  <Link color="primary" href="/auth/login/university" sx={linkStyle}>
+                    Universidad
+                  </Link>
+                </MenuItem>
               </Menu>
               {/* Register */}
               <Button
@@ -256,8 +259,16 @@ export default function Layout(props: any) {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={() => handleNavigateSignUp('athlete')}>Deportista</MenuItem>
-                <MenuItem onClick={() => handleNavigateSignUp('university')}>Universidad</MenuItem>
+                <MenuItem>
+                  <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
+                    Deportista
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={() => handleNavigateSignUp('university')}>
+                  <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
+                    Universidad
+                  </Link>
+                </MenuItem>
               </Menu>
             </Box>
             {/* Close right side */}
@@ -281,7 +292,9 @@ export default function Layout(props: any) {
       </Box>
     </Box>
   );
-}
+};
+
+export default Layout;
 
 // Styles:
 const Search = styled('div')(({ theme }) => ({

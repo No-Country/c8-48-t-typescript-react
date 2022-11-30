@@ -4,7 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
-export default function Footer() {
+const Footer = () => {
   const navigation = ['Home', 'Acerca de nosotros', 'Becas', 'Planes', 'Ayuda'];
   const titleStyle = { fontWeight: 600, fontSize: '18px', mb: 2 };
   return (
@@ -56,4 +56,6 @@ export default function Footer() {
       </Box>
     </Box>
   );
-}
+};
+
+export default Footer;

@@ -22,7 +22,7 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
     <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px">
       <MainContainer>
         <Typography variant="h3" fontWeight="bold" mb={2}>
-          Comienza a encontrar talento ya
+          Comienza a encontrar {variation === 'university' ? 'talento' : 'oportunidades'} ya
         </Typography>
         <CustomTextField formik={formik} name={'name'} label={'Email Address'} />
         <CustomTextField formik={formik} name={'lastName'} label={'Password'} />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -11,7 +10,7 @@ const validationSchema = yup.object({
     .required('Correo electrónico es requerido'),
 });
 
-export default function SignUpAthlete() {
+const SignUpAthlete = () => {
   const theme = useTheme();
   const formik = useFormik({
     initialValues: {
@@ -98,4 +97,6 @@ export default function SignUpAthlete() {
       </Box>
     </Box>
   );
-}
+};
+
+export default SignUpAthlete;

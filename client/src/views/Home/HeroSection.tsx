@@ -1,4 +1,4 @@
-import React from 'react';
+import AthleteHeroImage from 'src/assets/images/athlete-hero.png';
 import { Box, Typography, Button, CardMedia } from '@mui/material';
 export default function HeroSection() {
   return (
@@ -16,7 +16,12 @@ export default function HeroSection() {
           ¿Quines Somos?
         </Typography>
         <Typography
-          sx={{ color: 'secondary.contrastText', lineHeight: '30px', mt: 1.5, fontSize: 18 }}
+          sx={{
+            color: 'secondary.contrastText',
+            lineHeight: '30px',
+            mt: 1.5,
+            fontSize: 18,
+          }}
         >
           A short description introducing your <br /> business and services to visitors.
         </Typography>
@@ -36,7 +41,7 @@ export default function HeroSection() {
       <Box sx={{ position: 'relative' }}>
         <CardMedia
           component="img"
-          image="src\assets\images\athlete-hero.png"
+          image={AthleteHeroImage}
           alt="athlete"
           sx={{
             position: 'absolute',

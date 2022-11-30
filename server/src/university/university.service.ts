@@ -39,7 +39,7 @@ export class UniversityService {
         { ...updateUniversityDto },
       );
     } catch (error) {
-      throw new InternalServerErrorException('Error, interna server');
+      throw new InternalServerErrorException('Error, interno server');
     }
 
     return updateUniversityDto;

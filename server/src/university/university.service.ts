@@ -4,6 +4,7 @@ import { User } from 'src/auth/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUniversityDto } from './dto/create-university.dto';
 import { University } from './entities/university.entity';
+import { UpdateUniversityDto } from './dto/update-university.dto';
 
 @Injectable()
 export class UniversityService {
@@ -23,5 +24,20 @@ export class UniversityService {
     } catch (error) {
       throw new InternalServerErrorException('Error, internal server');
     }
+  }
+
+  async update(updateUniversityDto: UpdateUniversityDto, id: string) {
+    try {
+      this.universityRepository.update(
+        {
+          idUniversity: id,
+        },
+        { ...updateUniversityDto },
+      );
+    } catch (error) {
+      throw new InternalServerErrorException('Error, interna server');
+    }
+
+    return updateUniversityDto;
   }
 }

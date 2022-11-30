@@ -1,6 +1,4 @@
-import { OmitType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/mapped-types';
 import { CreateUniversityDto } from './create-university.dto';
 
-export class UpdateUniversityDto extends OmitType(CreateUniversityDto, [
-  'acceptConditions' as const,
-]) {}
+export class UpdateUniversityDto extends PartialType(CreateUniversityDto) {}

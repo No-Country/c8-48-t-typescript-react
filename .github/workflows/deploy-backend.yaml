@@ -1,10 +1,9 @@
-name: AWS
+name: Deploy Backend-AWS
 on:
   push:
     branches: [feat/deploy-backend]
   paths-ignore:
       - 'node_modules/**'
-  workflow_dispatch:
 
 jobs:
   server:
@@ -38,14 +37,12 @@ jobs:
         run: yarn build
 
 
-      - name: rsync deployments
+      - name: deployment - serve
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avzr --delete
           path: ./server/*
           remote_path: /var/www/my-app/
-          remote_host: ec2-54-80-18-152.compute-1.amazonaws.com
+          remote_host: ec2-44-210-155-80.compute-1.amazonaws.com
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-    env:
-      CI: true

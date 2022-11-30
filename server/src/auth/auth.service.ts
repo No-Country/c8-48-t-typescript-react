@@ -15,7 +15,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUniversityDto } from '../university/dto/create-university.dto';
 import { UniversityService } from '../university/university.service';
 import { CreateAthleteDto } from '../athlete/dto/create-athlete.dto';
-import { MultimediaService } from '../multimedia/multimedia.service';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AwsS3Service } from 'src/shared/services/aws-s3.service';
 

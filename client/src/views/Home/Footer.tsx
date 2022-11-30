@@ -8,7 +8,15 @@ export default function Footer() {
   const navigation = ['Home', 'Acerca de nosotros', 'Becas', 'Planes', 'Ayuda'];
   const titleStyle = { fontWeight: 600, fontSize: '18px', mb: 2 };
   return (
-    <Box sx={{ display: 'flex', height: '300px', alignItems: 'center' }}>
+    <Box
+      sx={{
+        bgcolor: 'white',
+        display: 'flex',
+        height: '300px',
+        alignItems: 'center',
+        width: '100vw',
+      }}
+    >
       {/* Social media */}
       <Box sx={{ width: '36%', py: 5, px: 10 }}>
         <Typography sx={titleStyle}>Redes Sociales</Typography>

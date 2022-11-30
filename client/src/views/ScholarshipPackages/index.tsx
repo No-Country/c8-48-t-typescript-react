@@ -1,7 +1,18 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-export default function PackagesSection() {
-  return (
+import { Box, Typography, Button } from '@mui/material/';
+import Footer from '../Home/Footer';
+
+const ScholarshipPackages = () => (
+  <Box
+    sx={{
+      height: '1000px',
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      pt: 5,
+      gap: 3,
+    }}
+  >
     <Box
       sx={{
         display: 'flex',
@@ -54,15 +65,23 @@ export default function PackagesSection() {
           </Typography>
           <Button
             size="small"
-            sx={{ bgcolor: 'secondary.dark', borderRadius: 10, width: '100%', mt: 5 }}
+            sx={{
+              bgcolor: 'secondary.dark',
+              borderRadius: 10,
+              width: '100%',
+              mt: 5,
+            }}
           >
             Seleccionar
           </Button>
         </Box>
       </Box>
     </Box>
-  );
-}
+    <Footer />
+  </Box>
+);
+
+export default ScholarshipPackages;
 
 const packageCardStyle = {
   width: 325,
@@ -97,5 +116,10 @@ const listTextStyle = {
   lineHeight: 2.5,
 };
 
-const buttonStyle = { bgcolor: 'secondary.dark', borderRadius: 10, width: '100%', mt: 7 };
+const buttonStyle = {
+  bgcolor: 'secondary.dark',
+  borderRadius: 10,
+  width: '100%',
+  mt: 7,
+};
 const titleStyle = { fontSize: 25, fontWeight: 600, mb: 5 };

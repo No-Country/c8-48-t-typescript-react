@@ -200,7 +200,12 @@ export default function Layout(props: any) {
               >
                 {pages.map((page, id) => {
                   return (
-                    <Link color="primary" sx={linkStyle} key={`pages-link-${id}-${Math.random()}`}>
+                    <Link
+                      color="primary"
+                      href={page.toLocaleLowerCase()}
+                      sx={linkStyle}
+                      key={`pages-link-${id}-${Math.random()}`}
+                    >
                       {page}
                     </Link>
                   );
@@ -261,6 +266,7 @@ export default function Layout(props: any) {
       </AppBar>
       <Box
         sx={{
+          bgcolor: 'primary.main',
           height: 'calc(100vh - 64px)',
           overflow: 'auto',
           display: 'flex',

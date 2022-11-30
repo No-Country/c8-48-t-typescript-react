@@ -3,7 +3,7 @@ import { Box, CardMedia, Typography } from '@mui/material';
 
 export default function AboutSection() {
   return (
-    <Box sx={{ display: 'flex', height: 550 }}>
+    <Box sx={{ display: 'flex', height: 550, bgcolor: 'white' }}>
       <Box sx={{ position: 'relative', width: '50%' }}>
         <CardMedia
           component="img"

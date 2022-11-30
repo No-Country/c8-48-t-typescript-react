@@ -1,8 +1,17 @@
 import UniversityLogo from '../../assets/images/logos/university.png';
 import { Box, Typography, CardMedia } from '@mui/material';
+import Footer from '../Home/Footer';
 
-export default function ScholarshipsSection() {
-  return (
+const Scholarships = () => (
+  <Box
+    sx={{
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 3,
+    }}
+  >
     <Box
       sx={{
         height: '1000px',
@@ -42,14 +51,26 @@ export default function ScholarshipsSection() {
           }}
         />
         <Box
-          sx={{ width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+          sx={{
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
         >
           <Typography sx={{ fontSize: '25px', fontWeight: 600 }}>
             Defensa central para 2ª division
           </Typography>
           <Typography>Universidad Leiden</Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'end', alignItems: 'end' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            justifyContent: 'end',
+            alignItems: 'end',
+          }}
+        >
           <Typography sx={{ m: 3 }}>Hace 3 Días</Typography>
         </Box>
       </Box>
@@ -73,14 +94,26 @@ export default function ScholarshipsSection() {
           }}
         />
         <Box
-          sx={{ width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+          sx={{
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
         >
           <Typography sx={{ fontSize: '25px', fontWeight: 600 }}>
             Defensa central para 2ª division
           </Typography>
           <Typography>Universidad Leiden</Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'end', alignItems: 'end' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            justifyContent: 'end',
+            alignItems: 'end',
+          }}
+        >
           <Typography sx={{ m: 3 }}>Hace 3 Días</Typography>
         </Box>
       </Box>
@@ -105,17 +138,32 @@ export default function ScholarshipsSection() {
           }}
         />
         <Box
-          sx={{ width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+          sx={{
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
         >
           <Typography sx={{ fontSize: '25px', fontWeight: 600 }}>
             Defensa central para 3ª division
           </Typography>
           <Typography>Universidad Leiden</Typography>
         </Box>
-        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'end', alignItems: 'end' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            justifyContent: 'end',
+            alignItems: 'end',
+          }}
+        >
           <Typography sx={{ m: 3 }}>Hace 3 Días</Typography>
         </Box>
       </Box>
     </Box>
-  );
-}
+    <Footer />
+  </Box>
+);
+
+export default Scholarships;

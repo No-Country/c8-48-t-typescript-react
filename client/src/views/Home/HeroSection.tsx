@@ -1,4 +1,4 @@
-import AthleteHeroImage from 'src/assets/images/athlete-hero.png';
+import AthleteHeroImage from '../../assets/images/athlete-hero.png';
 import { Box, Typography, Button, CardMedia } from '@mui/material';
 export default function HeroSection() {
   return (

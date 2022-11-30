@@ -104,3 +104,4 @@ dist
 .tern-port
 
 pgdata
+/postgres-server_data

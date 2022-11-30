@@ -198,9 +198,9 @@ export default function Layout(props: any) {
                   gap: { lg: 3, md: 1 },
                 }}
               >
-                {pages.map((page) => {
+                {pages.map((page, id) => {
                   return (
-                    <Link color="primary" sx={linkStyle}>
+                    <Link color="primary" sx={linkStyle} key={`pages-link-${id}-${Math.random()}`}>
                       {page}
                     </Link>
                   );

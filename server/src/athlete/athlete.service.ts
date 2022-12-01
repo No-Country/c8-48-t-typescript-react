@@ -29,7 +29,7 @@ export class AthleteService {
     strength: true,
     gameVision: true,
     leadership: true,
-    temperance: true,
+    temper: true,
     user: {
       fullName: true,
       email: true,

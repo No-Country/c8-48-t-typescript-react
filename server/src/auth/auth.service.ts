@@ -76,9 +76,9 @@ export class AuthService {
       select: { email: true, password: true, fullName: true },
     });
 
-    if (!user) throw new UnauthorizedException('Credenciales no validas');
+    if (!user) throw new UnauthorizedException('Credenciales no válidas');
     if (!bcrypt.compareSync(password, user.password))
-      throw new UnauthorizedException('Credenciales no validas');
+      throw new UnauthorizedException('Credenciales no válidas');
     return {
       ok: true,
       user: {

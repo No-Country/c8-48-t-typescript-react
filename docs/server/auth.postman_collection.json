@@ -1,0 +1,117 @@
+{
+  "info": {
+    "_postman_id": "2dd33da7-d32e-42e2-b85f-72499f91a4b2",
+    "name": "auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5906871"
+  },
+  "item": [
+    {
+      "name": "Register University",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{PROJECT_ROOT}}/docs/server/logos/Leiden.png"
+            },
+            {
+              "key": "fullName",
+              "value": "Universiteit Leiden",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "contact@uleiden.edu",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "Abc123456789",
+              "type": "text"
+            },
+            {
+              "key": "idCountry",
+              "value": "15",
+              "type": "text"
+            },
+            {
+              "key": "linkedin",
+              "value": "https://www.linkedin.com/school/leiden-university",
+              "type": "text"
+            },
+            {
+              "key": "website",
+              "value": "https://www.universiteitleiden.nl/",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Leiden University is the oldest university in the Netherlands, is one of Europe's foremost research universities.",
+              "type": "text"
+            },
+            {
+              "key": "acceptConditions",
+              "value": "true",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/auth/register/university",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "auth", "register", "university"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Athlete",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"fullName\": \"Alejandra Bellin\",\r\n    \"email\":\"alejandra@gmail.com\",\r\n    \"password\":\"Abc123456789\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/auth/register/athlete",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "auth", "register", "athlete"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"alejandra@gmail.com\",\r\n    \"password\":\"Abc123456789\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/auth/login",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "auth", "login"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

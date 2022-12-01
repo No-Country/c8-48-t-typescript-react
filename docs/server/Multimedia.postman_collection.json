@@ -1,0 +1,113 @@
+{
+  "info": {
+    "_postman_id": "af56a962-e535-4491-84f7-a0567fd1d783",
+    "name": "Multimedia",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5906871"
+  },
+  "item": [
+    {
+      "name": "Upload Url Video",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk2NTk1MjcsImV4cCI6MTY2OTY2NjcyN30.PWJ8je_84Cw3RimSzrmd7P2DOVtuedD1S_MMXeSFxoY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"urlVideo\": \"https://www.youtube.com/watch?v=p7e6XUkkcDU\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/multimedia/video/44283aea-d464-43ed-8dd0-43a3555c63f8",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "multimedia",
+            "video",
+            "44283aea-d464-43ed-8dd0-43a3555c63f8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Find All Videos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk2NTk1MjcsImV4cCI6MTY2OTY2NjcyN30.PWJ8je_84Cw3RimSzrmd7P2DOVtuedD1S_MMXeSFxoY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/multimedia/video/44283aea-d464-43ed-8dd0-43a3555c63f8",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "multimedia",
+            "video",
+            "44283aea-d464-43ed-8dd0-43a3555c63f8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload profile images",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk2NjQwNzksImV4cCI6MTY2OTY3MTI3OX0.Sg_rRWzC8IHA2p_CiA996QOLZT57iz042a8aCpc5WJk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{PROJECT_ROOT}}/docs/server/images/female-soccer-player.jpeg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/multimedia/profile/44283aea-d464-43ed-8dd0-43a3555c63f8",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "multimedia",
+            "profile",
+            "44283aea-d464-43ed-8dd0-43a3555c63f8"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

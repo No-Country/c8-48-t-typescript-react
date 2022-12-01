@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
 import { Athlete } from './entities/athlete.entity';
 import { User } from '../auth/entities/user.entity';
+import { CreateAthleteDto } from './dto/create-athlete.dto';
 
 @Injectable()
 export class AthleteService {
@@ -28,7 +29,7 @@ export class AthleteService {
     strength: true,
     gameVision: true,
     leadership: true,
-    temperance: true,
+    temper: true,
     user: {
       fullName: true,
       email: true,
@@ -37,6 +38,20 @@ export class AthleteService {
 
   findAll() {
     return `This action returns all athlete`;
+  }
+
+  async createAthlete(createAthleteDto: CreateAthleteDto, user: User) {
+    try {
+      const athlete = this.athletesRepository.create({
+        ...createAthleteDto,
+        user,
+      });
+      await this.athletesRepository.save(athlete);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Error interno, contacte al administrador',
+      );
+    }
   }
 
   async findOne(id: string) {
@@ -54,6 +69,7 @@ export class AthleteService {
       idAthlete,
       fullName: user.fullName,
       email: user.email,
+      urlProfile: user.urlProfile,
       ...athleteDetails,
     };
   }
@@ -67,16 +83,10 @@ export class AthleteService {
     if (!user) throw new BadRequestException('Athlete not found');
 
     try {
-      let athlete;
       if (!user.athlete) {
-        athlete = this.athletesRepository.create({
-          idAthlete: id,
-          user,
-          ...updateAthleteDto,
-        });
-        await this.athletesRepository.save(athlete);
+        await this.createAthlete(updateAthleteDto, user);
       } else {
-        athlete = await this.athletesRepository.update(
+        await this.athletesRepository.update(
           { idAthlete: id },
           {
             ...updateAthleteDto,

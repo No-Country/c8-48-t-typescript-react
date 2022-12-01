@@ -1,0 +1,154 @@
+{
+  "info": {
+    "_postman_id": "6513cac4-9a93-4dcf-b048-dcc9504b7ab9",
+    "name": "athlete",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5906871"
+  },
+  "item": [
+    {
+      "name": "Update Athlete data",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk0NDQwMTEsImV4cCI6MTY2OTQ1MTIxMX0.UAI99E1OFYxgUtvSYl5gVJoMRvpe4_-U40ec3rQKrVs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"age\": 30,\r\n    \"idCountry\": 10,\r\n    \"height\":15.76,\r\n    \"weight\": 150.7,\r\n    \"leadership\": true,\r\n    \"temperance\": false,\r\n    \"gameVision\": \"Prueba\",\r\n    \"strength\":\"will\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/athlete/783a5d38-fa7d-42cb-b102-7042b56d347a",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "athlete", "783a5d38-fa7d-42cb-b102-7042b56d347a"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Find one athlete by id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk0NDQwMTEsImV4cCI6MTY2OTQ1MTIxMX0.UAI99E1OFYxgUtvSYl5gVJoMRvpe4_-U40ec3rQKrVs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/athlete/e96a2199-9ec1-443f-b57a-3e994d2cd1d3",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "athlete", "e96a2199-9ec1-443f-b57a-3e994d2cd1d3"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload images for an athlete",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk2NjQwNzksImV4cCI6MTY2OTY3MTI3OX0.Sg_rRWzC8IHA2p_CiA996QOLZT57iz042a8aCpc5WJk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{PROJECT_ROOT}}/docs/server/images/portrait-of-young-woman-practicing-soccer-skills-and-doing-tricks-with-the-football-ball.jpeg"
+            },
+            {
+              "key": "age",
+              "value": "26",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/athlete/image/44283aea-d464-43ed-8dd0-43a3555c63f8",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "athlete",
+            "image",
+            "44283aea-d464-43ed-8dd0-43a3555c63f8"
+          ],
+          "query": [
+            {
+              "key": "file",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload PDF document for an athlete",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZWphbmRyYUBnbWFpbC5jb20iLCJpYXQiOjE2Njk2NjQwNzksImV4cCI6MTY2OTY3MTI3OX0.Sg_rRWzC8IHA2p_CiA996QOLZT57iz042a8aCpc5WJk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{PROJECT_ROOT}}/docs/server/Sample-Player-Profile.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/athlete/document/44283aea-d464-43ed-8dd0-43a3555c63f8",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "athlete",
+            "document",
+            "44283aea-d464-43ed-8dd0-43a3555c63f8"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

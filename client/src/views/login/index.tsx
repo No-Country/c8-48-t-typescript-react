@@ -1,13 +1,16 @@
 import { Box, Button, Checkbox, styled, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
+import { postLogin } from '../../services/connections';
+import CustomizedSnackbars from '../../components/StackComponent';
+import { useLocation } from 'react-router-dom';
 const validationSchema = yup.object({
   name: yup.string().required('Nombre es requerido'),
   lastName: yup.string().required('Apellido es requerido'),
 });
 
 const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' }) => {
+  const location = useLocation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -16,16 +19,17 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      postLogin({ email: values.name, password: values.lastName });
     },
   });
   return (
-    <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px">
+    <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px" p={4}>
       <MainContainer>
         <Typography variant="h3" fontWeight="bold" mb={2}>
-          Comienza a encontrar talento ya
+          Comienza a encontrar {variation === 'university' ? 'talento' : 'becas'} ya
         </Typography>
         <CustomTextField formik={formik} name={'name'} label={'Email Address'} />
-        <CustomTextField formik={formik} name={'lastName'} label={'Password'} />
+        <CustomTextField formik={formik} name={'lastName'} label={'Password'} type="password" />
         <Box width="100%" maxWidth="600px">
           <Checkbox sx={{ mb: '20px' }} />
         </Box>
@@ -42,13 +46,24 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
           Ingresar como {variation}
         </Button>
       </MainContainer>
+      {location.state?.fromRegister && <CustomizedSnackbars />}
     </Box>
   );
 };
 
 export default Login;
 
-const CustomTextField = ({ formik, name, label }: { formik: any; name: string; label: string }) => (
+const CustomTextField = ({
+  formik,
+  name,
+  label,
+  type = 'text',
+}: {
+  formik: any;
+  name: string;
+  label: string;
+  type?: React.HTMLInputTypeAttribute;
+}) => (
   <TextField
     fullWidth
     id={name}
@@ -57,6 +72,7 @@ const CustomTextField = ({ formik, name, label }: { formik: any; name: string; l
     sx={{ mb: '20px', maxWidth: '600px' }}
     color="primary"
     size="medium"
+    type={type}
     variant="outlined"
     value={formik.values[name]}
     onChange={formik.handleChange}
@@ -66,7 +82,7 @@ const CustomTextField = ({ formik, name, label }: { formik: any; name: string; l
 );
 
 const MainContainer = styled(Box)(() => ({
-  padding: 5,
+  padding: '40px',
   margin: 5,
   backgroundColor: '#fff',
   display: 'flex',

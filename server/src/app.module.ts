@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AthleteModule } from './athlete/athlete.module';
 import { SharedModule } from './shared/shared.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
+import { UniversityModule } from './university/university.module';
 import EnvConfiguration from './config/configuration';
 
 @Module({
@@ -33,6 +34,7 @@ import EnvConfiguration from './config/configuration';
     }),
     SharedModule,
     MultimediaModule,
+    UniversityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

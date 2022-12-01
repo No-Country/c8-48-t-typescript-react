@@ -1,0 +1,65 @@
+{
+  "info": {
+    "_postman_id": "682bcd3a-371b-40c9-bf34-52560bfe56be",
+    "name": "university",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "5906871"
+  },
+  "item": [
+    {
+      "name": "Update university's data",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVuYWhAZ21haWwuY29tIiwiaWF0IjoxNjY5ODI0NjU3LCJleHAiOjE2Njk4MzE4NTd9.7Rr-lTwiI0ympYtw08CQKT1Xl2Zr-Vt3GENUWU4-e9o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"idCountry\": 17\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/university/f55a69e4-6c96-429d-b72b-a61790f1fc8e",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "university", "f55a69e4-6c96-429d-b72b-a61790f1fc8e"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Find One university by id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVuYWhAZ21haWwuY29tIiwiaWF0IjoxNjY5ODI0NjU3LCJleHAiOjE2Njk4MzE4NTd9.7Rr-lTwiI0ympYtw08CQKT1Xl2Zr-Vt3GENUWU4-e9o",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/university/f55a69e4-6c96-429d-b72b-a61790f1fc8e",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "university", "f55a69e4-6c96-429d-b72b-a61790f1fc8e"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

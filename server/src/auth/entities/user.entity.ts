@@ -9,6 +9,7 @@ import {
 import { Length } from 'class-validator';
 import { Athlete } from 'src/athlete/entities/athlete.entity';
 import { Multimedia } from '../../multimedia/entities/multimedia.entity';
+import { University } from '../../university/entities/university.entity';
 @Entity('Users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -33,6 +34,11 @@ export class User {
     cascade: true,
   })
   athlete: Athlete;
+
+  @OneToOne(() => University, (university) => university.user, {
+    cascade: true,
+  })
+  university: University;
 
   @OneToMany(() => Multimedia, (multimedia) => multimedia.user, {
     cascade: true,

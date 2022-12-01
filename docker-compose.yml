@@ -73,6 +73,7 @@ services:
     container_name: "c8-48_client_${NODE_ENV}"
     environment:
       - NODE_ENV:${NODE_ENV}
+      - REACT_APP_API_URL:${REACT_APP_API_URL}
     env_file:
       - .env
     build:

@@ -63,7 +63,6 @@ const SignUpUniversity = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values, 'que pedo');
       values['file'] = universityImage;
       postRegisterUniversity(values);
     },

@@ -6,6 +6,7 @@ import { InputLabelPropsCustom, InputPropsCustom } from '../../constants/mui/tex
 import stadium from '../../assets/images/stadium.png';
 import useRequestAuth from '../../services/hooks/useRequestAuth';
 import { useNavigate } from 'react-router-dom';
+
 const validationSchema = yup.object({
   fullName: yup.string().required('Nombre completo es requerido'),
   email: yup
@@ -24,7 +25,6 @@ const validationSchema = yup.object({
 const SignUpAthlete = () => {
   const navigate = useNavigate();
   const { postRegisterAthlete, registerAthleteData } = useRequestAuth();
-  console.log(registerAthleteData, 'from register');
 
   const theme = useTheme();
   const formik = useFormik({
@@ -41,7 +41,10 @@ const SignUpAthlete = () => {
 
   // style
   const textFieldStyle = { width: '100%', m: 1 };
-  const linkStyle = { color: theme.palette.secondary.light, textDecoration: 'underline' };
+  const linkStyle = {
+    color: theme.palette.secondary.light,
+    textDecoration: 'underline',
+  };
   useEffect(() => {
     registerAthleteData.email !== '' &&
       navigate('/auth/login/athlete', { state: { fromRegister: true } });
@@ -105,7 +108,7 @@ const SignUpAthlete = () => {
             onChange={formik.handleChange}
             error={formik.touched.fullName && Boolean(formik.errors.fullName)}
             helperText={formik.touched.fullName && formik.errors.fullName}
-          ></TextField>
+          />
           <TextField
             variant="outlined"
             id="email"
@@ -120,7 +123,7 @@ const SignUpAthlete = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-          ></TextField>
+          />
           <TextField
             variant="outlined"
             id="password"
@@ -137,12 +140,22 @@ const SignUpAthlete = () => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-          ></TextField>
+          />
           <Box
-            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 5 }}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mt: 5,
+            }}
           >
             <Typography
-              sx={{ width: '50%', my: 3, fontSize: '9px', color: theme.palette.secondary.light }}
+              sx={{
+                width: '50%',
+                my: 3,
+                fontSize: '9px',
+                color: theme.palette.secondary.light,
+              }}
             >
               By continuing, you agree that we create an account for you (unless already created),
               and accept our&nbsp;

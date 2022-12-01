@@ -1,8 +1,9 @@
 import { useCallback, useState } from 'react';
 import axios from 'axios';
+import { rootBackEnd } from '../../constants/links';
 
 const client = axios.create({
-  baseURL: 'https://nc-backend-production.up.railway.app/api/',
+  baseURL: rootBackEnd,
 });
 
 // Athlete
@@ -31,11 +32,6 @@ interface postRegisterAthlete {
   password: string;
 }
 
-// interface RegisterUniversity {
-//   fullName: string;
-//   email: string;
-// }
-
 export default function useRequestAuth() {
   const [registerAthleteData, setRegisterAthleteData] = useState<RegisterAthleteData>({
     fullName: '',
@@ -46,12 +42,12 @@ export default function useRequestAuth() {
   const postRegisterAthlete = useCallback(
     (body: postRegisterAthlete) => {
       client
-        .post('auth/register/athlete', body)
+        .post('api/auth/register/athlete', body)
         .then((res) => {
           setRegisterAthleteData(res.data);
           console.log(res.data);
         })
-        .catch((err) => console.log(err, 'errrr'));
+        .catch((error) => console.log({ error }));
     },
     [setRegisterAthleteData],
   );
@@ -60,11 +56,11 @@ export default function useRequestAuth() {
   const postRegisterUniversity = useCallback(
     (body: postRegisterUniversity) => {
       client
-        .post('auth/register/university', body)
+        .post('api/auth/register/university', body)
         .then((res) => {
           console.log(res.data);
         })
-        .catch((err) => console.log(err, 'errrr'));
+        .catch((error) => console.log({ error }));
     },
     [setRegisterAthleteData],
   );

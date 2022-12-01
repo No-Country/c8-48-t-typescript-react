@@ -6,22 +6,20 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
   return <MuiAlert elevation={6} ref={ref} variant="filled" color="success" {...props} />;
 });
 
-export default function CustomizedSnackbars() {
-  const [open, setOpen] = React.useState(true);
+const CustomizedSnackbars = () => {
+  const [isOpen, setIsOpen] = React.useState(true);
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') return;
 
-    setOpen(false);
+    setIsOpen(false);
   };
 
   return (
     <Stack spacing={2} sx={{ width: '100%', position: 'absolute' }}>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={open}
+        open={isOpen}
         autoHideDuration={8000}
         onClose={handleClose}
       >
@@ -31,4 +29,6 @@ export default function CustomizedSnackbars() {
       </Snackbar>
     </Stack>
   );
-}
+};
+
+export default CustomizedSnackbars;

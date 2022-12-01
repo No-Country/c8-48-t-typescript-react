@@ -1,6 +1,7 @@
 import { rootBackEnd } from '../constants/links';
 
 const completeUrl = (url = '') => rootBackEnd + url;
+
 const bearerHeader: () => HeadersInit = () => {
   return { 'Content-Type': 'application/json' };
 };

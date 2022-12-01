@@ -117,6 +117,8 @@ export class AuthService {
       throw new BadRequestException(error.detail);
     }
     console.log(error);
+    console.log(process.env.AWS_ACCESS_KEY_ID);
+    console.log(process.env.AWS_SECRET_ACCESS_KEY);
     throw new InternalServerErrorException(
       'Error interno, por favor contacte al administrador',
     );

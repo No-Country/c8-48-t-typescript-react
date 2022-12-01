@@ -1,1 +1,1 @@
-export const rootBackEnd = 'http://localhost:3000/';
+export const rootBackEnd = 'https://nc-backend-production.up.railway.app/api/';

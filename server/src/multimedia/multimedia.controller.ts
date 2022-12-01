@@ -34,7 +34,7 @@ export class MultimediaController {
     return this.multimediaService.findAllVideos(idUser);
   }
 
-  @Post('perfil/:id')
+  @Post('profile/:id')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))
   uploadPerfil(

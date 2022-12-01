@@ -1,0 +1,15 @@
+{
+  "environmentName": "nc-backend",
+  "dateExported": "2022-12-01T09:14:47.969Z",
+  "version": "1.0",
+  "variables": [
+    {
+      "name": "BASE_URL",
+      "value": "https://nc-backend-production.up.railway.app"
+    },
+    {
+      "name": "PROJECT_ROOT",
+      "value": "/C:/Users/David Alexander/Downloads/c8-48-t-typescript-react"
+    }
+  ]
+}

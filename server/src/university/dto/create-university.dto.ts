@@ -12,15 +12,15 @@ export class CreateUniversityDto extends CreateUserDto {
   idCountry: number;
 
   @IsString()
-  linkedin: string;
+  linkedin?: string;
 
   @IsString()
   @Length(1, 255)
-  website: string;
+  website?: string;
 
   @IsString()
   @Length(1, 255)
-  description: string;
+  description?: string;
 
   @IsBoolean()
   acceptConditions: boolean;

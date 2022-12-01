@@ -59,7 +59,7 @@ export class CreateAthleteDto extends CreateUserDto {
       '$property debe de ingresar un mínimo de 1 y un máximo de 255 caracteres.',
   })
   @IsOptional()
-  visionGame?: string;
+  gameVision?: string;
   @IsString()
   @Length(1, 255, {
     message: '$property debe de ingresar un máximo de 255 caracteres.',

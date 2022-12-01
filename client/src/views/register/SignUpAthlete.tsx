@@ -6,7 +6,6 @@ import { InputLabelPropsCustom, InputPropsCustom } from '../../constants/mui/tex
 import stadium from '../../assets/images/stadium.png';
 import useRequestAuth from '../../services/hooks/useRequestAuth';
 import { useNavigate } from 'react-router-dom';
-
 const validationSchema = yup.object({
   fullName: yup.string().required('Nombre completo es requerido'),
   email: yup

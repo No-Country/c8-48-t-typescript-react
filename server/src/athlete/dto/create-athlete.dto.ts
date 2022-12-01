@@ -65,5 +65,5 @@ export class CreateAthleteDto extends CreateUserDto {
     message: '$property debe de ingresar un máximo de 255 caracteres.',
   })
   @IsOptional()
-  strenght?: string;
+  strength?: string;
 }

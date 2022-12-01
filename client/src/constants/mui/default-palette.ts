@@ -39,9 +39,9 @@ export default {
     lightRed: '#FFCDD2',
   },
   success: {
-    main: '#9FBD9E', // Success Green
-    dark: '#799C78', // Success Text
-    tagBg: '#9FBD9E20', // Success Green low opacity
+    main: '#27F49E', // Success Green
+    dark: '#27F49E', // Success Text
+    tagBg: '#27F49E', // Success Green low opacity
   },
   success2: {
     main: '#9FBD9E', // Success Green low opacity

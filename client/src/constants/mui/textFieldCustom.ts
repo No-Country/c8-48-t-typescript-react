@@ -1,7 +1,9 @@
 export const InputLabelPropsCustom = {
   style: {
     fontSize: 15,
-    // For some reason I can't access to the palette from this file
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderRadius: '3px',
     backgroundColor: `#ffffff`,
   },
 };
@@ -9,9 +11,8 @@ export const InputLabelPropsCustom = {
 export const InputPropsCustom = {
   style: {
     fontSize: 18,
-    height: 40,
+    height: 25,
     width: 272,
-    padding: '0 14px',
     backgroundColor: 'none',
   },
 };

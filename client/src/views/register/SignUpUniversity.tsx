@@ -1,13 +1,31 @@
 import { useState } from 'react';
-import { Box, TextField, Typography, Button, Divider, CardMedia, Checkbox } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Divider,
+  CardMedia,
+  Checkbox,
+  MenuItem,
+} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { InputLabelPropsCustom, InputPropsCustom } from '../../constants/mui/textFieldCustom';
+import useRequestAuth from '../../services/hooks/useRequestAuth';
+
+const countriesData = [
+  { id: 1, name: 'Argentina' },
+  { id: 2, name: 'Colombia' },
+  { id: 3, name: 'Chile' },
+  { id: 4, name: 'Uruguay' },
+  { id: 5, name: 'Costa Rica' },
+];
 
 const validationSchema = yup.object({
-  universityName: yup.string().required('Campo obligatorio'),
-  country: yup.string(),
+  fullName: yup.string().required('Campo obligatorio'),
+  idCountry: yup.string().required('Campo obligatorio'),
   email: yup
     .string()
     .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Debe ingresar un correo electrónico valido')
@@ -22,27 +40,31 @@ const validationSchema = yup.object({
   linkedin: yup.string(),
   website: yup.string(),
   description: yup.string(),
-  termsAndConditions: yup
+  acceptConditions: yup
     .bool()
     .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
 const SignUpUniversity = () => {
+  const { postRegisterUniversity } = useRequestAuth();
   const [universityImage, setUniversityImage] = useState<any>('');
+
   const formik = useFormik({
     initialValues: {
-      universityName: '',
-      country: '',
+      fullName: '',
+      idCountry: 1,
       email: '',
       password: '',
       linkedin: '',
       website: '',
       description: '',
-      termsAndConditions: false,
+      acceptConditions: false,
+      file: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      values['file'] = universityImage;
+      postRegisterUniversity(values);
     },
   });
 
@@ -52,52 +74,65 @@ const SignUpUniversity = () => {
       onSubmit={formik.handleSubmit}
       sx={{ width: '100vw', height: '100vh', mt: 5, p: { lg: 11, md: 11, sm: 10, xs: 4 } }}
     >
-      <Typography sx={{ mb: 7, fontSize: { lg: 36, md: 36, sm: 28, xs: 24 } }}>
+      <Typography color="secondary" sx={{ mb: 7, fontSize: { lg: 36, md: 36, sm: 28, xs: 24 } }}>
         Registra tu universidad
       </Typography>
       {/* University Name */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Nombre de la universidad</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          Nombre de la universidad
+        </Typography>
         <TextField
           fullWidth
-          id="university"
-          name="university-name"
+          id="fullName"
+          name="fullName"
           label="Nombre de la universidad"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
           sx={textFieldStyle}
-          value={formik.values.universityName}
+          value={formik.values.fullName}
           onChange={formik.handleChange}
-          error={formik.touched.universityName && Boolean(formik.errors.universityName)}
-          helperText={formik.touched.universityName && formik.errors.universityName}
+          error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+          helperText={formik.touched.fullName && formik.errors.fullName}
         />
       </Box>
       <Divider />
 
-      {/* Country*/}
+      {/* idCountry*/}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>País</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          País
+        </Typography>
         <TextField
           fullWidth
-          id="pais"
-          name="País"
+          id="idCountry"
+          name="idCountry"
           label="País de origen de la universidad"
+          select
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
           sx={textFieldStyle}
-          value={formik.values.country}
+          value={formik.values.idCountry}
           onChange={formik.handleChange}
-          error={formik.touched.country && Boolean(formik.errors.country)}
-          helperText={formik.touched.country && formik.errors.country}
-        />
+          error={formik.touched.idCountry && Boolean(formik.errors.idCountry)}
+          helperText={formik.touched.idCountry && formik.errors.idCountry}
+        >
+          {countriesData.map((option) => (
+            <MenuItem color="secondary" key={option.id} value={option.id}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </TextField>
       </Box>
       <Divider />
 
       {/* Image Logo */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Logo de la universidad</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          Logo de la universidad
+        </Typography>
 
         <Box display="flex" justifyContent="center">
           <CardMedia
@@ -110,11 +145,19 @@ const SignUpUniversity = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              objectFit: 'contain',
             }}
-            src={universityImage !== '' && universityImage}
+            src={universityImage !== '' ? universityImage : ''}
           ></CardMedia>
           <Button
-            sx={{ fontSize: { lg: '14px', md: '12px', sm: '11px', xs: '10px' } }}
+            sx={{
+              fontSize: { lg: '14px', md: '12px', sm: '11px', xs: '10px' },
+              bgcolor: 'secondary.main',
+              color: 'primary.main',
+              '&:hover': {
+                bgcolor: 'secondary.main',
+              },
+            }}
             variant="contained"
             component="label"
             size="small"
@@ -150,7 +193,9 @@ const SignUpUniversity = () => {
 
       {/*Email password  */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Email y contraseña</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          Email y contraseña
+        </Typography>
         <TextField
           fullWidth
           id="email"
@@ -187,12 +232,14 @@ const SignUpUniversity = () => {
 
       {/* Linkedin */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Linkedin de la universidad</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          Sitio web de la universidad
+        </Typography>
         <TextField
           fullWidth
-          id="web"
-          name="web"
-          label="https://university.com"
+          id="website"
+          name="website"
+          label="Ingresa la URL de la universidad"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
@@ -207,12 +254,14 @@ const SignUpUniversity = () => {
 
       {/* Website */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Sitio web de la universidad</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          LinkedIn de la universidad
+        </Typography>
         <TextField
           fullWidth
           id="linkedin"
           name="linkedin"
-          label="https://bo.linkedin.com"
+          label="Ingresa el enlace al LinkedIn de la universidad"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
@@ -227,7 +276,9 @@ const SignUpUniversity = () => {
 
       {/* Description */}
       <Box sx={sectionFieldStyled}>
-        <Typography sx={textStyle}>Descripción de la universidad</Typography>
+        <Typography color="secondary" sx={textStyle}>
+          Descripción de la universidad
+        </Typography>
         <TextField
           multiline
           rows={7}
@@ -247,25 +298,35 @@ const SignUpUniversity = () => {
       <Divider />
 
       {/* Terms and conditions */}
-      <Typography sx={{ mt: 3 }}>Aceptar términos y condiciones:</Typography>
+      <Typography color="secondary" sx={{ mt: 3 }}>
+        Aceptar términos y condiciones:
+      </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Checkbox
-          id="term"
+          id="acceptConditions"
           required
           onChange={formik.handleChange}
-          value={formik.values.termsAndConditions}
+          value={formik.values.acceptConditions}
+          color="secondary"
         />
-        <Typography sx={{ fontSize: { sm: '14px', xs: '12px' } }}>
+        <Typography color="secondary" sx={{ fontSize: { sm: '14px', xs: '12px' } }}>
           He leído y acepto la Política de privacidad y la Política de moderación de becas.
         </Typography>
       </Box>
 
       <Button
-        color="primary"
         variant="contained"
         fullWidth
         type="submit"
-        sx={{ width: 150, my: 8 }}
+        sx={{
+          width: 150,
+          my: 8,
+          bgcolor: 'secondary.dark',
+          color: 'primary.main',
+          '&:hover': {
+            bgcolor: 'secondary.dark',
+          },
+        }}
       >
         Enviar
       </Button>

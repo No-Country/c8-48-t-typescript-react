@@ -2,13 +2,15 @@ import { Box, Button, Checkbox, styled, TextField, Typography } from '@mui/mater
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { postLogin } from '../../services/connections';
-
+import CustomizedSnackbars from '../../components/StackComponent';
+import { useLocation } from 'react-router-dom';
 const validationSchema = yup.object({
   name: yup.string().required('Nombre es requerido'),
   lastName: yup.string().required('Apellido es requerido'),
 });
 
 const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' }) => {
+  const location = useLocation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -44,6 +46,7 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
           Ingresar como {variation}
         </Button>
       </MainContainer>
+      {location.state?.fromRegister && <CustomizedSnackbars />}
     </Box>
   );
 };

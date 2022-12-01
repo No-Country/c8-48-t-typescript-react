@@ -239,7 +239,7 @@ const SignUpUniversity = () => {
           fullWidth
           id="website"
           name="website"
-          label="https://university.com"
+          label="Ingresa la URL de la universidad"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
@@ -261,7 +261,7 @@ const SignUpUniversity = () => {
           fullWidth
           id="linkedin"
           name="linkedin"
-          label="https://bo.linkedin.com"
+          label="Ingresa el enlace al LinkedIn de la universidad"
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}

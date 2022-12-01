@@ -18,7 +18,6 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       postLogin({ email: values.name, password: values.lastName });
     },
   });

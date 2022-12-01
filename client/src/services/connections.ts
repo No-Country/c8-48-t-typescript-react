@@ -13,7 +13,7 @@ type postLogin = {
 };
 const postLogin = async (body: postLogin) => {
   try {
-    const _data = await fetch(completeUrl('api/auth/login'), {
+    const _data = await fetch(completeUrl('/auth/login'), {
       method: 'POST',
       headers: bearerHeader(),
       body: JSON.stringify(body),

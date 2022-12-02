@@ -28,12 +28,11 @@ const FAQ = () => (
             fontWeight: 600,
           }}
         >
-          ¿Get In Touch lorem ipsum ?
+          ¿Es seguro el proceso de becas?
         </Typography>
         <Typography sx={{ color: 'secondary.main', fontSize: 15, mb: 10 }}>
-          It is a long established fact that a reader <br /> will be distracted by the readable
-          content <br />
-          of a page when looking at its layout.
+          Nuestra plataforma permite solamente a universidades oficiales para que estas propongan
+          becas
         </Typography>
         {/* Second question */}
         <Typography
@@ -44,12 +43,11 @@ const FAQ = () => (
             fontWeight: 600,
           }}
         >
-          ¿Get In Touch lorem ipsum ?
+          ¿Cuántos deportes cubre becco?
         </Typography>
         <Typography sx={{ color: 'secondary.main', fontSize: 15, mb: 8 }}>
-          It is a long established fact that a reader <br /> will be distracted by the readable
-          content <br />
-          of a page when looking at its layout.
+          Cada vez más estamos agregando nuevas disciplinas para que estas sean consideradas en
+          becas de universidades
         </Typography>
         {/* Third question */}
         <Typography
@@ -60,12 +58,11 @@ const FAQ = () => (
             fontWeight: 600,
           }}
         >
-          ¿Get In Touch lorem ipsum ?
+          ¿Puedo hacer sugerencias a Becco?
         </Typography>
         <Typography sx={{ color: 'secondary.main', fontSize: 15, mb: 3 }}>
-          It is a long established fact that a reader <br /> will be distracted by the readable
-          content <br />
-          of a page when looking at its layout.
+          Si gustas darnos sugerencias puedes enviarnos un correo a:{' '}
+          <a href="mailto:becco@gmail.com">becco@gmail.com</a>
         </Typography>
       </Box>
       <Box sx={{ width: '50%', height: '100vh', mt: 10 }}>

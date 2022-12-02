@@ -1,4 +1,7 @@
 import { rootBackEnd } from '../constants/links';
+import { errorAlert, errorServerAlert, successAlert } from './alerts';
+import { cleanToken, setToken } from './handleLocalStorage';
+import { handleMessageError } from './helpers';
 
 const completeUrl = (url = '') => rootBackEnd + url;
 
@@ -11,17 +14,26 @@ type postLogin = {
   email: string;
   password: string;
 };
-const postLogin = async (body: postLogin) => {
+const postLogin: (body: postLogin) => Promise<boolean> = async (body: postLogin) => {
   try {
-    const _data = await fetch(completeUrl('api/auth/login'), {
+    const _data = await fetch(completeUrl('/auth/login'), {
       method: 'POST',
       headers: bearerHeader(),
       body: JSON.stringify(body),
     });
     const data = await _data.json();
-    console.log(data);
+    if (data.ok !== true) {
+      errorAlert(handleMessageError(data.message));
+      cleanToken();
+      return false;
+    }
+    setToken(data.jwt);
+    successAlert('Has Ingresado exitosamente');
+    return true;
   } catch (e) {
-    console.log(e);
+    errorServerAlert();
+    console.error(e);
+    return false;
   }
 };
 

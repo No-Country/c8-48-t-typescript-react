@@ -59,6 +59,8 @@ const Layout = (props: any) => {
     setLoginEl(null);
   };
 
+  const userLogged = () => JSON.parse(localStorage.getItem('user') || '');
+
   return (
     <Box>
       <CssBaseline />
@@ -208,70 +210,78 @@ const Layout = (props: any) => {
                   );
                 })}
               </Box>
-              {/* Login */}
-              <Button
-                sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
-                color="primary"
-                size="small"
-                onClick={handleClickLogin}
-              >
-                INICIAR SESIÓN
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={loginEl}
-                open={openLogin}
-                onClose={handleCloseLogin}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem>
-                  <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
-                    Deportista
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link color="primary" href="/auth/login/university" sx={linkStyle}>
-                    Universidad
-                  </Link>
-                </MenuItem>
-              </Menu>
-              {/* Register */}
-              <Button
-                color="primary"
-                sx={{
-                  letterSpacing: '0.46px',
-                  fontSize: { lg: 13, md: 12 },
-                  border: `1px solid ${theme.palette.primary.main}`,
-                }}
-                onClick={handleClickSignup}
-                size="small"
-              >
-                REGISTRATE
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={signupEl}
-                open={openSignup}
-                onClose={handleCloseSignup}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem>
-                  <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
-                    Deportista
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={() => handleNavigateSignUp('university')}>
-                  <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
-                    Universidad
-                  </Link>
-                </MenuItem>
-              </Menu>
+              {userLogged().fullName ? (
+                <Typography>
+                  Bienvenida <b>{userLogged().fullName}</b>!
+                </Typography>
+              ) : (
+                <>
+                  {/* Login */}
+                  <Button
+                    sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
+                    color="primary"
+                    size="small"
+                    onClick={handleClickLogin}
+                  >
+                    INICIAR SESIÓN
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={loginEl}
+                    open={openLogin}
+                    onClose={handleCloseLogin}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem>
+                      <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
+                        Deportista
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link color="primary" href="/auth/login/university" sx={linkStyle}>
+                        Universidad
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                  {/* Register */}
+                  <Button
+                    color="primary"
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                      border: `1px solid ${theme.palette.primary.main}`,
+                    }}
+                    onClick={handleClickSignup}
+                    size="small"
+                  >
+                    REGISTRATE
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={signupEl}
+                    open={openSignup}
+                    onClose={handleCloseSignup}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem>
+                      <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
+                        Deportista
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={() => handleNavigateSignUp('university')}>
+                      <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
+                        Universidad
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                  {/* Close right side */}
+                </>
+              )}
             </Box>
-            {/* Close right side */}
           </Toolbar>
         </Container>
       </AppBar>

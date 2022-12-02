@@ -43,7 +43,7 @@ const FAQ = () => (
             fontWeight: 600,
           }}
         >
-          ¿Cuantos deportes cubre becco?
+          ¿Cuántos deportes cubre becco?
         </Typography>
         <Typography sx={{ color: 'secondary.main', fontSize: 15, mb: 8 }}>
           Cada vez más estamos agregando nuevas disciplinas para que estas sean consideradas en

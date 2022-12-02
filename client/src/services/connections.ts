@@ -14,7 +14,7 @@ type postLogin = {
   email: string;
   password: string;
 };
-const postLogin:(body: postLogin) => Promise<boolean> = async (body: postLogin) => {
+const postLogin: (body: postLogin) => Promise<boolean> = async (body: postLogin) => {
   try {
     const _data = await fetch(completeUrl('/auth/login'), {
       method: 'POST',
@@ -28,7 +28,7 @@ const postLogin:(body: postLogin) => Promise<boolean> = async (body: postLogin) 
       return false;
     }
     setToken(data.jwt);
-    successAlert('Logeado exitosamente');
+    successAlert('Has Ingresado exitosamente');
     return true;
   } catch (e) {
     errorServerAlert();

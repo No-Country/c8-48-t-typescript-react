@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 
 export const successAlert = (text = '') => {
-  Swal.fire('Exito', text, 'success');
+  Swal.fire('Éxito', text, 'success');
 };
 
 export const errorAlert = (text = '') => {
@@ -9,5 +9,5 @@ export const errorAlert = (text = '') => {
 };
 
 export const errorServerAlert = () => {
-  Swal.fire('Error', 'Algo sucedio con el servidor 😅', 'error');
+  Swal.fire('Error', 'Algo sucedió con el servidor 😅', 'error');
 };

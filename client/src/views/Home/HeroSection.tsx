@@ -23,7 +23,8 @@ const HeroSection = () => (
           fontSize: 18,
         }}
       >
-        A short description introducing your <br /> business and services to visitors.
+        Somos un equipo de personas apasionadas por la tecnología que aporta un mejor cambio a la
+        realidad de otras personas.
       </Typography>
       <Button
         size="small"

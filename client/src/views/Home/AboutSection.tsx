@@ -27,7 +27,8 @@ const AboutSection = () => (
         ¿Que Hacemos?
       </Typography>
       <Typography sx={{ position: 'absolute', left: 50, top: 225 }}>
-        A short description introducing your <br /> business and services to visitors.
+        Con Nuestra plataforma permitimos a los jóvenes deportistas mostrar su talento y lograr
+        obtener becas universitarias. Sin necesidad de utilizar distintos puntos de contacto.
       </Typography>
     </Box>
   </Box>

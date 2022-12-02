@@ -36,7 +36,7 @@ services:
       - "8200:8978"
     volumes:
       - ./cloudbeaver-data:/opt/cloudbeaver/workspace
-  server-dev:
+  run-server:
     container_name: "nest-api_${NODE_ENV}"
     environment:
       - NODE_ENV:${NODE_ENV}
@@ -72,7 +72,7 @@ services:
     networks:
       - dev-network
     depends_on:
-      - server-dev
+      - run-server
     command: yarn dev --host --port 8080
     restart: unless-stopped
 networks:

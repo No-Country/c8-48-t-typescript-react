@@ -107,6 +107,7 @@ docker build -t c8-48 .
 Using `docker-compose` you can do this:
 
 ### SO Linux
+
 ```sh
 docker compose build
 docker compose up pgadmin

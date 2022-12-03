@@ -1,369 +1,383 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Becco</title>
-  <meta property="og:title" content=Becco>
-  <meta property="og:site_name" content=becco>
-  <meta property="og:url" content="">
-  <meta property="og:description" content="Nuestra plataforma, permite a los jóvenes deportistas mostrar su talento y
-    lograr obtener becas universitarias. Sin necesidad de utilizar distintos puntos de contacto.">
-  <meta property="og:type" content=website>
-  <meta property="og:image"
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Becco</title>
+    <meta property="og:title" content="Becco" />
+    <meta property="og:site_name" content="becco" />
+    <meta property="og:url" content="" />
+    <meta
+      property="og:description"
+      content="Nuestra plataforma, permite a los jóvenes deportistas mostrar su talento y
+    lograr obtener becas universitarias. Sin necesidad de utilizar distintos puntos de contacto."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image"
     content=https://user-images.githubusercontent.com/36519478/204613346-bdc156d0-c15c-409f-b0da-d838cc6bf867.png>
-  <style>
-    /* https://codepen.io/maxwellcochrane/pen/abWojqp */
-    :root {
-      --DARK: #1C1C1C;
-      --light: #6543FF;
-      --DARKEST: #060606;
-      --ORANGE: #ff5400;
-      --YELLOW: #ffbd00;
-    }
-
-    .container {
-      height: 100vh;
-      width: 100vw;
-      background-image: linear-gradient(135deg, #FFFFFF, #6543FF);
-    }
-
-    .rocketContainer {
-      position: absolute;
-      -webkit-animation: flight 4s infinite;
-      animation: flight 4s infinite;
-    }
-
-    .tip {
-      position: absolute;
-      height: 20px;
-      width: 40px;
-      background: var(--DARKEST);
-      -webkit-box-shadow: inset var(--light) 10px 2px 10px;
-      box-shadow: inset var(--light) 10px 2px 10px;
-      left: 105px;
-      top: -50px;
-      z-index: 1;
-      border-radius: 10rem 10rem 4rem 4rem;
-    }
-
-    .rocket {
-      height: 250px;
-      width: 250px;
-      background: linear-gradient(to bottom right, var(--light) 20%, var(--DARKEST) 80%) no-repeat border-box;
-      border-radius: 50rem 10rem 50rem 5rem;
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-      -webkit-box-shadow: inset var(--light) 20px 2px 10px;
-      box-shadow: inset var(--light) 20px 2px 10px;
-    }
-
-    .dots {
-      position: absolute;
-      height: 20px;
-      width: 20px;
-      background: var(--light);
-      opacity: 50%;
-      -webkit-box-shadow: var(--light) 0px -40px;
-      box-shadow: var(--light) 0px -40px;
-      border-radius: 50%;
-      left: 115px;
-      top: 215px;
-    }
-
-    .window {
-      position: absolute;
-      background: var(--light);
-      height: 100px;
-      width: 100px;
-      opacity: 50%;
-      top: 25px;
-      left: 75px;
-      border-radius: 100rem;
-      -webkit-box-shadow: 2pt 1pt 5pt 1pt var(--DARKEST);
-      box-shadow: 2pt 1pt 5pt 1pt var(--DARKEST);
-    }
-
-    .wing {
-      position: absolute;
-      z-index: -1;
-      background: var(--DARK);
-      height: 150px;
-      width: 100px;
-      top: 175px;
-      -webkit-box-shadow: inset var(--light) 20px 2px 10px;
-      box-shadow: inset var(--light) 20px 2px 10px;
-    }
-
-    .wingOne {
-      left: 125px;
-      border-radius: 1rem 8rem;
-      background: linear-gradient(to right, var(--light) 45%, var(--DARKEST) 100%) no-repeat border-box;
-    }
-
-    .wingTwo {
-      left: 25px;
-      border-radius: 8rem 1rem;
-
-    }
-
-    .bum {
-      position: absolute;
-      background: var(--DARKEST);
-      height: 20px;
-      width: 50px;
-      left: 100px;
-      top: 275px;
-      border-radius: 1rem 1rem 4rem 4rem;
-      -webkit-box-shadow: inset var(--light) 20px 2px 10px;
-      box-shadow: inset var(--light) 20px 2px 10px;
-    }
-
-    .light {
-      position: absolute;
-      background: -webkit-gradient(linear, left top, left bottom, from(var(--YELLOW)), to(rgba(255, 255, 255, 0)));
-      background: linear-gradient(var(--YELLOW), rgba(255, 255, 255, 0));
-      height: 120px;
-      width: 40px;
-      left: 105px;
-      top: 250px;
-      z-index: -5;
-    }
-
-    .light2 {
-      background: -webkit-gradient(linear, left top, left bottom, from(var(--ORANGE)), to(rgba(255, 255, 255, 0)));
-      background: linear-gradient(var(--ORANGE), rgba(255, 255, 255, 0));
-      position: absolute;
-      width: 25px;
-      top: 220px;
-      left: 112px;
-    }
-
-    .flame {
-      position: absolute;
-      height: 50px;
-      width: 50px;
-      background-color: var(--ORANGE);
-      border-radius: 50% 50% 50% 0;
-      left: 100px;
-      top: 290px;
-      opacity: 10%;
-      -webkit-animation: glow 3s infinite;
-      animation: glow 3s infinite;
-      z-index: -1;
-    }
-
-    .flame2 {
-      position: absolute;
-      height: 20px;
-      width: 20px;
-      opacity: 20%;
-      left: 115px;
-    }
-
-    @-webkit-keyframes glow {
-      0% {
-        -webkit-transform: rotate(-45deg) scale(1.3);
-        transform: rotate(-45deg) scale(1.3);
+    <style>
+      /* https://codepen.io/maxwellcochrane/pen/abWojqp */
+      :root {
+        --DARK: #1c1c1c;
+        --light: #6543ff;
+        --DARKEST: #060606;
+        --ORANGE: #ff5400;
+        --YELLOW: #ffbd00;
       }
 
-      50% {
-        -webkit-transform: rotate(-45deg) scale(0.8);
-        transform: rotate(-45deg) scale(0.8);
+      .container {
+        height: 100vh;
+        width: 100vw;
+        background-image: linear-gradient(135deg, #ffffff, #6543ff);
       }
 
-      100% {
-        -webkit-transform: rotate(-45deg) scale(1.3);
-        transform: rotate(-45deg) scale(1.3);
-      }
-    }
-
-    @keyframes glow {
-      0% {
-        -webkit-transform: rotate(-45deg) scale(1.3);
-        transform: rotate(-45deg) scale(1.3);
+      .rocketContainer {
+        position: absolute;
+        -webkit-animation: flight 4s infinite;
+        animation: flight 4s infinite;
       }
 
-      50% {
-        -webkit-transform: rotate(-45deg) scale(0.8);
-        transform: rotate(-45deg) scale(0.8);
+      .tip {
+        position: absolute;
+        height: 20px;
+        width: 40px;
+        background: var(--DARKEST);
+        -webkit-box-shadow: inset var(--light) 10px 2px 10px;
+        box-shadow: inset var(--light) 10px 2px 10px;
+        left: 105px;
+        top: -50px;
+        z-index: 1;
+        border-radius: 10rem 10rem 4rem 4rem;
       }
 
-      100% {
-        -webkit-transform: rotate(-45deg) scale(1.3);
-        transform: rotate(-45deg) scale(1.3);
-      }
-    }
-
-    @-webkit-keyframes flight {
-      0% {
-        top: 50%;
-        left: 50%;
-        opacity: 0%;
-        -webkit-transform: scale(0.1) rotate(50deg);
-        transform: scale(0.1) rotate(50deg);
+      .rocket {
+        height: 250px;
+        width: 250px;
+        background: linear-gradient(to bottom right, var(--light) 20%, var(--DARKEST) 80%) no-repeat
+          border-box;
+        border-radius: 50rem 10rem 50rem 5rem;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-box-shadow: inset var(--light) 20px 2px 10px;
+        box-shadow: inset var(--light) 20px 2px 10px;
       }
 
-      2% {
-        opacity: 0%;
+      .dots {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background: var(--light);
+        opacity: 50%;
+        -webkit-box-shadow: var(--light) 0px -40px;
+        box-shadow: var(--light) 0px -40px;
+        border-radius: 50%;
+        left: 115px;
+        top: 215px;
       }
 
-      20% {
+      .window {
+        position: absolute;
+        background: var(--light);
+        height: 100px;
+        width: 100px;
+        opacity: 50%;
+        top: 25px;
+        left: 75px;
+        border-radius: 100rem;
+        -webkit-box-shadow: 2pt 1pt 5pt 1pt var(--DARKEST);
+        box-shadow: 2pt 1pt 5pt 1pt var(--DARKEST);
+      }
+
+      .wing {
+        position: absolute;
+        z-index: -1;
+        background: var(--DARK);
+        height: 150px;
+        width: 100px;
+        top: 175px;
+        -webkit-box-shadow: inset var(--light) 20px 2px 10px;
+        box-shadow: inset var(--light) 20px 2px 10px;
+      }
+
+      .wingOne {
+        left: 125px;
+        border-radius: 1rem 8rem;
+        background: linear-gradient(to right, var(--light) 45%, var(--DARKEST) 100%) no-repeat
+          border-box;
+      }
+
+      .wingTwo {
+        left: 25px;
+        border-radius: 8rem 1rem;
+      }
+
+      .bum {
+        position: absolute;
+        background: var(--DARKEST);
+        height: 20px;
+        width: 50px;
+        left: 100px;
+        top: 275px;
+        border-radius: 1rem 1rem 4rem 4rem;
+        -webkit-box-shadow: inset var(--light) 20px 2px 10px;
+        box-shadow: inset var(--light) 20px 2px 10px;
+      }
+
+      .light {
+        position: absolute;
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(var(--YELLOW)),
+          to(rgba(255, 255, 255, 0))
+        );
+        background: linear-gradient(var(--YELLOW), rgba(255, 255, 255, 0));
+        height: 120px;
+        width: 40px;
+        left: 105px;
+        top: 250px;
+        z-index: -5;
+      }
+
+      .light2 {
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(var(--ORANGE)),
+          to(rgba(255, 255, 255, 0))
+        );
+        background: linear-gradient(var(--ORANGE), rgba(255, 255, 255, 0));
+        position: absolute;
+        width: 25px;
         top: 220px;
-        left: 230px;
-        opacity: 100%;
-        -webkit-transform: scale(0.4) rotate(50deg);
-        transform: scale(0.4) rotate(50deg);
+        left: 112px;
       }
 
-      25% {
-        top: 221px;
-        left: 233px;
+      .flame {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        background-color: var(--ORANGE);
+        border-radius: 50% 50% 50% 0;
+        left: 100px;
+        top: 290px;
+        opacity: 10%;
+        -webkit-animation: glow 3s infinite;
+        animation: glow 3s infinite;
+        z-index: -1;
       }
 
-      35% {
-        top: 218px;
+      .flame2 {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        opacity: 20%;
+        left: 115px;
       }
 
-      45% {
-        top: 222px;
-        left: 232px;
+      @-webkit-keyframes glow {
+        0% {
+          -webkit-transform: rotate(-45deg) scale(1.3);
+          transform: rotate(-45deg) scale(1.3);
+        }
+
+        50% {
+          -webkit-transform: rotate(-45deg) scale(0.8);
+          transform: rotate(-45deg) scale(0.8);
+        }
+
+        100% {
+          -webkit-transform: rotate(-45deg) scale(1.3);
+          transform: rotate(-45deg) scale(1.3);
+        }
       }
 
-      55% {
-        top: 219px;
-        left: 233px;
+      @keyframes glow {
+        0% {
+          -webkit-transform: rotate(-45deg) scale(1.3);
+          transform: rotate(-45deg) scale(1.3);
+        }
+
+        50% {
+          -webkit-transform: rotate(-45deg) scale(0.8);
+          transform: rotate(-45deg) scale(0.8);
+        }
+
+        100% {
+          -webkit-transform: rotate(-45deg) scale(1.3);
+          transform: rotate(-45deg) scale(1.3);
+        }
       }
 
-      65% {
-        top: 221px;
-        left: 233px;
+      @-webkit-keyframes flight {
+        0% {
+          top: 50%;
+          left: 50%;
+          opacity: 0%;
+          -webkit-transform: scale(0.1) rotate(50deg);
+          transform: scale(0.1) rotate(50deg);
+        }
+
+        2% {
+          opacity: 0%;
+        }
+
+        20% {
+          top: 220px;
+          left: 230px;
+          opacity: 100%;
+          -webkit-transform: scale(0.4) rotate(50deg);
+          transform: scale(0.4) rotate(50deg);
+        }
+
+        25% {
+          top: 221px;
+          left: 233px;
+        }
+
+        35% {
+          top: 218px;
+        }
+
+        45% {
+          top: 222px;
+          left: 232px;
+        }
+
+        55% {
+          top: 219px;
+          left: 233px;
+        }
+
+        65% {
+          top: 221px;
+          left: 233px;
+        }
+
+        75% {
+          top: 218px;
+        }
+
+        80% {
+          top: 222px;
+          left: 233px;
+          opacity: 100%;
+          -webkit-transform: scale(0.4) rotate(50deg);
+          transform: scale(0.4) rotate(50deg);
+        }
+
+        90% {
+          opacity: 0%;
+        }
+
+        100% {
+          top: 0px;
+          left: 500px;
+          opacity: 0%;
+          -webkit-transform: scale(0.3) rotate(50deg);
+          transform: scale(0.3) rotate(50deg);
+        }
       }
 
-      75% {
-        top: 218px;
-      }
+      @keyframes flight {
+        0% {
+          top: 500px;
+          left: 0px;
+          opacity: 0%;
+          -webkit-transform: scale(0.1) rotate(50deg);
+          transform: scale(0.1) rotate(50deg);
+        }
 
-      80% {
-        top: 222px;
-        left: 233px;
-        opacity: 100%;
-        -webkit-transform: scale(0.4) rotate(50deg);
-        transform: scale(0.4) rotate(50deg);
-      }
+        2% {
+          opacity: 0%;
+        }
 
-      90% {
-        opacity: 0%;
-      }
+        20% {
+          top: 220px;
+          left: 230px;
+          opacity: 100%;
+          -webkit-transform: scale(0.4) rotate(50deg);
+          transform: scale(0.4) rotate(50deg);
+        }
 
-      100% {
-        top: 0px;
-        left: 500px;
-        opacity: 0%;
-        -webkit-transform: scale(0.3) rotate(50deg);
-        transform: scale(0.3) rotate(50deg);
-      }
-    }
+        25% {
+          top: 221px;
+          left: 233px;
+        }
 
-    @keyframes flight {
-      0% {
-        top: 500px;
-        left: 0px;
-        opacity: 0%;
-        -webkit-transform: scale(0.1) rotate(50deg);
-        transform: scale(0.1) rotate(50deg);
-      }
+        35% {
+          top: 218px;
+        }
 
-      2% {
-        opacity: 0%;
-      }
+        45% {
+          top: 222px;
+          left: 232px;
+        }
 
-      20% {
-        top: 220px;
-        left: 230px;
-        opacity: 100%;
-        -webkit-transform: scale(0.4) rotate(50deg);
-        transform: scale(0.4) rotate(50deg);
-      }
+        55% {
+          top: 219px;
+          left: 233px;
+        }
 
-      25% {
-        top: 221px;
-        left: 233px;
-      }
+        65% {
+          top: 221px;
+          left: 233px;
+        }
 
-      35% {
-        top: 218px;
-      }
+        75% {
+          top: 218px;
+        }
 
-      45% {
-        top: 222px;
-        left: 232px;
-      }
+        80% {
+          top: 222px;
+          left: 233px;
+          opacity: 100%;
+          -webkit-transform: scale(0.4) rotate(50deg);
+          transform: scale(0.4) rotate(50deg);
+        }
 
-      55% {
-        top: 219px;
-        left: 233px;
-      }
+        90% {
+          opacity: 0%;
+        }
 
-      65% {
-        top: 221px;
-        left: 233px;
+        100% {
+          top: 0px;
+          left: 500px;
+          opacity: 0%;
+          -webkit-transform: scale(0.3) rotate(50deg);
+          transform: scale(0.3) rotate(50deg);
+        }
       }
+    </style>
+  </head>
 
-      75% {
-        top: 218px;
-      }
-
-      80% {
-        top: 222px;
-        left: 233px;
-        opacity: 100%;
-        -webkit-transform: scale(0.4) rotate(50deg);
-        transform: scale(0.4) rotate(50deg);
-      }
-
-      90% {
-        opacity: 0%;
-      }
-
-      100% {
-        top: 0px;
-        left: 500px;
-        opacity: 0%;
-        -webkit-transform: scale(0.3) rotate(50deg);
-        transform: scale(0.3) rotate(50deg);
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div id="root">
-    <div class="loader">
-      <div class="container">
-        <div class="rocketContainer">
-          <div class="tip"></div>
-          <div class="rocket"></div>
-          <div class="window"></div>
-          <div class="dots"></div>
-          <div class="bum"></div>
-          <div class="wing wingOne"></div>
-          <div class="wing wingTwo"></div>
-          <div class="light"></div>
-          <div class="light2"></div>
-          <div class="flame"></div>
-          <div class="flame2"></div>
+  <body>
+    <div id="root">
+      <div class="loader">
+        <div class="container">
+          <div class="rocketContainer">
+            <div class="tip"></div>
+            <div class="rocket"></div>
+            <div class="window"></div>
+            <div class="dots"></div>
+            <div class="bum"></div>
+            <div class="wing wingOne"></div>
+            <div class="wing wingTwo"></div>
+            <div class="light"></div>
+            <div class="light2"></div>
+            <div class="flame"></div>
+            <div class="flame2"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script type="module" src="/src/main.tsx"></script>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-</body>
-
+    <script type="module" src="/src/main.tsx"></script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+  </body>
 </html>

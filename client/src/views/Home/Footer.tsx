@@ -6,25 +6,38 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Footer = () => {
   const navigation = ['Home', 'Acerca de nosotros', 'Becas', 'Planes', 'Ayuda'];
-  const titleStyle = { fontWeight: 600, fontSize: '18px', mb: 2 };
+  const titleStyle = { fontWeight: 600, fontSize: { xl: 26, lg: 18, sm: 15 }, mb: 2 };
+
   return (
     <Box
       sx={{
         bgcolor: 'white',
         display: 'flex',
-        height: '300px',
-        alignItems: 'center',
+        flexDirection: { xl: 'row', lg: 'row', md: 'row', sm: 'row', xs: 'column' },
+        height: { xl: '400px', lg: '350px' },
+        alignItems: 'start',
         width: '100vw',
+        py: 9,
       }}
     >
       {/* Social media */}
-      <Box sx={{ width: '36%', py: 5, px: 10 }}>
+      <Box
+        sx={{
+          width: { xl: '40%', lg: '40%', md: '40%', sm: '40%', xs: '95%' },
+          px: { xl: 10, lg: 10, md: 7, sm: 5, xs: 5 },
+        }}
+      >
         <Typography sx={titleStyle}>Redes Sociales</Typography>
-        <Typography sx={{ mb: 2 }}>
-          Summarize your business so the visitor can <br /> learn about your offerings from any page
-          <br /> on your website.
+        <Typography sx={{ mb: 2, fontSize: { xl: 20, lg: 16, md: 12, sm: 12, xs: 12 } }}>
+          Para mantenerte al tanto de la plataforma <br /> y conocer mas de nosotros.
         </Typography>
-        <Stack direction="row" spacing={1}>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            justifyContent: { xl: 'start', lg: 'start', md: 'start', sm: 'start', xs: 'flex-end' },
+          }}
+        >
           <IconButton color="primary">
             <FacebookIcon />
           </IconButton>
@@ -37,19 +50,30 @@ const Footer = () => {
         </Stack>
       </Box>
       {/* Navigation */}
-      <Box>
+      <Box
+        sx={{
+          display: { xl: 'flex', lg: 'flex', md: 'flex', sx: 'flex', xs: 'none' },
+          flexDirection: 'column',
+        }}
+      >
         <Typography sx={titleStyle}>Navegación</Typography>
         <Stack direction="column" spacing={0.5}>
           {navigation.map((link, id) => {
-            return <Link key={`nav-link-${id}`}>{link}</Link>;
+            return (
+              <Link sx={{ fontSize: { xl: 20, lg: 16, md: 12, sm: 12 } }} key={`nav-link-${id}`}>
+                {link}
+              </Link>
+            );
           })}
         </Stack>
       </Box>
       {/* Contacto */}
-      <Box sx={{ px: 12, position: 'relative' }}>
-        <Box sx={{ position: 'absolute', width: '100%', top: -85 }}>
+      <Box sx={{ px: { xl: 10, lg: 10, md: 7, sm: 5, xs: 5 } }}>
+        <Box sx={{ width: '100%', top: -85 }}>
           <Typography sx={titleStyle}>Contacto</Typography>
-          <Typography sx={{ lineHeight: 2 }}>
+          <Typography
+            sx={{ lineHeight: 1.5, fontSize: { xl: 20, lg: 16, md: 12, sm: 12, xs: 12 } }}
+          >
             Email: Contact@Mysite.com <br /> Phone: 123-456-7890
           </Typography>
         </Box>

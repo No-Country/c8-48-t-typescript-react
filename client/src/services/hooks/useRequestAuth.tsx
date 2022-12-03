@@ -6,16 +6,10 @@ const client = axios.create({
 });
 
 // Athlete
-interface postRegisterUniversity {
-  file: string;
+interface postRegisterAthlete {
   fullName: string;
   email: string;
   password: string;
-  idCountry: number;
-  linkedin: string;
-  website: string;
-  description: string;
-  acceptConditions: boolean;
 }
 
 interface RegisterAthleteData {
@@ -24,20 +18,29 @@ interface RegisterAthleteData {
 }
 
 // University
-
-interface postRegisterAthlete {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
-// interface RegisterUniversity {
+// interface postRegisterUniversity {
+//   file: string;
 //   fullName: string;
 //   email: string;
+//   password: string;
+//   idCountry: number;
+//   linkedin: string;
+//   website: string;
+//   description: string;
+//   acceptConditions: boolean;
 // }
+
+interface RegisterUniversityData {
+  fullName: string;
+  email: string;
+}
 
 export default function useRequestAuth() {
   const [registerAthleteData, setRegisterAthleteData] = useState<RegisterAthleteData>({
+    fullName: '',
+    email: '',
+  });
+  const [registerUniversityData, setRegisterUniversityData] = useState<RegisterUniversityData>({
     fullName: '',
     email: '',
   });
@@ -51,20 +54,24 @@ export default function useRequestAuth() {
           setRegisterAthleteData(res.data);
           console.log(res.data);
         })
-        .catch((err) => console.log(err, 'errrr'));
+        .catch((err) => console.log(err));
     },
     [setRegisterAthleteData],
   );
 
   //   Register University
   const postRegisterUniversity = useCallback(
-    (body: postRegisterUniversity) => {
+    (body: FormData) => {
       client
-        .post('auth/register/university', body)
-        .then((res) => {
-          console.log(res.data);
+        .post('auth/register/university', body, {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         })
-        .catch((err) => console.log(err, 'errrr'));
+        .then((res) => {
+          setRegisterUniversityData(res.data);
+        })
+        .catch((err) => console.log(err));
     },
     [setRegisterAthleteData],
   );
@@ -73,5 +80,6 @@ export default function useRequestAuth() {
     postRegisterAthlete,
     postRegisterUniversity,
     registerAthleteData,
+    registerUniversityData,
   };
 }

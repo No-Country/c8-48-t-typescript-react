@@ -72,7 +72,7 @@ const Layout = (props: any) => {
           color: 'primary.main',
           backgroundColor: 'primary.contrastText',
           px: { lg: 10, md: 1, sm: 8, xs: 4 },
-          py: 1,
+          py: 0.5,
         }}
       >
         <Container maxWidth="xl">

@@ -86,7 +86,6 @@ networks:
     ipam:
       config:
         - subnet: 172.32.0.0/18
-
 volumes:
   postgres-server_data:
     driver: local

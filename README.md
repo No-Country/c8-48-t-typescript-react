@@ -105,7 +105,8 @@ docker build -t c8-48 .
 ```
 
 Using `docker-compose` you can do this:
-## SO Linux
+
+### SO Linux
 ```sh
 docker compose build
 docker compose up pgadmin
@@ -115,7 +116,8 @@ docker compose up run-client
 
 if you inspect the [Dockerfile](./Dockerfile) you can notice it have several stages, you can run all of them using `docker-compose`.
 
-## SO Windows
+### SO Windows
+
 ```sh
 docker compose -f docker-compose-windows.yaml build
 docker compose -f docker-compose-windows.yaml up cloudbeaver

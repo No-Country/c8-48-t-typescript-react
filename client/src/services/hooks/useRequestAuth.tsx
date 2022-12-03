@@ -75,7 +75,20 @@ export default function useRequestAuth() {
           return true;
         })
         .catch((error) => {
-          console.log({ error });
+          if (error.response?.status === 400) {
+            errorAlert(
+              handleMessageError(
+                error.response?.data?.message ?? ['Hubo problemas con los datos proporcionados'],
+              ),
+            );
+          }
+          if (error.response?.status === 401) {
+            errorAlert(
+              handleMessageError(
+                error.response?.data?.message ?? ['Las credenciales proporcionadas son invalidas'],
+              ),
+            );
+          }
           return false;
         }),
     [],

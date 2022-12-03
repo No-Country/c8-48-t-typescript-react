@@ -59,7 +59,7 @@ const Layout = (props: any) => {
     setLoginEl(null);
   };
 
-  const userLogged = () => JSON.parse(localStorage.getItem('user') || '');
+  const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
 
   return (
     <Box>

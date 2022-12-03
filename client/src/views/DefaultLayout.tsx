@@ -5,6 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import MarkunreadOutlinedIcon from '@mui/icons-material/MarkunreadOutlined';
 import {
   Container,
   CssBaseline,
@@ -211,9 +213,17 @@ const Layout = (props: any) => {
                 })}
               </Box>
               {userLogged().fullName ? (
-                <Typography>
-                  Bienvenida <b>{userLogged().fullName}</b>!
-                </Typography>
+                <>
+                  <IconButton aria-label="notifications">
+                    <MarkunreadOutlinedIcon />
+                  </IconButton>
+                  <IconButton aria-label="profile">
+                    <PersonOutlineOutlinedIcon />
+                    <Typography>
+                      <b>{userLogged().fullName}</b>!
+                    </Typography>
+                  </IconButton>
+                </>
               ) : (
                 <>
                   {/* Login */}

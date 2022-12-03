@@ -1,12 +1,12 @@
-import React from 'react';
 import { Box, Typography, Stack, IconButton, Link } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Footer = () => {
-  const navigation = ['Home', 'Acerca de nosotros', 'Becas', 'Planes', 'Ayuda'];
+  const navigation = ['Home', 'Becas', 'Planes', 'Ayuda'];
   const titleStyle = { fontWeight: 600, fontSize: '18px', mb: 2 };
+
   return (
     <Box
       sx={{
@@ -21,8 +21,7 @@ const Footer = () => {
       <Box sx={{ width: '36%', py: 5, px: 10 }}>
         <Typography sx={titleStyle}>Redes Sociales</Typography>
         <Typography sx={{ mb: 2 }}>
-          Summarize your business so the visitor can <br /> learn about your offerings from any page
-          <br /> on your website.
+          Para mantenerte al tanto de la plataforma y conocer mas de nosotros
         </Typography>
         <Stack direction="row" spacing={1}>
           <IconButton color="primary">
@@ -41,16 +40,20 @@ const Footer = () => {
         <Typography sx={titleStyle}>Navegación</Typography>
         <Stack direction="column" spacing={0.5}>
           {navigation.map((link, id) => {
-            return <Link key={`nav-link-${id}`}>{link}</Link>;
+            return (
+              <Link key={`nav-link-${id}`} href={link === 'Home' ? '/' : link.toLowerCase()}>
+                {link}
+              </Link>
+            );
           })}
         </Stack>
       </Box>
       {/* Contacto */}
       <Box sx={{ px: 12, position: 'relative' }}>
         <Box sx={{ position: 'absolute', width: '100%', top: -85 }}>
-          <Typography sx={titleStyle}>Contacto</Typography>
+          <Typography sx={titleStyle}>Contactos</Typography>
           <Typography sx={{ lineHeight: 2 }}>
-            Email: Contact@Mysite.com <br /> Phone: 123-456-7890
+            Email: Becco@gmail.com <br /> Phone: 123-456-7890
           </Typography>
         </Box>
       </Box>

@@ -85,7 +85,7 @@ export default function useRequestAuth() {
           if (error.response?.status === 401) {
             errorAlert(
               handleMessageError(
-                error.response?.data?.message ?? ['Las credenciales proporcionadas son invalidas'],
+                error.response?.data?.message ?? ['Las credenciales proporcionadas son inválidas'],
               ),
             );
           }

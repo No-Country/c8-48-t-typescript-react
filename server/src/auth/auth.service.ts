@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -73,19 +74,34 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, fullName: true },
+      select: { email: true, password: true, fullName: true, idUser: true },
     });
 
-    if (!user) throw new UnauthorizedException('Credenciales no válidas');
+    if (!user)
+      throw new UnauthorizedException({
+        success: false,
+        errors: [
+          {
+            message: 'Credenciales no válidas',
+          },
+        ],
+      });
     if (!bcrypt.compareSync(password, user.password))
-      throw new UnauthorizedException('Credenciales no válidas');
+      throw new UnauthorizedException({
+        success: false,
+        errors: [
+          {
+            message: 'Credenciales no válidas',
+          },
+        ],
+      });
     return {
-      ok: true,
-      user: {
+      success: true,
+      data: {
         email: user.email,
         fullName: user.fullName,
       },
-      jwt: this.jwtService.sign({ email }),
+      jwt: this.jwtService.sign({ idUser: user.idUser }),
     };
   }
 
@@ -95,7 +111,7 @@ export class AuthService {
       relations: { athlete: true },
     });
 
-    if (!user) throw new BadRequestException('User not found');
+    if (!user) throw new NotFoundException('User not found');
 
     return user;
   }

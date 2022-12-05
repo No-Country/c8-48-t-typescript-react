@@ -16,8 +16,8 @@ import { UniversityService } from '../university/university.service';
 import { CreateAthleteDto } from '../athlete/dto/create-athlete.dto';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AwsS3Service } from 'src/shared/services/aws-s3.service';
-import { DataHelper } from 'src/shared/helper/DataHelper';
 import { handleDBErrors } from 'src/shared/helper/ErrorExceptionDB';
+import { DataHelper } from 'src/shared/helper/DataHelper';
 
 @Injectable()
 export class AuthService {

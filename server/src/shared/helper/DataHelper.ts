@@ -9,5 +9,4 @@ class ErrorItem {
   code? = '0';
   message: string;
   criticality? = '';
-  trece?: any;
 }

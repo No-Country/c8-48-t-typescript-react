@@ -89,52 +89,48 @@ export class AuthService {
     const dataHelper = new DataHelper();
     const { email, password } = loginUserDto;
 
-    try {
-      const user = await this.userRepository.findOne({
-        where: { email },
-        select: {
-          email: true,
-          password: true,
-          fullName: true,
-          idUser: true,
-          rol: true,
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: {
+        email: true,
+        password: true,
+        fullName: true,
+        idUser: true,
+        rol: true,
+      },
+    });
+
+    if (!user) {
+      dataHelper.errors = [
+        {
+          code: '0',
+          message: 'Credenciales no válidas',
+          criticality: '',
         },
-      });
-
-      if (!user) {
-        dataHelper.errors = [
-          {
-            code: '0',
-            message: 'Credenciales no válidas',
-            criticality: '',
-          },
-        ];
-        throw new UnauthorizedException(dataHelper);
-      }
-
-      if (!bcrypt.compareSync(password, user.password)) {
-        dataHelper.errors = [
-          {
-            code: '0',
-            message: 'Credenciales no válidas',
-            criticality: '',
-          },
-        ];
-        throw new UnauthorizedException(dataHelper);
-      }
-
-      dataHelper.success = true;
-      dataHelper.data = {
-        email: user.email,
-        fullName: user.fullName,
-        rol: user.rol,
-      };
-      dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
-
-      return dataHelper;
-    } catch (error) {
-      handleDBErrors(error);
+      ];
+      throw new UnauthorizedException(dataHelper);
     }
+
+    if (!bcrypt.compareSync(password, user.password)) {
+      dataHelper.errors = [
+        {
+          code: '0',
+          message: 'Credenciales no válidas',
+          criticality: '',
+        },
+      ];
+      throw new UnauthorizedException(dataHelper);
+    }
+
+    dataHelper.success = true;
+    dataHelper.data = {
+      email: user.email,
+      fullName: user.fullName,
+      rol: user.rol,
+    };
+    dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
+
+    return dataHelper;
   }
 
   async findOne(id: string) {

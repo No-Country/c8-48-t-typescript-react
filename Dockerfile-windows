@@ -1,0 +1,44 @@
+## SERVER BUILD FOR DEVELOPMENT
+FROM node:18-alpine AS build-server
+
+WORKDIR /server-dev
+
+COPY ./server/package.json ./server/yarn.lock ./
+RUN yarn
+
+USER node
+
+## SERVER DEV
+FROM node:18-alpine as run-server
+
+WORKDIR /app
+
+COPY --chown=node:node --from=build-server /server-dev/node_modules ./node_modules
+
+COPY ./server/ .
+
+EXPOSE 3000
+
+CMD [ "yarn", "start:dev" ]
+
+## CLIENT BUILD FOR DEVELOPMENT
+FROM node:18-alpine AS dev-client
+
+WORKDIR /c8-48-dev-client
+
+COPY ./client/package.json ./client/yarn.lock ./
+
+RUN yarn
+
+## CLIENT DEV
+FROM node:18-alpine AS run-client
+
+WORKDIR /client
+
+COPY --chown=node:node --from=dev-client /c8-48-dev-client/node_modules ./node_modules
+
+COPY ./client/ .
+
+EXPOSE 8080
+
+USER node

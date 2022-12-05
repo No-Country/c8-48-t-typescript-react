@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -14,6 +14,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { InputLabelPropsCustom, InputPropsCustom } from '../../constants/mui/textFieldCustom';
 import useRequestAuth from '../../services/hooks/useRequestAuth';
+import { useNavigate } from 'react-router-dom';
 
 const countriesData = [
   { id: 1, name: 'Argentina' },
@@ -45,14 +46,28 @@ const validationSchema = yup.object({
     .oneOf([true], 'Necesitas aceptar los términos y condiciones antes de continuar'),
 });
 
+function DataURIToBlob(dataURI: string) {
+  const splitDataURI = dataURI.split(',');
+  const byteString =
+    splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1]);
+  const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
+
+  const ia = new Uint8Array(byteString.length);
+  for (let i = 0; i < byteString.length; i++) ia[i] = byteString.charCodeAt(i);
+
+  return new Blob([ia], { type: mimeString });
+}
+
 const SignUpUniversity = () => {
-  const { postRegisterUniversity } = useRequestAuth();
+  const navigate = useNavigate();
+
+  const { postRegisterUniversity, registerUniversityData } = useRequestAuth();
   const [universityImage, setUniversityImage] = useState<any>('');
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
-      idCountry: 1,
+      idCountry: '',
       email: '',
       password: '',
       linkedin: '',
@@ -63,10 +78,25 @@ const SignUpUniversity = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      values['file'] = universityImage;
-      postRegisterUniversity(values);
+      const file = DataURIToBlob(universityImage);
+      const form_data = new FormData();
+      form_data.append('file', file, 'image.jpg');
+      form_data.append('fullName', values.fullName);
+      form_data.append('email', values.email);
+      form_data.append('password', values.password);
+      form_data.append('idCountry', values.idCountry);
+      form_data.append('linkedin', values.linkedin);
+      form_data.append('website', values.website);
+      form_data.append('description', values.description);
+      form_data.append('acceptConditions', JSON.stringify(values.acceptConditions));
+
+      postRegisterUniversity(form_data);
     },
   });
+
+  useEffect(() => {
+    registerUniversityData.email !== '' ? navigate('/auth/login/university') : null;
+  }, [registerUniversityData]);
 
   return (
     <Box
@@ -204,7 +234,7 @@ const SignUpUniversity = () => {
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
-          sx={{ width: { lg: '25%', md: '25%', sm: '60%', xs: '80%' }, mr: 2 }}
+          sx={{ width: { lg: '25%', md: '25%', sm: '60%', xs: '100%' }, mr: 2 }}
           value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
@@ -221,7 +251,7 @@ const SignUpUniversity = () => {
           color="primary"
           InputLabelProps={InputLabelPropsCustom}
           inputProps={InputPropsCustom}
-          sx={{ width: { lg: '25%', md: '25%', sm: '60%', xs: '80%' }, mr: 2 }}
+          sx={{ width: { lg: '25%', md: '25%', sm: '60%', xs: '100%' }, mr: 2 }}
           value={formik.values.password}
           onChange={formik.handleChange}
           error={formik.touched.password && Boolean(formik.errors.password)}
@@ -230,7 +260,7 @@ const SignUpUniversity = () => {
       </Box>
       <Divider />
 
-      {/* Linkedin */}
+      {/* Website */}
       <Box sx={sectionFieldStyled}>
         <Typography color="secondary" sx={textStyle}>
           Sitio web de la universidad
@@ -252,7 +282,7 @@ const SignUpUniversity = () => {
       </Box>
       <Divider />
 
-      {/* Website */}
+      {/* Linkedin */}
       <Box sx={sectionFieldStyled}>
         <Typography color="secondary" sx={textStyle}>
           LinkedIn de la universidad
@@ -336,7 +366,7 @@ const SignUpUniversity = () => {
 
 export default SignUpUniversity;
 
-const textFieldStyle = { width: { lg: '25%', md: '30%', sm: '60%', xs: '80%' } };
+const textFieldStyle = { width: { lg: '25%', md: '30%', sm: '60%', xs: '100%' } };
 const textStyle = {
   width: { lg: 400, md: 300 },
   fontSize: { lg: 18, md: 18, sm: 16 },

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, useTheme } from '@mui/material';
-import { motion } from 'framer-motion ';
+import { motion } from 'framer-motion';
 
 export default function Slider(slides: { slides: any[] }) {
   const theme = useTheme();

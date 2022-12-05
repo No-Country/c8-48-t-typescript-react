@@ -33,10 +33,10 @@ const App = () => (
 let container: any = null;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-document.addEventListener('DOMContentLoaded', function (_) {
-  if (!container) {
-    container = document.getElementById('root') as HTMLElement;
-    const root = ReactDOM.createRoot(container);
-    root.render(<App />);
-  }
-});
+// document.addEventListener('DOMContentLoaded', function (_) {
+// if (!container) {
+container = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(container);
+root.render(<App />);
+// }
+// });

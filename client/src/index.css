@@ -10,7 +10,7 @@ body {
 
 #viewport-mask {
   visibility: hidden;
-  min-height: 100vh;
+  min-height: 99vh;
   min-width: 100vw;
   background: #00000060;
   position: absolute;

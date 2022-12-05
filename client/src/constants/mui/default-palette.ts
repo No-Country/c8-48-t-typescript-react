@@ -6,7 +6,7 @@ export default {
   secondary: {
     main: '#FFFFFF', // white
     contrastText: '#E7E7E7',
-    light: 'rgba(0,0,0,0.6)', // white opacity 60%
+    light: 'rgba(255,255,255,0.6)', // white opacity 60%
     dark: '#27F49E', // green
   },
   neutral: {

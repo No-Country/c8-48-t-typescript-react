@@ -9,7 +9,6 @@ export const handleDBErrors = (error: any): never => {
   if (error.code === '23505') {
     dataHelper.errors = [
       {
-        code: '23505',
         message: error.detail,
       },
     ];

@@ -103,9 +103,7 @@ export class AuthService {
     if (!user) {
       dataHelper.errors = [
         {
-          code: '0',
           message: 'Credenciales no válidas',
-          criticality: '',
         },
       ];
       throw new UnauthorizedException(dataHelper);
@@ -114,9 +112,7 @@ export class AuthService {
     if (!bcrypt.compareSync(password, user.password)) {
       dataHelper.errors = [
         {
-          code: '0',
           message: 'Credenciales no válidas',
-          criticality: '',
         },
       ];
       throw new UnauthorizedException(dataHelper);

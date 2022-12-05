@@ -60,7 +60,8 @@ export class AuthService {
     try {
       await this.universityService.create(createUniversityDto, user);
       dataHelper.success = true;
-      dataHelper.data = { fullName, email };
+      dataHelper.data = { fullName, email, rol: user.rol };
+      dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
       return dataHelper;
     } catch (error) {
       handleDBErrors(error);
@@ -78,7 +79,7 @@ export class AuthService {
     });
 
     dataHelper.success = true;
-    dataHelper.data = { fullName, email };
+    dataHelper.data = { fullName, email, rol: user.rol };
     dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
 
     return dataHelper;

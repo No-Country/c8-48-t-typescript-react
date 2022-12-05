@@ -4,7 +4,6 @@ import { cleanToken, setToken } from './handleLocalStorage';
 import { handleMessageError } from './helpers';
 
 const completeUrl = (url = '') => rootBackEnd + url;
-
 const bearerHeader: () => HeadersInit = () => {
   return { 'Content-Type': 'application/json' };
 };

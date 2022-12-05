@@ -16,16 +16,10 @@ type postLoginBody = {
 };
 
 // Athlete
-interface postRegisterUniversity {
-  file: string;
+interface postRegisterAthlete {
   fullName: string;
   email: string;
   password: string;
-  idCountry: number;
-  linkedin: string;
-  website: string;
-  description: string;
-  acceptConditions: boolean;
 }
 
 interface RegisterAthleteData {
@@ -53,8 +47,17 @@ interface LoginResponse {
   data?: LoggedUser;
 }
 
+interface RegisterUniversityData {
+  fullName: string;
+  email: string;
+}
+
 export default function useRequestAuth() {
   const [registerAthleteData, setRegisterAthleteData] = useState<RegisterAthleteData>({
+    fullName: '',
+    email: '',
+  });
+  const [registerUniversityData, setRegisterUniversityData] = useState<RegisterUniversityData>({
     fullName: '',
     email: '',
   });
@@ -109,13 +112,17 @@ export default function useRequestAuth() {
 
   //   Register University
   const postRegisterUniversity = useCallback(
-    (body: postRegisterUniversity) => {
+    (body: FormData) => {
       client
-        .post('api/auth/register/university', body)
-        .then((res) => {
-          console.log(res.data);
+        .post('api/auth/register/university', body, {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
         })
-        .catch((error) => console.log({ error }));
+        .then((res) => {
+          setRegisterUniversityData(res.data);
+        })
+        .catch((err) => console.log(err));
     },
     [setRegisterAthleteData],
   );
@@ -125,5 +132,6 @@ export default function useRequestAuth() {
     postRegisterUniversity,
     registerAthleteData,
     postLogin,
+    registerUniversityData,
   };
 }

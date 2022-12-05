@@ -27,6 +27,10 @@ export class User {
 
   @Column('bool', { default: true })
   isActive: boolean;
+
+  @Column('text')
+  rol: string;
+
   @CreateDateColumn()
   createAt: Date;
 

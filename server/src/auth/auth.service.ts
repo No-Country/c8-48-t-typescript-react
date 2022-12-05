@@ -1,7 +1,6 @@
 import {
-  BadRequestException,
   Injectable,
-  InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,6 +16,8 @@ import { UniversityService } from '../university/university.service';
 import { CreateAthleteDto } from '../athlete/dto/create-athlete.dto';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AwsS3Service } from 'src/shared/services/aws-s3.service';
+import { handleDBErrors } from 'src/shared/helper/ErrorExceptionDB';
+import { DataHelper } from 'src/shared/helper/DataHelper';
 
 @Injectable()
 export class AuthService {
@@ -28,74 +29,122 @@ export class AuthService {
   ) {}
 
   async create(createUserDto: CreateUserDto, file?: iFile) {
+    const { password, ...userDate } = createUserDto;
+    const user = this.userRepository.create({
+      ...userDate,
+      password: bcrypt.hashSync(password, 10),
+    });
     try {
-      const { password, ...userDate } = createUserDto;
-
       if (file) {
         const key = await this.awsS3Service.uploadImage(file);
         userDate.urlProfile = key;
       }
-
-      const user = this.userRepository.create({
-        ...userDate,
-        password: bcrypt.hashSync(password, 10),
-      });
       await this.userRepository.save(user);
-
-      return user;
     } catch (error) {
-      this.handleDBErrors(error);
+      handleDBErrors(error);
     }
+
+    return user;
   }
 
   async createUniversity(
     createUniversityDto: CreateUniversityDto,
     file: iFile,
   ) {
+    const dataHelper = new DataHelper();
     const { fullName, email, password } = createUniversityDto;
-    const user = await this.create({ fullName, email, password }, file);
+    const user = await this.create(
+      { fullName, email, password, rol: 'university' },
+      file,
+    );
     try {
       await this.universityService.create(createUniversityDto, user);
-      return { fullName, email };
+      dataHelper.success = true;
+      dataHelper.data = { fullName, email, rol: user.rol };
+      dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
+      return dataHelper;
     } catch (error) {
-      throw new InternalServerErrorException('Error interno en server');
+      handleDBErrors(error);
     }
   }
 
   async createAthlete(createAthleteDto: CreateAthleteDto) {
+    const dataHelper = new DataHelper();
     const { fullName, email, password } = createAthleteDto;
-    await this.create({ fullName, email, password });
-    return { fullName, email };
+    const user = await this.create({
+      fullName,
+      email,
+      password,
+      rol: 'athlete',
+    });
+
+    dataHelper.success = true;
+    dataHelper.data = { fullName, email, rol: user.rol };
+    dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
+
+    return dataHelper;
   }
 
   async login(loginUserDto: LoginUserDto) {
+    const dataHelper = new DataHelper();
     const { email, password } = loginUserDto;
 
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, fullName: true },
+      select: {
+        email: true,
+        password: true,
+        fullName: true,
+        idUser: true,
+        rol: true,
+      },
     });
 
-    if (!user) throw new UnauthorizedException('Credenciales no válidas');
-    if (!bcrypt.compareSync(password, user.password))
-      throw new UnauthorizedException('Credenciales no válidas');
-    return {
-      ok: true,
-      user: {
-        email: user.email,
-        fullName: user.fullName,
-      },
-      jwt: this.jwtService.sign({ email }),
+    if (!user) {
+      dataHelper.errors = [
+        {
+          message: 'Credenciales no válidas',
+        },
+      ];
+      throw new UnauthorizedException(dataHelper);
+    }
+
+    if (!bcrypt.compareSync(password, user.password)) {
+      dataHelper.errors = [
+        {
+          message: 'Credenciales no válidas',
+        },
+      ];
+      throw new UnauthorizedException(dataHelper);
+    }
+
+    dataHelper.success = true;
+    dataHelper.data = {
+      email: user.email,
+      fullName: user.fullName,
+      rol: user.rol,
     };
+    dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
+
+    return dataHelper;
   }
 
   async findOne(id: string) {
+    const dataHelper = new DataHelper();
+
     const user = await this.userRepository.findOne({
       where: { idUser: id },
       relations: { athlete: true },
     });
 
-    if (!user) throw new BadRequestException('User not found');
+    if (!user) {
+      dataHelper.errors = [
+        {
+          message: 'User not found',
+        },
+      ];
+      throw new NotFoundException(dataHelper);
+    }
 
     return user;
   }
@@ -110,17 +159,5 @@ export class AuthService {
     } catch (error) {}
 
     return user;
-  }
-
-  private handleDBErrors(error: any): never {
-    if (error.code === '23505') {
-      throw new BadRequestException(error.detail);
-    }
-    console.log(error);
-    console.log(process.env.AWS_ACCESS_KEY_ID);
-    console.log(process.env.AWS_SECRET_ACCESS_KEY);
-    throw new InternalServerErrorException(
-      'Error interno, por favor contacte al administrador',
-    );
   }
 }

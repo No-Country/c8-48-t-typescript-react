@@ -53,7 +53,10 @@ export class AuthService {
   ) {
     const dataHelper = new DataHelper();
     const { fullName, email, password } = createUniversityDto;
-    const user = await this.create({ fullName, email, password }, file);
+    const user = await this.create(
+      { fullName, email, password, rol: 'university' },
+      file,
+    );
     try {
       await this.universityService.create(createUniversityDto, user);
       dataHelper.success = true;
@@ -67,7 +70,12 @@ export class AuthService {
   async createAthlete(createAthleteDto: CreateAthleteDto) {
     const dataHelper = new DataHelper();
     const { fullName, email, password } = createAthleteDto;
-    const user = await this.create({ fullName, email, password });
+    const user = await this.create({
+      fullName,
+      email,
+      password,
+      rol: 'athlete',
+    });
 
     dataHelper.success = true;
     dataHelper.data = { fullName, email };
@@ -83,7 +91,13 @@ export class AuthService {
     try {
       const user = await this.userRepository.findOne({
         where: { email },
-        select: { email: true, password: true, fullName: true, idUser: true },
+        select: {
+          email: true,
+          password: true,
+          fullName: true,
+          idUser: true,
+          rol: true,
+        },
       });
 
       if (!user) {
@@ -112,6 +126,7 @@ export class AuthService {
       dataHelper.data = {
         email: user.email,
         fullName: user.fullName,
+        rol: user.rol,
       };
       dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
 

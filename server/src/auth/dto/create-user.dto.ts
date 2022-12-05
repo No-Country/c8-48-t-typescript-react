@@ -5,6 +5,7 @@ import {
   MaxLength,
   Matches,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -21,6 +22,10 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   urlProfile?: string;
+
+  @IsArray()
+  @IsOptional()
+  rol: string;
 
   @IsString()
   @MinLength(8)

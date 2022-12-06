@@ -1,11 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, styled, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Box, Card, CardContent, styled, Typography } from '@mui/material';
 
-type CardFilter = {
-  variation?: 'university' | 'athlete';
-};
+// type CardFilter = {
+//   variation?: 'university' | 'athlete';
+// };
 
-export const CardFilter = ({ variation = '' }: CardFilter) => {
+export const CardFilter = ({ variation = '' }: any) => {
   const width = 312;
   const isVariationAthlete = variation === 'athlete';
 

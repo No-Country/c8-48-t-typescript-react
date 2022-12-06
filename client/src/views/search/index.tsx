@@ -1,11 +1,10 @@
 import { Box, styled, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
 import { CardFilter } from './components/Cards';
 import { ListFilter } from './components/List';
 
 const SearchView = () => {
-  const params = useParams();
-  const search = params?.search;
+  // const params = useParams();
+  // const search = params?.search;
 
   return (
     <MainContainer>

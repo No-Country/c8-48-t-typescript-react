@@ -15,14 +15,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AthleteService } from './athlete.service';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
-import { MultimediaService } from '../multimedia/multimedia.service';
 
 @Controller('athlete')
 export class AthleteController {
-  constructor(
-    private readonly athleteService: AthleteService,
-    private readonly multimediaService: MultimediaService,
-  ) {}
+  constructor(private readonly athleteService: AthleteService) {}
 
   @Post('image/:id')
   @UseInterceptors(FileInterceptor('file'))
@@ -31,7 +27,7 @@ export class AthleteController {
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.multimediaService.uploadImage(file, idUser);
+    return ''; //this.multimediaService.uploadImage(file, idUser);
   }
 
   @Post('document/:id')
@@ -41,7 +37,7 @@ export class AthleteController {
     @UploadedFile() file: iFile,
     @Param('id', ParseUUIDPipe) idUser: string,
   ) {
-    return this.multimediaService.uploadDocument(file, idUser);
+    return ''; //this.multimediaService.uploadDocument(file, idUser);
   }
 
   @Get()

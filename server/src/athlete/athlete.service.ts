@@ -10,18 +10,17 @@ import { UpdateAthleteDto } from './dto/update-athlete.dto';
 import { Athlete } from './entities/athlete.entity';
 import { User } from '../auth/entities/user.entity';
 import { CreateAthleteDto } from './dto/create-athlete.dto';
+import { DataHelper } from '../shared/helper/DataHelper';
 
 @Injectable()
 export class AthleteService {
   constructor(
     @InjectRepository(Athlete)
     private readonly athletesRepository: Repository<Athlete>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
   ) {}
 
   private readonly select = {
-    idAthletes: true,
+    idAthlete: true,
     age: true,
     height: true,
     weight: true,
@@ -29,10 +28,11 @@ export class AthleteService {
     strength: true,
     gameVision: true,
     leadership: true,
-    temper: true,
+    temperance: true,
     user: {
       fullName: true,
       email: true,
+      urlProfile: true,
     },
   };
 
@@ -55,42 +55,43 @@ export class AthleteService {
   }
 
   async findOne(id: string) {
+    const dataHelper = new DataHelper();
     const athletes = await this.athletesRepository.findOne({
       where: { idAthlete: id },
       relations: { user: true },
       select: this.select,
     });
 
-    if (!athletes) throw new BadRequestException('Athletes not found');
-
-    const { user, idAthlete: idAthlete, ...athleteDetails } = athletes;
-
-    return {
-      idAthlete,
-      fullName: user.fullName,
-      email: user.email,
-      urlProfile: user.urlProfile,
-      ...athleteDetails,
-    };
+    if (!athletes) {
+      dataHelper.errors = [
+        {
+          message: 'Athletes not found',
+        },
+      ];
+      throw new BadRequestException(dataHelper);
+    }
+    dataHelper.success = true;
+    dataHelper.data = athletes;
+    return dataHelper;
   }
 
   async update(id: string, updateAthleteDto: UpdateAthleteDto) {
-    const user = await this.userRepository.findOne({
-      where: { idUser: id },
-      relations: { athlete: true },
+    const athlete = await this.athletesRepository.findOne({
+      where: { idAthlete: id },
+      relations: { user: true },
     });
 
-    if (!user) throw new BadRequestException('Athlete not found');
+    if (!athlete) throw new BadRequestException('Athlete not found');
 
     try {
-      if (!user.athlete) {
-        await this.createAthlete(updateAthleteDto, user);
+      if (!athlete.user) {
+        await this.createAthlete(updateAthleteDto, athlete.user);
       } else {
         await this.athletesRepository.update(
           { idAthlete: id },
           {
             ...updateAthleteDto,
-            user,
+            user: athlete,
             updateAt: new Date(),
           },
         );

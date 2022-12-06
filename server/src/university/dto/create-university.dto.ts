@@ -1,14 +1,7 @@
-import {
-  IsBoolean,
-  IsNumber,
-  IsPositive,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsBoolean, IsString, Length } from 'class-validator';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 export class CreateUniversityDto extends CreateUserDto {
-  @IsNumber()
-  @IsPositive()
+  @IsString()
   idCountry: string;
 
   @IsString()

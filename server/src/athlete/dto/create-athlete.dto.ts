@@ -17,9 +17,7 @@ export class CreateAthleteDto extends CreateUserDto {
   @IsOptional()
   age?: number;
 
-  @IsNumber()
-  @IsPositive()
-  @Min(1)
+  @IsString()
   @IsOptional()
   idCountry?: string;
 

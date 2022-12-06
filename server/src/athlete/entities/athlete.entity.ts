@@ -13,31 +13,33 @@ export class Athlete {
   @PrimaryGeneratedColumn('uuid')
   idAthlete: string;
 
-  @Column('smallint')
+  @Column('smallint', { nullable: true })
   age: number;
 
-  @Column('int')
+  @Column('int', { nullable: true })
   idCountry: number;
 
-  @Column({ type: 'numeric', precision: 5, scale: 2 })
+  @Column({ type: 'numeric', precision: 5, scale: 2, nullable: true })
   height: number;
 
-  @Column('numeric', { precision: 5, scale: 2 })
+  @Column('numeric', { precision: 5, scale: 2, nullable: true })
   weight: number;
 
-  @Column('bool')
+  @Column('bool', { nullable: true })
   leadership: boolean;
 
-  @Column('bool')
+  @Column('bool', { nullable: true })
   temperance: boolean;
 
   @Column('varchar', {
     length: 255,
+    nullable: true,
   })
   gameVision: string;
 
   @Column('varchar', {
     length: 255,
+    nullable: true,
   })
   strength: string;
 

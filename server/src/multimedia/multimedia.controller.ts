@@ -19,6 +19,26 @@ import { MultimediaService } from './multimedia.service';
 export class MultimediaController {
   constructor(private readonly multimediaService: MultimediaService) {}
 
+  @Post('image/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
+  uploadImage(
+    @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string,
+  ) {
+    return this.multimediaService.uploadImage(file, idUser);
+  }
+
+  @Post('document/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard('jwt'))
+  uploadDocument(
+    @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string,
+  ) {
+    return this.multimediaService.uploadDocument(file, idUser);
+  }
+
   @Post('video/:id')
   @UseGuards(AuthGuard('jwt'))
   updateUrlVideo(

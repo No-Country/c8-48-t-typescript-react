@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { CreateUniversityDto } from './dto/create-university.dto';
 import { University } from './entities/university.entity';
 import { UpdateUniversityDto } from './dto/update-university.dto';
+import { DataHelper } from '../shared/helper/DataHelper';
 
 @Injectable()
 export class UniversityService {
@@ -16,6 +17,19 @@ export class UniversityService {
     @InjectRepository(University)
     private readonly universityRepository: Repository<University>,
   ) {}
+
+  private readonly select = {
+    idUniversity: true,
+    idCountry: true,
+    website: true,
+    linkedin: true,
+    description: true,
+    user: {
+      fullName: true,
+      email: true,
+      urlProfile: true,
+    },
+  };
 
   async create(createUniversityDto: CreateUniversityDto, user: User) {
     try {
@@ -46,23 +60,25 @@ export class UniversityService {
   }
 
   async findOne(id: string) {
+    const dataHelper = new DataHelper();
     try {
       const university = await this.universityRepository.findOne({
         where: { idUniversity: id },
         relations: { user: true },
+        select: this.select,
       });
 
-      if (!university) throw new BadRequestException('University not found');
-
-      const { user, idUniversity, ...universityDetails } = university;
-
-      return {
-        idUniversity,
-        fullName: user.fullName,
-        email: user.email,
-        urlProfile: user.urlProfile,
-        ...universityDetails,
-      };
+      if (!university) {
+        dataHelper.errors = [
+          {
+            message: 'University not found',
+          },
+        ];
+        throw new BadRequestException(dataHelper);
+      }
+      dataHelper.success = true;
+      dataHelper.data = university;
+      return dataHelper;
     } catch (error) {
       throw new InternalServerErrorException('Error, internal server');
     }

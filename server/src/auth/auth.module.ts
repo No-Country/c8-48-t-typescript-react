@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt-strategy';
 import { UniversityModule } from 'src/university/university.module';
+import { AthleteModule } from 'src/athlete/athlete.module';
 
 @Module({
   controllers: [AuthController],
@@ -15,6 +16,7 @@ import { UniversityModule } from 'src/university/university.module';
   imports: [
     ConfigModule,
     UniversityModule,
+    AthleteModule,
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

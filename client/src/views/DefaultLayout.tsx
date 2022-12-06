@@ -172,8 +172,9 @@ const Layout = (props: any) => {
             {/* search bar */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <form
-                onSubmit={(e) => {
-                  navigate(`search/${e.target['search-input'].value}`);
+                onSubmit={(e: React.FormEvent) => {
+                  const data = new FormData(e.target as HTMLFormElement);
+                  navigate(`search/${data.get('search-input')}`);
                 }}
               >
                 <Search>

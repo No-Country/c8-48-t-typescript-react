@@ -14,7 +14,7 @@ const SearchView = () => {
         </Typography>
         <ListFilter title="Pais" elements={[]} />
         <ListFilter
-          title="Posicion"
+          title="Posición"
           elements={[
             'Arquero (arq)',
             'def lateral derecho (dld)',

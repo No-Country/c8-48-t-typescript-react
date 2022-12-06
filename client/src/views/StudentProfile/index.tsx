@@ -35,7 +35,7 @@ const StudentProfile = () => {
   const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       {/* {userLogged().fullName} | {athlete?.age} */}
       <ContainerFlex>
         <Column1>
@@ -51,7 +51,7 @@ const StudentProfile = () => {
             </HeaderInfoAthlete>
             <ImgAthlete>
               <img
-                style={{ width: 250, height: 230, margin: 'auto', display: 'block' }}
+                style={{ width: '100%', height: 230, margin: 'auto', display: 'block' }}
                 src="https://fcf.com.co/wp-content/uploads/1991/07/James-Rodriguez-2-445x400.png"
               />
             </ImgAthlete>
@@ -78,22 +78,23 @@ const StudentProfile = () => {
 export default StudentProfile;
 
 const ContainerFlex = styled(Box)({
-  width: 1346,
+  width: '100%',
   display: 'flex',
+  border: '1px solid #fff',
 });
 
 const Column1 = styled(Box)({
-  width: 310,
+  width: '29%',
   heigth: 700,
   background: '#2F0343',
 });
 
 const InfoAthlete = styled(Box)({
-  width: 310,
+  width: '100%',
 });
 
 const HeaderInfoAthlete = styled(Box)({
-  width: 280,
+  width: '80%',
   margin: '20px auto 0 auto',
   padding: 5,
   borderRadius: '20px 20px 0 0',
@@ -102,7 +103,7 @@ const HeaderInfoAthlete = styled(Box)({
 });
 
 const OriginAthlete = styled(Box)({
-  width: 280,
+  width: '80%',
   display: 'flex',
   alignItems: 'center',
   alignContent: 'center',
@@ -115,7 +116,7 @@ const CountryAthlete = styled(Typography)({
 });
 
 const ImgAthlete = styled(Box)({
-  width: 280,
+  width: '80%',
   height: 240,
   padding: 10,
   margin: 'auto',
@@ -123,7 +124,7 @@ const ImgAthlete = styled(Box)({
 });
 
 const DataAthlete = styled(Box)({
-  width: 280,
+  width: '80%',
   margin: 'auto',
   textAlign: 'center',
   padding: 5,
@@ -132,18 +133,18 @@ const DataAthlete = styled(Box)({
 });
 
 const Athletedata = styled(Typography)({
-  width: '93px',
+  width: '33%',
   fontSize: '17px',
   color: '#000',
 });
 
 const ContainerData = styled(Box)({
-  width: 280,
+  width: '100%',
   display: 'flex',
 });
 
 const DataAthleteNew = styled(Typography)({
-  width: '93px',
+  width: '33%',
   fontSize: 12,
 });
 

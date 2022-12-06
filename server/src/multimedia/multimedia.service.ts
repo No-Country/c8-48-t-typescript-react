@@ -51,10 +51,16 @@ export class MultimediaService {
     }
   }
 
-  async uploadDocument(file: iFile, idUser: string) {
-    /*   const user = await this.authService.findOne(idUser);
-    if (file && !this.validatorService.isDocument(file.mimetype))
-      throw new BadRequestException('File extension should be pdf');
+  async uploadDocument(file: iFile, user: User) {
+    const dataHelper = new DataHelper();
+    if (file && !this.validatorService.isDocument(file.mimetype)) {
+      dataHelper.errors = [
+        {
+          message: 'File extension should be pdf',
+        },
+      ];
+      throw new BadRequestException(dataHelper);
+    }
 
     try {
       const key = await this.awsS3Service.uploadDocument(file);
@@ -64,14 +70,16 @@ export class MultimediaService {
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return {
+      dataHelper.success = true;
+      dataHelper.data = {
         idMultimedia: multimedia.idMultimedia,
         url: this.generadorService.getS3PublicUrl(key),
         createAt: multimedia.createAt,
       };
+      return dataHelper;
     } catch (error) {
-      throw new BadRequestException('Error');
-    } */
+      handleDBErrors(error);
+    }
   }
 
   async uploadVideoUrl(urlVideo: string, idUser: string) {

@@ -28,14 +28,11 @@ export class MultimediaController {
     return this.multimediaService.uploadImage(file, user);
   }
 
-  @Post('document/:id')
+  @Post('document')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))
-  uploadDocument(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadDocument(file, idUser);
+  uploadDocument(@UploadedFile() file: iFile, @GetUser() user: User) {
+    return this.multimediaService.uploadDocument(file, user);
   }
 
   @Post('video/:id')

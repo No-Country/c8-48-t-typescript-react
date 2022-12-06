@@ -35,12 +35,9 @@ export class MultimediaController {
     return this.multimediaService.uploadDocument(file, user);
   }
 
-  @Post('video/:id')
+  @Post('video')
   @UseGuards(AuthGuard('jwt'))
-  updateUrlVideo(
-    @Param('id', ParseUUIDPipe) idUser: string,
-    @Body() body: any,
-  ) {
-    return this.multimediaService.uploadVideoUrl(body.urlVideo, idUser);
+  updateUrlVideo(@GetUser() user: User, @Body() body: any) {
+    return this.multimediaService.uploadVideoUrl(body.urlVideo, user);
   }
 }

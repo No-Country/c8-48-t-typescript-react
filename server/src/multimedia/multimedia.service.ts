@@ -82,8 +82,8 @@ export class MultimediaService {
     }
   }
 
-  async uploadVideoUrl(urlVideo: string, idUser: string) {
-    /* const user = await this.authService.findOne(idUser);
+  async uploadVideoUrl(urlVideo: string, user: User) {
+    const dataHelper = new DataHelper();
     try {
       const multimedia = this.multimediaRepository.create({
         url: urlVideo,
@@ -91,14 +91,15 @@ export class MultimediaService {
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return {
+      dataHelper.success = true;
+      dataHelper.data = {
         idMultimedia: multimedia.idMultimedia,
         url: multimedia.url,
         type: multimedia.type,
       };
+      return dataHelper;
     } catch (error) {
-      console.log(error);
-      throw new BadRequestException('Error');
-    } */
+      handleDBErrors(error);
+    }
   }
 }

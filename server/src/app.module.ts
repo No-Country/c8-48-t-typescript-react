@@ -8,6 +8,8 @@ import { AthleteModule } from './athlete/athlete.module';
 import { SharedModule } from './shared/shared.module';
 import { MultimediaModule } from './multimedia/multimedia.module';
 import { UniversityModule } from './university/university.module';
+import { SeedModule } from './seed/seed.module';
+import { CountryModule } from './country/country.module';
 import EnvConfiguration from './config/configuration';
 
 @Module({
@@ -35,6 +37,8 @@ import EnvConfiguration from './config/configuration';
     SharedModule,
     MultimediaModule,
     UniversityModule,
+    SeedModule,
+    CountryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

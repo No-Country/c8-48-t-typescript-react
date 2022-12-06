@@ -1,5 +1,6 @@
-import { iCountry } from './country.interface';
-export const country: iCountry[] = [
+import { iCountry } from '../interfaces/country.interface';
+
+export const countries: iCountry[] = [
   { name: 'Afghanistan', code: 'AF' },
   { name: 'Aland Islands', code: 'AX' },
   { name: 'Albania', code: 'AL' },

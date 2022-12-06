@@ -1,4 +1,4 @@
 export interface iCountry {
-  name: string;
   code: string;
+  name: string;
 }

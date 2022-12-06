@@ -32,7 +32,9 @@ export const CardFilter = ({ variation = '' }: CardFilter) => {
         sx={{
           width: '100%',
           padding: 0,
-          '&::last-child': { paddingBottom: 0 },
+          '&:last-child': {
+            paddingBottom: 0,
+          },
         }}
       >
         <Box

@@ -43,20 +43,4 @@ export class MultimediaController {
   ) {
     return this.multimediaService.uploadVideoUrl(body.urlVideo, idUser);
   }
-
-  @Get('video/:id')
-  @UseGuards(AuthGuard('jwt'))
-  findAllVideo(@Param('id', ParseUUIDPipe) idUser: string) {
-    return this.multimediaService.findAllVideos(idUser);
-  }
-
-  @Post('profile/:id')
-  @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(AuthGuard('jwt'))
-  uploadPerfil(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadProfile(file, idUser);
-  }
 }

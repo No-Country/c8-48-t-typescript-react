@@ -101,42 +101,4 @@ export class MultimediaService {
       throw new BadRequestException('Error');
     } */
   }
-
-  async findAllImagesUser(idUser: string) {
-    return this.multimediaRepository.find({
-      where: { user: { idUser }, type: 'I' },
-    });
-  }
-
-  async findAllVideos(idUser: string) {
-    return this.multimediaRepository.find({
-      where: { user: { idUser }, type: 'V' },
-      select: {
-        idMultimedia: true,
-        url: true,
-        createAt: true,
-      },
-    });
-  }
-
-  async findOneDocument(idUser: string) {
-    return this.multimediaRepository.findOne({
-      where: { user: { idUser }, type: 'D' },
-    });
-  }
-
-  async uploadProfile(file: iFile, idUser: string) {
-    /* if (file && !this.validatorService.isImage(file.mimetype))
-      throw new BadRequestException('File extension should be jpeg or png');
-    try {
-      const key = await this.awsS3Service.uploadImage(file);
-      const user = await this.authService.updateUser(
-        { urlProfile: key },
-        idUser,
-      );
-      return user;
-    } catch (error) {
-      throw new BadRequestException('Error');
-    } */
-  }
 }

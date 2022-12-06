@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { rootBackEnd } from '../../constants/links';
@@ -13,11 +13,12 @@ const client = axios.create({
 const StudentProfile = () => {
   const [athlete, setAthlete] = useState({ age: 0 });
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token?.length) navigate('/auth/login/athlete');
-    const athleteId = localStorage.getItem('athleteId');
-    if (!athleteId?.length) navigate('/auth/login/athlete');
+    // const athleteId = localStorage.getItem('athleteId');
+    // if (!athleteId?.length) navigate('/auth/login/athlete');
   }, []);
   useEffect(() => {
     const getAthleteProfile = async (athleteId = 'e96a2199-9ec1-443f-b57a-3e994d2cd1d3') => {

@@ -219,16 +219,19 @@ const Layout = (props: any) => {
                   </IconButton>
                   <IconButton aria-label="profile">
                     <PersonOutlineOutlinedIcon />
-                    <Typography>
-                      <b>{userLogged().fullName}</b>!
-                    </Typography>
+                    <Link color="primary" href="/athlete" sx={linkStyle}>
+                      {userLogged().fullName}
+                    </Link>
                   </IconButton>
                 </>
               ) : (
                 <>
                   {/* Login */}
                   <Button
-                    sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                    }}
                     color="primary"
                     size="small"
                     onClick={handleClickLogin}

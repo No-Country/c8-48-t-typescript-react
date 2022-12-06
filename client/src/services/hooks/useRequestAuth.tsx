@@ -69,7 +69,7 @@ export default function useRequestAuth() {
             errorAlert(handleMessageError(response.message));
             cleanToken();
           }
-          localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem('user', JSON.stringify(res.data.data));
           setToken(response.jwt);
           successAlert('Has Ingresado exitosamente');
           return true;

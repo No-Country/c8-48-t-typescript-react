@@ -1,16 +1,5 @@
-import {
-  ExpandLess,
-  ExpandMore,
-  MoveToInbox,
-  StarBorder,
-} from '@mui/icons-material';
-import {
-  Collapse,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { ExpandLess, ExpandMore, MoveToInbox, StarBorder } from '@mui/icons-material';
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useState } from 'react';
 
 type ListFilterTypes = {

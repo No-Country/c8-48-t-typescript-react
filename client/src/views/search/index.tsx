@@ -13,7 +13,6 @@ const SearchView = () => {
         <Typography variant="h4" align="center">
           Universidades
         </Typography>
-        <ListFilter title="hola" elements={['hola']} />
         <ListFilter title="Pais" elements={[]} />
         <ListFilter
           title="Posicion"
@@ -33,7 +32,6 @@ const SearchView = () => {
         />
         <ListFilter title="Ranking" elements={[]} />
         <ListFilter title="Area estudio" elements={[]} />
-        <ListFilter title="promedio" elements={[]} />
       </SideContainer>
       <PrincipalContainer>
         <CardFilter variation="athlete" />
@@ -52,7 +50,7 @@ const MainContainer = styled(Box)(() => ({
   flexDirection: 'row',
   justifyContent: 'space-between',
   height: '100%',
-  weight: '100vw',
+  width: '100vw',
 }));
 
 const SideContainer = styled(Box)(() => ({
@@ -67,5 +65,6 @@ const PrincipalContainer = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  weight: '100%',
+  height: '100vh',
+  width: '100%',
 }));

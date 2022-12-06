@@ -12,6 +12,8 @@ import {
 
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { User } from 'src/auth/entities/user.entity';
+import { GetUser } from 'src/shared/decorators/get-user.decorator';
 import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { MultimediaService } from './multimedia.service';
 
@@ -19,14 +21,11 @@ import { MultimediaService } from './multimedia.service';
 export class MultimediaController {
   constructor(private readonly multimediaService: MultimediaService) {}
 
-  @Post('image/:id')
+  @Post('image')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))
-  uploadImage(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadImage(file, idUser);
+  uploadImage(@UploadedFile() file: iFile, @GetUser() user: User) {
+    return this.multimediaService.uploadImage(file, user);
   }
 
   @Post('document/:id')

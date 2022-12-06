@@ -6,6 +6,9 @@ import { ValidatorService } from 'src/shared/services/validator.service';
 import { Repository } from 'typeorm';
 import { Multimedia } from './entities/multimedia.entity';
 import { GeneratorService } from '../shared/services/generator.service';
+import { User } from 'src/auth/entities/user.entity';
+import { DataHelper } from '../shared/helper/DataHelper';
+import { handleDBErrors } from '../shared/helper/ErrorExceptionDB';
 
 @Injectable()
 export class MultimediaService {
@@ -17,11 +20,16 @@ export class MultimediaService {
     private generadorService: GeneratorService,
   ) {}
 
-  async uploadImage(file: iFile, idUser: string) {
-    /* const user = await this.multimediaRepository.findOne(idUser);
-
-    if (file && !this.validatorService.isImage(file.mimetype))
-      throw new BadRequestException('File extension should be jpeg or png');
+  async uploadImage(file: iFile, user: User) {
+    const dataHelper = new DataHelper();
+    if (file && !this.validatorService.isImage(file.mimetype)) {
+      dataHelper.errors = [
+        {
+          message: 'File extension should be jpeg or png',
+        },
+      ];
+      throw new BadRequestException(dataHelper);
+    }
 
     try {
       const key = await this.awsS3Service.uploadImage(file);
@@ -31,14 +39,16 @@ export class MultimediaService {
         user,
       });
       await this.multimediaRepository.save(multimedia);
-      return {
+      dataHelper.success = true;
+      dataHelper.data = {
         idMultiMedia: multimedia.idMultimedia,
         url: this.generadorService.getS3PublicUrl(key),
         createAt: multimedia.createAt,
       };
+      return dataHelper;
     } catch (error) {
-      throw new BadRequestException('Error');
-    } */
+      handleDBErrors(error);
+    }
   }
 
   async uploadDocument(file: iFile, idUser: string) {

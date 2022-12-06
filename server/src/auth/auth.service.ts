@@ -18,6 +18,7 @@ import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AwsS3Service } from 'src/shared/services/aws-s3.service';
 import { handleDBErrors } from 'src/shared/helper/ErrorExceptionDB';
 import { DataHelper } from 'src/shared/helper/DataHelper';
+import { AthleteService } from '../athlete/athlete.service';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +26,7 @@ export class AuthService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
     private readonly universityService: UniversityService,
+    private readonly athleteService: AthleteService,
     private awsS3Service: AwsS3Service,
   ) {}
 
@@ -77,7 +79,7 @@ export class AuthService {
       password,
       rol: 'athlete',
     });
-
+    await this.athleteService.createAthlete(createAthleteDto, user);
     dataHelper.success = true;
     dataHelper.data = { fullName, email, rol: user.rol };
     dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
@@ -91,12 +93,18 @@ export class AuthService {
 
     const user = await this.userRepository.findOne({
       where: { email },
+      relations: {
+        athlete: true,
+        university: true,
+      },
       select: {
         email: true,
         password: true,
         fullName: true,
         idUser: true,
         rol: true,
+        athlete: { idAthlete: true },
+        university: { idUniversity: true },
       },
     });
 
@@ -117,12 +125,13 @@ export class AuthService {
       ];
       throw new UnauthorizedException(dataHelper);
     }
-
     dataHelper.success = true;
     dataHelper.data = {
       email: user.email,
       fullName: user.fullName,
       rol: user.rol,
+      idAthlete: user.athlete?.idAthlete,
+      idUniversity: user.university?.idUniversity,
     };
     dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
 

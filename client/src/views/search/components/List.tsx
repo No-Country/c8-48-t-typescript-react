@@ -18,29 +18,32 @@ type ListFilterTypes = {
   elements: string[];
 };
 
-export const ListFilter = ({ title, elements }: ListFilterTypes) => {
+export const ListFilter = ({ title, elements = [] }: ListFilterTypes) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <List component="div" disablePadding>
+    <List component="div" disablePadding sx={{ width: '100%' }}>
       <ListItemButton onClick={() => setOpen(!open)}>
-        <ListItemIcon>
+        {/* <ListItemIcon>
           <MoveToInbox />
-        </ListItemIcon>
-        <ListItemText primary="Sent mail" />
+        </ListItemIcon> */}
+        <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
+          {elements.map((e) => {
+            return (
+              <ListItemButton sx={{ pl: 4 }}>
+                {/* <ListItemIcon>
+                      <StarBorder />
+                    </ListItemIcon> */}
+                <ListItemText primary={e} />
+              </ListItemButton>
+            );
+          })}
         </List>
       </Collapse>
-      ;
     </List>
   );
 };

@@ -72,7 +72,7 @@ const Layout = (props: any) => {
   const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
 
   return (
-    <Box>
+    <Box height="100%" width="100vw">
       <CssBaseline />
       <AppBar
         position="static"

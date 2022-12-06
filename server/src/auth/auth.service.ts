@@ -130,9 +130,8 @@ export class AuthService {
       email: user.email,
       fullName: user.fullName,
       rol: user.rol,
-      idAthlete: user.athlete == null ? null : user.athlete.idAthlete,
-      idUniversity:
-        user.university == null ? null : user.university.idUniversity,
+      idAthlete: user.athlete?.idAthlete,
+      idUniversity: user.university?.idUniversity,
     };
     dataHelper.jwt = this.jwtService.sign({ idUser: user.idUser });
 

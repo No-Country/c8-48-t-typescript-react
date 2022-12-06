@@ -76,12 +76,20 @@ export class AthleteService {
   }
 
   async update(id: string, updateAthleteDto: UpdateAthleteDto) {
+    const dataHelper = new DataHelper();
     const athlete = await this.athletesRepository.findOne({
       where: { idAthlete: id },
       relations: { user: true },
     });
 
-    if (!athlete) throw new BadRequestException('Athlete not found');
+    if (!athlete) {
+      dataHelper.errors = [
+        {
+          message: 'Athlete not found',
+        },
+      ];
+      throw new BadRequestException(dataHelper);
+    }
 
     try {
       if (!athlete.user) {
@@ -91,14 +99,13 @@ export class AthleteService {
           { idAthlete: id },
           {
             ...updateAthleteDto,
-            user: athlete,
             updateAt: new Date(),
           },
         );
       }
-      return {
-        ...updateAthleteDto,
-      };
+      dataHelper.success = true;
+      dataHelper.data = updateAthleteDto;
+      return dataHelper;
     } catch (error) {
       throw new InternalServerErrorException(
         'Error interno, contacte al administrador',

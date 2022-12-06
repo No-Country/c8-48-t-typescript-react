@@ -6,11 +6,12 @@
 body {
   font-family: 'Mulish', sans-serif;
   margin: 0;
+  padding: 0;
 }
 
 #viewport-mask {
   visibility: hidden;
-  min-height: 100vh;
+  min-height: 99vh;
   min-width: 100vw;
   background: #00000060;
   position: absolute;

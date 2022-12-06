@@ -64,7 +64,7 @@ const Layout = (props: any) => {
   const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
 
   return (
-    <Box>
+    <Box height="100%" width="100vw">
       <CssBaseline />
       <AppBar
         position="static"
@@ -171,12 +171,23 @@ const Layout = (props: any) => {
 
             {/* search bar */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase placeholder="Buscar…" inputProps={{ 'aria-label': 'search' }} />
-              </Search>
+              <form
+                onSubmit={(e: React.FormEvent) => {
+                  const data = new FormData(e.target as HTMLFormElement);
+                  navigate(`search/${data.get('search-input')}`);
+                }}
+              >
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    id="search-input"
+                    placeholder="Buscar…"
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </Search>
+              </form>
             </Box>
             {/* close search bar */}
 
@@ -228,7 +239,10 @@ const Layout = (props: any) => {
                 <>
                   {/* Login */}
                   <Button
-                    sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                    }}
                     color="primary"
                     size="small"
                     onClick={handleClickLogin}

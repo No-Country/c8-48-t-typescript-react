@@ -1,10 +1,7 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Param,
-  ParseUUIDPipe,
   UseGuards,
   UseInterceptors,
   UploadedFile,

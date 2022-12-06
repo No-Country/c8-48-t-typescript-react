@@ -6,13 +6,12 @@ import {
   Patch,
   Param,
   ParseUUIDPipe,
-  UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { iFile } from 'src/shared/interfaces/file-interfaces';
+/* import { iFile } from 'src/shared/interfaces/file-interfaces'; */
 import { AthleteService } from './athlete.service';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
 
@@ -23,20 +22,16 @@ export class AthleteController {
   @Post('image/:id')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))
-  uploadImage(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
+  uploadImage /*  @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string, */() {
     return ''; //this.multimediaService.uploadImage(file, idUser);
   }
 
   @Post('document/:id')
   @UseInterceptors(FileInterceptor('file'))
   @UseGuards(AuthGuard('jwt'))
-  uploadDocument(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
+  uploadDocument /* @UploadedFile() file: iFile,
+    @Param('id', ParseUUIDPipe) idUser: string, */() {
     return ''; //this.multimediaService.uploadDocument(file, idUser);
   }
 

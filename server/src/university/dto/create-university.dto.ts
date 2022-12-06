@@ -9,7 +9,7 @@ import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 export class CreateUniversityDto extends CreateUserDto {
   @IsNumber()
   @IsPositive()
-  idCountry: number;
+  idCountry: string;
 
   @IsString()
   linkedin?: string;

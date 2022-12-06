@@ -1,4 +1,5 @@
 import { User } from 'src/auth/entities/user.entity';
+import { Country } from 'src/country/entities/country.entity';
 import {
   Column,
   CreateDateColumn,
@@ -16,8 +17,9 @@ export class Athlete {
   @Column('smallint', { nullable: true })
   age: number;
 
-  @Column('int', { nullable: true })
-  idCountry: number;
+  @OneToOne(() => Country, (country) => country.code)
+  @JoinColumn()
+  idCountry: string;
 
   @Column({ type: 'numeric', precision: 5, scale: 2, nullable: true })
   height: number;

@@ -19,5 +19,6 @@ export const handleDBErrors = (error: any): never => {
       message: 'Error interno, por favor contacte al administrador',
     },
   ];
+
   throw new InternalServerErrorException(dataHelper);
 };

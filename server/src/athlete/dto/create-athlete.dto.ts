@@ -19,7 +19,7 @@ export class CreateAthleteDto extends CreateUserDto {
 
   @IsString()
   @IsOptional()
-  idCountry?: string;
+  country?: string;
 
   @IsNumber(
     { maxDecimalPlaces: 2 },

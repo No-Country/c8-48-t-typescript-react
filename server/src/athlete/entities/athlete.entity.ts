@@ -19,7 +19,7 @@ export class Athlete {
 
   @OneToOne(() => Country, (country) => country.code)
   @JoinColumn()
-  idCountry: string;
+  country: string;
 
   @Column({ type: 'numeric', precision: 5, scale: 2, nullable: true })
   height: number;

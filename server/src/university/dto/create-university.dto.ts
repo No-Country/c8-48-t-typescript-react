@@ -2,7 +2,7 @@ import { IsBoolean, IsString, Length } from 'class-validator';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 export class CreateUniversityDto extends CreateUserDto {
   @IsString()
-  idCountry: string;
+  country: string;
 
   @IsString()
   linkedin?: string;

@@ -20,7 +20,7 @@ export class UniversityService {
 
   private readonly select = {
     idUniversity: true,
-    idCountry: true,
+
     website: true,
     linkedin: true,
     description: true,
@@ -64,7 +64,7 @@ export class UniversityService {
     try {
       const university = await this.universityRepository.findOne({
         where: { idUniversity: id },
-        relations: { user: true },
+        relations: { user: true, country: true },
         select: this.select,
       });
 

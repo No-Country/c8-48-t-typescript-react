@@ -1,11 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('Countries')
 export class Country {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
-  @Column('text')
+  @PrimaryColumn('text')
   code: string;
   @Column('text')
   name: string;

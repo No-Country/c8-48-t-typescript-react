@@ -15,7 +15,7 @@ export class University {
 
   @OneToOne(() => Country, (country) => country.code)
   @JoinColumn()
-  idCountry: string;
+  country: string;
 
   @Column('text')
   linkedin: string;

@@ -4,7 +4,6 @@ import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AwsS3Service } from 'src/shared/services/aws-s3.service';
 import { ValidatorService } from 'src/shared/services/validator.service';
 import { Repository } from 'typeorm';
-import { AuthService } from '../auth/auth.service';
 import { Multimedia } from './entities/multimedia.entity';
 import { GeneratorService } from '../shared/services/generator.service';
 
@@ -15,12 +14,11 @@ export class MultimediaService {
     private readonly multimediaRepository: Repository<Multimedia>,
     private validatorService: ValidatorService,
     private awsS3Service: AwsS3Service,
-    private authService: AuthService,
     private generadorService: GeneratorService,
   ) {}
 
   async uploadImage(file: iFile, idUser: string) {
-    const user = await this.authService.findOne(idUser);
+    /* const user = await this.multimediaRepository.findOne(idUser);
 
     if (file && !this.validatorService.isImage(file.mimetype))
       throw new BadRequestException('File extension should be jpeg or png');
@@ -40,11 +38,11 @@ export class MultimediaService {
       };
     } catch (error) {
       throw new BadRequestException('Error');
-    }
+    } */
   }
 
   async uploadDocument(file: iFile, idUser: string) {
-    const user = await this.authService.findOne(idUser);
+    /*   const user = await this.authService.findOne(idUser);
     if (file && !this.validatorService.isDocument(file.mimetype))
       throw new BadRequestException('File extension should be pdf');
 
@@ -63,11 +61,11 @@ export class MultimediaService {
       };
     } catch (error) {
       throw new BadRequestException('Error');
-    }
+    } */
   }
 
   async uploadVideoUrl(urlVideo: string, idUser: string) {
-    const user = await this.authService.findOne(idUser);
+    /* const user = await this.authService.findOne(idUser);
     try {
       const multimedia = this.multimediaRepository.create({
         url: urlVideo,
@@ -83,7 +81,7 @@ export class MultimediaService {
     } catch (error) {
       console.log(error);
       throw new BadRequestException('Error');
-    }
+    } */
   }
 
   async findAllImagesUser(idUser: string) {
@@ -110,7 +108,7 @@ export class MultimediaService {
   }
 
   async uploadProfile(file: iFile, idUser: string) {
-    if (file && !this.validatorService.isImage(file.mimetype))
+    /* if (file && !this.validatorService.isImage(file.mimetype))
       throw new BadRequestException('File extension should be jpeg or png');
     try {
       const key = await this.awsS3Service.uploadImage(file);
@@ -121,6 +119,6 @@ export class MultimediaService {
       return user;
     } catch (error) {
       throw new BadRequestException('Error');
-    }
+    } */
   }
 }

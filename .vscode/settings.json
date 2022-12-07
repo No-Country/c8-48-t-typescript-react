@@ -77,5 +77,6 @@
     "scss",
     ".module.scss"
   ],
-  "prettier.configPath": "./server/.prettierrc.json"
+  "prettier.configPath": "./server/.prettierrc.json",
+  "Codegeex.EnableExtension": false
 }

@@ -81,6 +81,17 @@ const ScholarshipPackages = () => {
       </Box>
       {/* sm and xs Size */}
       <Box sx={{ display: { xl: 'none', lg: 'none', md: 'none', sm: 'block', xs: 'block' } }}>
+        <Typography
+          sx={{
+            color: 'secondary.main',
+            fontSize: { sm: 30, xs: 20 },
+            position: 'absolute',
+            px: { sm: 10, xs: 7 },
+            py: 2,
+          }}
+        >
+          Planes
+        </Typography>
         <Slider slides={cardSlides} />
       </Box>
       <Footer />

@@ -2,6 +2,9 @@ export default {
   primary: {
     main: '#220B39', // Dark Purple
     contrastText: '#FFFFFF', // White
+    light: '#2D064C',
+    dark: 'rgba(38, 19, 49, 0.5)',
+    tooltip: '#2F0343',
   },
   secondary: {
     main: '#FFFFFF', // white

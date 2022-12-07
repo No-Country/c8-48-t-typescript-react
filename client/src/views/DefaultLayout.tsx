@@ -280,7 +280,7 @@ const Layout = (props: any) => {
                     onClick={handleClickSignup}
                     size="small"
                   >
-                    REGISTRATE
+                    REGÍSTRATE
                   </Button>
                   <Menu
                     id="basic-menu"

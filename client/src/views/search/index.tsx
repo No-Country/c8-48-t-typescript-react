@@ -12,7 +12,7 @@ const SearchView = () => {
         <Typography variant="h4" align="center">
           Universidades
         </Typography>
-        <ListFilter title="Pais" elements={[]} />
+        <ListFilter title="País" elements={[]} />
         <ListFilter
           title="Posición"
           elements={[

@@ -30,7 +30,7 @@ const FAQ = () => (
           universidades oficiales para que estas <br /> propongan becas
         </Typography>
         {/* Second question */}
-        <Typography sx={titleStyle}>¿Cuantos deportes cubre Becco?</Typography>
+        <Typography sx={titleStyle}>¿Cuántos deportes cubre Becco?</Typography>
         <Typography sx={paragraphStyle}>
           Cada vez más estamos agregando nuevas <br />
           disciplinas para que estas sean consideradas

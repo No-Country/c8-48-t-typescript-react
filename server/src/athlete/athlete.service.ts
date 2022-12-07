@@ -9,7 +9,6 @@ import { Repository } from 'typeorm';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
 import { Athlete } from './entities/athlete.entity';
 import { User } from '../auth/entities/user.entity';
-import { CreateAthleteDto } from './dto/create-athlete.dto';
 import { DataHelper } from '../shared/helper/DataHelper';
 import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
 import { AcademicAthlete } from './entities/academicAthlete.entity';
@@ -33,6 +32,21 @@ export class AthleteService {
     gameVision: true,
     leadership: true,
     temperance: true,
+    position: true,
+    leg: true,
+    acceleration: true,
+    speed: true,
+    jump: true,
+    shot: true,
+    passes: true,
+    quite: true,
+    academicAthlete: {
+      idAcademicAthlete: true,
+      studyLevel: true,
+      average: true,
+      areaInterest: true,
+      careerInterest: true,
+    },
     user: {
       fullName: true,
       email: true,

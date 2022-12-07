@@ -64,4 +64,31 @@ export class CreateAthleteDto extends CreateUserDto {
   })
   @IsOptional()
   strength?: string;
+  @IsString()
+  @IsOptional()
+  position?: string;
+
+  @IsString()
+  @IsOptional()
+  leg?: string;
+
+  @IsNumber()
+  @IsOptional()
+  acceleration?: number;
+  @IsNumber()
+  @IsOptional()
+  speed?: number;
+  @IsNumber()
+  @IsOptional()
+  jump?: number;
+
+  @IsNumber()
+  @IsOptional()
+  shot?: number;
+  @IsNumber()
+  @IsOptional()
+  passes?: number;
+  @IsNumber()
+  @IsOptional()
+  quite?: number;
 }

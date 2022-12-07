@@ -46,6 +46,29 @@ export class Athlete {
   })
   strength: string;
 
+  @Column('text', { nullable: true })
+  position: string;
+
+  @Column('text', { nullable: true })
+  leg: string;
+
+  @Column('int', { nullable: true })
+  acceleration: number;
+
+  @Column('int', { nullable: true })
+  speed: number;
+
+  @Column('int', { nullable: true })
+  jump: number;
+
+  @Column('int', { nullable: true })
+  shot: number;
+
+  @Column('int', { nullable: true })
+  passes: number;
+  @Column('int', { nullable: true })
+  quite: number;
+
   @OneToOne(() => AcademicAthlete, (academicAthlete) => academicAthlete.athlete)
   academicAthlete: AcademicAthlete;
 

@@ -2,11 +2,14 @@ export default {
   primary: {
     main: '#220B39', // Dark Purple
     contrastText: '#FFFFFF', // White
+    light: '#2D064C',
+    dark: 'rgba(38, 19, 49, 0.5)',
+    tooltip: '#2F0343',
   },
   secondary: {
     main: '#FFFFFF', // white
     contrastText: '#E7E7E7',
-    light: 'rgba(0,0,0,0.6)', // white opacity 60%
+    light: 'rgba(255,255,255,0.6)', // white opacity 60%
     dark: '#27F49E', // green
   },
   neutral: {

@@ -5,6 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import MarkunreadOutlinedIcon from '@mui/icons-material/MarkunreadOutlined';
 import {
   Container,
   CssBaseline,
@@ -59,8 +61,10 @@ const Layout = (props: any) => {
     setLoginEl(null);
   };
 
+  const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
+
   return (
-    <Box>
+    <Box height="100%" width="100vw">
       <CssBaseline />
       <AppBar
         position="static"
@@ -68,7 +72,7 @@ const Layout = (props: any) => {
           color: 'primary.main',
           backgroundColor: 'primary.contrastText',
           px: { lg: 10, md: 1, sm: 8, xs: 4 },
-          py: 1,
+          py: 0.5,
         }}
       >
         <Container maxWidth="xl">
@@ -167,12 +171,23 @@ const Layout = (props: any) => {
 
             {/* search bar */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase placeholder="Buscar…" inputProps={{ 'aria-label': 'search' }} />
-              </Search>
+              <form
+                onSubmit={(e: React.FormEvent) => {
+                  const data = new FormData(e.target as HTMLFormElement);
+                  navigate(`search/${data.get('search-input')}`);
+                }}
+              >
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    id="search-input"
+                    placeholder="Buscar…"
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </Search>
+              </form>
             </Box>
             {/* close search bar */}
 
@@ -208,70 +223,95 @@ const Layout = (props: any) => {
                   );
                 })}
               </Box>
-              {/* Login */}
-              <Button
-                sx={{ letterSpacing: '0.46px', fontSize: { lg: 13, md: 12 } }}
-                color="primary"
-                size="small"
-                onClick={handleClickLogin}
-              >
-                INICIAR SESIÓN
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={loginEl}
-                open={openLogin}
-                onClose={handleCloseLogin}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem>
-                  <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
-                    Deportista
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link color="primary" href="/auth/login/university" sx={linkStyle}>
-                    Universidad
-                  </Link>
-                </MenuItem>
-              </Menu>
-              {/* Register */}
-              <Button
-                color="primary"
-                sx={{
-                  letterSpacing: '0.46px',
-                  fontSize: { lg: 13, md: 12 },
-                  border: `1px solid ${theme.palette.primary.main}`,
-                }}
-                onClick={handleClickSignup}
-                size="small"
-              >
-                REGISTRATE
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={signupEl}
-                open={openSignup}
-                onClose={handleCloseSignup}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem>
-                  <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
-                    Deportista
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={() => handleNavigateSignUp('university')}>
-                  <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
-                    Universidad
-                  </Link>
-                </MenuItem>
-              </Menu>
+              {userLogged().fullName ? (
+                <>
+                  <IconButton aria-label="notifications">
+                    <MarkunreadOutlinedIcon />
+                  </IconButton>
+                  <IconButton aria-label="profile">
+                    <PersonOutlineOutlinedIcon />
+                    <Link
+                      color="primary"
+                      href={
+                        userLogged().rol === 'athlete' ? '/athlete-profile' : 'university-profile'
+                      }
+                      sx={linkStyle}
+                    >
+                      {userLogged().fullName}
+                    </Link>
+                  </IconButton>
+                </>
+              ) : (
+                <>
+                  {/* Login */}
+                  <Button
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                    }}
+                    color="primary"
+                    size="small"
+                    onClick={handleClickLogin}
+                  >
+                    INICIAR SESIÓN
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={loginEl}
+                    open={openLogin}
+                    onClose={handleCloseLogin}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem>
+                      <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
+                        Deportista
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link color="primary" href="/auth/login/university" sx={linkStyle}>
+                        Universidad
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                  {/* Register */}
+                  <Button
+                    color="primary"
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                      border: `1px solid ${theme.palette.primary.main}`,
+                    }}
+                    onClick={handleClickSignup}
+                    size="small"
+                  >
+                    REGÍSTRATE
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={signupEl}
+                    open={openSignup}
+                    onClose={handleCloseSignup}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem>
+                      <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
+                        Deportista
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={() => handleNavigateSignUp('university')}>
+                      <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
+                        Universidad
+                      </Link>
+                    </MenuItem>
+                  </Menu>
+                  {/* Close right side */}
+                </>
+              )}
             </Box>
-            {/* Close right side */}
           </Toolbar>
         </Container>
       </AppBar>

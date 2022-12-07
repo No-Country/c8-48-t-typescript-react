@@ -1,9 +1,11 @@
 import { Box, Button, Checkbox, styled, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { postLogin } from '../../services/connections';
 import CustomizedSnackbars from '../../components/StackComponent';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useRequestAuth from '../../services/hooks/useRequestAuth';
+
 const validationSchema = yup.object({
   name: yup.string().required('Nombre es requerido'),
   lastName: yup.string().required('Apellido es requerido'),
@@ -11,15 +13,21 @@ const validationSchema = yup.object({
 
 const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { postLogin } = useRequestAuth();
   const formik = useFormik({
     initialValues: {
       name: '',
       lastName: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      postLogin({ email: values.name, password: values.lastName });
+    onSubmit: async (values) => {
+      const res = await postLogin({ email: values.name, password: values.lastName });
+      if (res.success) {
+        const path = res.data?.idAthlete ? '/athlete-profile/' + res.data.idAthlete : '/';
+        console.log(path);
+        navigate(path);
+      }
     },
   });
   return (

@@ -1,48 +1,20 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   ParseUUIDPipe,
-  UploadedFile,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { iFile } from 'src/shared/interfaces/file-interfaces';
 import { AthleteService } from './athlete.service';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
-import { MultimediaService } from '../multimedia/multimedia.service';
+import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
 
 @Controller('athlete')
 export class AthleteController {
-  constructor(
-    private readonly athleteService: AthleteService,
-    private readonly multimediaService: MultimediaService,
-  ) {}
-
-  @Post('image/:id')
-  @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(AuthGuard('jwt'))
-  uploadImage(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadImage(file, idUser);
-  }
-
-  @Post('document/:id')
-  @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(AuthGuard('jwt'))
-  uploadDocument(
-    @UploadedFile() file: iFile,
-    @Param('id', ParseUUIDPipe) idUser: string,
-  ) {
-    return this.multimediaService.uploadDocument(file, idUser);
-  }
+  constructor(private readonly athleteService: AthleteService) {}
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
@@ -63,5 +35,16 @@ export class AthleteController {
     @Body() updateAthletesDto: UpdateAthleteDto,
   ) {
     return this.athleteService.update(id, updateAthletesDto);
+  }
+  @Patch('academic/:id')
+  @UseGuards(AuthGuard('jwt'))
+  updateAcademicAthlete(
+    @Param('id', ParseUUIDPipe) idAthlete: string,
+    @Body() updateAcademicAthlete: UpdateAcademicAthleteDto,
+  ) {
+    return this.athleteService.updateAcademicAthlete(
+      updateAcademicAthlete,
+      idAthlete,
+    );
   }
 }

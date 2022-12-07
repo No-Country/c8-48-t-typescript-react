@@ -8,6 +8,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AcademicAthlete } from './academicAthlete.entity';
 
 @Entity('Athletes')
 export class Athlete {
@@ -44,6 +45,9 @@ export class Athlete {
     nullable: true,
   })
   strength: string;
+
+  @OneToOne(() => AcademicAthlete, (academicAthlete) => academicAthlete.athlete)
+  academicAthlete: AcademicAthlete;
 
   @CreateDateColumn()
   createAt: Date;

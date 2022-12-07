@@ -61,26 +61,22 @@ export class UniversityService {
 
   async findOne(id: string) {
     const dataHelper = new DataHelper();
-    try {
-      const university = await this.universityRepository.findOne({
-        where: { idUniversity: id },
-        relations: { user: true, country: true },
-        select: this.select,
-      });
+    const university = await this.universityRepository.findOne({
+      where: { idUniversity: id },
+      relations: { user: true, country: true },
+      select: this.select,
+    });
 
-      if (!university) {
-        dataHelper.errors = [
-          {
-            message: 'University not found',
-          },
-        ];
-        throw new BadRequestException(dataHelper);
-      }
-      dataHelper.success = true;
-      dataHelper.data = university;
-      return dataHelper;
-    } catch (error) {
-      throw new InternalServerErrorException('Error, internal server');
+    if (!university) {
+      dataHelper.errors = [
+        {
+          message: 'University not found',
+        },
+      ];
+      throw new BadRequestException(dataHelper);
     }
+    dataHelper.success = true;
+    dataHelper.data = university;
+    return dataHelper;
   }
 }

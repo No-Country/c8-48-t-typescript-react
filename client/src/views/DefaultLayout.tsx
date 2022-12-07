@@ -230,9 +230,15 @@ const Layout = (props: any) => {
                   </IconButton>
                   <IconButton aria-label="profile">
                     <PersonOutlineOutlinedIcon />
-                    <Typography>
-                      <b>{userLogged().fullName}</b>!
-                    </Typography>
+                    <Link
+                      color="primary"
+                      href={
+                        userLogged().rol === 'athlete' ? '/athlete-profile' : 'university-profile'
+                      }
+                      sx={linkStyle}
+                    >
+                      {userLogged().fullName}
+                    </Link>
                   </IconButton>
                 </>
               ) : (

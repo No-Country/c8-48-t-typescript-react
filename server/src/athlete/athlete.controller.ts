@@ -10,6 +10,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { AthleteService } from './athlete.service';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
+import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
 
 @Controller('athlete')
 export class AthleteController {
@@ -34,5 +35,16 @@ export class AthleteController {
     @Body() updateAthletesDto: UpdateAthleteDto,
   ) {
     return this.athleteService.update(id, updateAthletesDto);
+  }
+  @Patch('academic/:id')
+  @UseGuards(AuthGuard('jwt'))
+  updateAcademicAthlete(
+    @Param('id', ParseUUIDPipe) idAthlete: string,
+    @Body() updateAcademicAthlete: UpdateAcademicAthleteDto,
+  ) {
+    return this.athleteService.updateAcademicAthlete(
+      updateAcademicAthlete,
+      idAthlete,
+    );
   }
 }

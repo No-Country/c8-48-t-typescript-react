@@ -9,14 +9,18 @@ import { Repository } from 'typeorm';
 import { UpdateAthleteDto } from './dto/update-athlete.dto';
 import { Athlete } from './entities/athlete.entity';
 import { User } from '../auth/entities/user.entity';
-import { CreateAthleteDto } from './dto/create-athlete.dto';
 import { DataHelper } from '../shared/helper/DataHelper';
+import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
+import { AcademicAthlete } from './entities/academicAthlete.entity';
+import { handleDBErrors } from '../shared/helper/ErrorExceptionDB';
 
 @Injectable()
 export class AthleteService {
   constructor(
     @InjectRepository(Athlete)
     private readonly athletesRepository: Repository<Athlete>,
+    @InjectRepository(AcademicAthlete)
+    private readonly academicAthleteRepository: Repository<AcademicAthlete>,
   ) {}
 
   private readonly select = {
@@ -24,11 +28,25 @@ export class AthleteService {
     age: true,
     height: true,
     weight: true,
-    idCountry: true,
     strength: true,
     gameVision: true,
     leadership: true,
     temperance: true,
+    position: true,
+    leg: true,
+    acceleration: true,
+    speed: true,
+    jump: true,
+    shot: true,
+    passes: true,
+    quite: true,
+    academicAthlete: {
+      idAcademicAthlete: true,
+      studyLevel: true,
+      average: true,
+      areaInterest: true,
+      careerInterest: true,
+    },
     user: {
       fullName: true,
       email: true,
@@ -40,10 +58,10 @@ export class AthleteService {
     return `This action returns all athlete`;
   }
 
-  async createAthlete(createAthleteDto: CreateAthleteDto, user: User) {
+  async createAthlete(updateAthleteDto: UpdateAthleteDto, user: User) {
     try {
       const athlete = this.athletesRepository.create({
-        ...createAthleteDto,
+        ...updateAthleteDto,
         user,
       });
       await this.athletesRepository.save(athlete);
@@ -58,7 +76,7 @@ export class AthleteService {
     const dataHelper = new DataHelper();
     const athletes = await this.athletesRepository.findOne({
       where: { idAthlete: id },
-      relations: { user: true },
+      relations: { user: true, country: true, academicAthlete: true },
       select: this.select,
     });
 
@@ -111,5 +129,54 @@ export class AthleteService {
         'Error interno, contacte al administrador',
       );
     }
+  }
+
+  async createAcademicAthlete(
+    updateAcademicAthleteDto: UpdateAcademicAthleteDto,
+    idAthlete: string,
+  ) {
+    try {
+      const academicAthlete = this.academicAthleteRepository.create({
+        ...updateAcademicAthleteDto,
+        athlete: { idAthlete: idAthlete },
+      });
+      await this.academicAthleteRepository.save(academicAthlete);
+      return academicAthlete;
+    } catch (error) {
+      handleDBErrors(error);
+    }
+  }
+
+  async updateAcademicAthlete(
+    updateAcademicAthleteDto: UpdateAcademicAthleteDto,
+    idAthlete: string,
+  ) {
+    const dataHelper = new DataHelper();
+    const academicAthlete = await this.academicAthleteRepository.findOne({
+      where: {
+        athlete: { idAthlete: idAthlete },
+      },
+    });
+
+    if (!academicAthlete) {
+      dataHelper.success = true;
+      dataHelper.data = await this.createAcademicAthlete(
+        updateAcademicAthleteDto,
+        idAthlete,
+      );
+    } else {
+      await this.academicAthleteRepository.update(
+        {
+          athlete: { idAthlete: idAthlete },
+        },
+        {
+          ...updateAcademicAthleteDto,
+        },
+      );
+      dataHelper.success = true;
+      dataHelper.data = updateAcademicAthleteDto;
+    }
+
+    return dataHelper;
   }
 }

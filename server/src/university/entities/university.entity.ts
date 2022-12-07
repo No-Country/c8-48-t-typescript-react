@@ -1,4 +1,5 @@
 import { User } from 'src/auth/entities/user.entity';
+import { Country } from 'src/country/entities/country.entity';
 import {
   Column,
   Entity,
@@ -12,8 +13,9 @@ export class University {
   @PrimaryGeneratedColumn('uuid')
   idUniversity: string;
 
-  @Column('int')
-  idCountry: number;
+  @OneToOne(() => Country, (country) => country.code)
+  @JoinColumn()
+  country: string;
 
   @Column('text')
   linkedin: string;

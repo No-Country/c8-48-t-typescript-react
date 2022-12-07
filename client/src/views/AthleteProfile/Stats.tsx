@@ -64,7 +64,27 @@ const Stats = () => {
   });
   const theme = useTheme();
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        color: 'white',
+        flexDirection: 'column',
+        background: `repeating-linear-gradient(
+              to bottom,
+              ${theme.palette.primary.light} 0px,
+              ${theme.palette.primary.light} 40px,
+              ${theme.palette.primary.tooltip} 40px,
+              ${theme.palette.primary.tooltip} 80px
+            )`,
+        py: 2,
+        px: 0,
+        borderRadius: '25px',
+        position: 'relative',
+        my: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {/* Display data vacante */}
       <Box sx={{ bgcolor: 'primary.dark', p: 3, width: '850px', height: '320px' }}>
         <IconButton sx={{ position: 'absolute', color: 'secondary.dark', right: 40, top: 10 }}>
@@ -340,7 +360,7 @@ const Stats = () => {
         </Typography>
       </Box>
       {/* Close minimum required */}
-    </>
+    </Box>
   );
 };
 

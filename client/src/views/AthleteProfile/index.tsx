@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { rootBackEnd } from '../../constants/links';
 import SideBar from './SideBar';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import Stats from './Stats';
 import AcademicData from './AcademicData';
 
@@ -35,42 +35,14 @@ const AthleteProfile = () => {
     if (athleteId) getAthleteProfile(athleteId);
   }, []);
 
-  const theme = useTheme();
-
   // const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
 
   console.log(athlete);
   return (
     <Box sx={{ display: 'flex', margin: '1rem auto', maxWidth: 1200 }}>
-      {/* Side bar */}
       <SideBar />
-      {/* Data */}
-      <Box sx={{ width: '85%' }}>
-        {/* Vacantes del equipo */}
-        <Box
-          sx={{
-            display: 'flex',
-            color: 'white',
-            flexDirection: 'column',
-            background: `repeating-linear-gradient(
-              to bottom,
-              ${theme.palette.primary.light} 0px,
-              ${theme.palette.primary.light} 40px,
-              ${theme.palette.primary.tooltip} 40px,
-              ${theme.palette.primary.tooltip} 80px
-            )`,
-            py: 2,
-            px: 0,
-            borderRadius: '25px',
-            position: 'relative',
-            my: 3,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Stats />
-        </Box>
-
+      <Box>
+        <Stats />
         <AcademicData />
       </Box>
     </Box>

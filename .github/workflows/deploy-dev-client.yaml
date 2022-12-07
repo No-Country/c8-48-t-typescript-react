@@ -32,4 +32,5 @@ jobs:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
         run: yarn build
       - run: npm install -g surge
+      - run: cp ./client/dist/index.html ./client/dist/200.html
       - run: surge ./client/dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}

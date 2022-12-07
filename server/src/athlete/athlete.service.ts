@@ -44,10 +44,10 @@ export class AthleteService {
     return `This action returns all athlete`;
   }
 
-  async createAthlete(createAthleteDto: CreateAthleteDto, user: User) {
+  async createAthlete(updateAthleteDto: UpdateAthleteDto, user: User) {
     try {
       const athlete = this.athletesRepository.create({
-        ...createAthleteDto,
+        ...updateAthleteDto,
         user,
       });
       await this.athletesRepository.save(athlete);

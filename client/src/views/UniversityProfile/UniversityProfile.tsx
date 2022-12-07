@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, useTheme, IconButton, CardMedia, Tooltip } from '@mui/material';
-import cancha from '../../assets/images/cancha.png';
+import cancha from '../../assets/images/Cancha.png';
 import EditIcon from '@mui/icons-material/Edit';
 import { motion, AnimatePresence } from 'framer-motion';
 import SideBar from './SideBar';

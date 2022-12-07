@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { rootBackEnd } from '../../constants/links';
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled, Typography, Select, MenuItem } from '@mui/material';
 
 const client = axios.create({
   baseURL: rootBackEnd,
@@ -44,7 +44,7 @@ const StudentProfile = () => {
               <OriginAthlete>
                 <CountryAthlete>Col</CountryAthlete>
                 <img
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 30, height: 20 }}
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/1200px-Flag_of_Colombia.svg.png"
                 />
               </OriginAthlete>
@@ -68,6 +68,26 @@ const StudentProfile = () => {
               </ContainerData>
             </DataAthlete>
           </InfoAthlete>
+          <Anuncio>
+            <AnuncioTitle>¿Buscas una oportunidad?</AnuncioTitle>
+            <TextAnuncio>
+              MANTENER TU ESTADO ACTULIZADO TE PERMITIRA APARECER EN EL BUSCADOR DE LAS
+              UNIVERSIDADES
+            </TextAnuncio>
+            <SelectEstado>
+              <Estados>Bucando</Estados>
+              <Estados>Pausado</Estados>
+              <Estados>Tramitando</Estados>
+              <Estados>Escucho ofertas</Estados>
+            </SelectEstado>
+          </Anuncio>
+          <ContainerResumen>
+            <TitleEstadisticas>Resumen</TitleEstadisticas>
+            <EstadisticaCuenta>PERFIL ACTUALIZADO 80%</EstadisticaCuenta>
+            <EstadisticaCuenta>SOLICITUDES RECIBIDAS 7</EstadisticaCuenta>
+            <EstadisticaCuenta>SOLICITUDES ENVIADAS 4</EstadisticaCuenta>
+            <EstadisticaCuenta>MIEMBRO DESDE 04/05/22</EstadisticaCuenta>
+          </ContainerResumen>
         </Column1>
         <Column2></Column2>
       </ContainerFlex>
@@ -80,11 +100,10 @@ export default StudentProfile;
 const ContainerFlex = styled(Box)({
   width: '100%',
   display: 'flex',
-  border: '1px solid #fff',
 });
 
 const Column1 = styled(Box)({
-  width: '29%',
+  width: '30%',
   heigth: 700,
   background: '#2F0343',
 });
@@ -94,7 +113,7 @@ const InfoAthlete = styled(Box)({
 });
 
 const HeaderInfoAthlete = styled(Box)({
-  width: '80%',
+  width: '85%',
   margin: '20px auto 0 auto',
   padding: 5,
   borderRadius: '20px 20px 0 0',
@@ -103,7 +122,7 @@ const HeaderInfoAthlete = styled(Box)({
 });
 
 const OriginAthlete = styled(Box)({
-  width: '80%',
+  width: '85%',
   display: 'flex',
   alignItems: 'center',
   alignContent: 'center',
@@ -116,7 +135,7 @@ const CountryAthlete = styled(Typography)({
 });
 
 const ImgAthlete = styled(Box)({
-  width: '80%',
+  width: '85%',
   height: 240,
   padding: 10,
   margin: 'auto',
@@ -124,7 +143,7 @@ const ImgAthlete = styled(Box)({
 });
 
 const DataAthlete = styled(Box)({
-  width: '80%',
+  width: '85%',
   margin: 'auto',
   textAlign: 'center',
   padding: 5,
@@ -146,6 +165,60 @@ const ContainerData = styled(Box)({
 const DataAthleteNew = styled(Typography)({
   width: '33%',
   fontSize: 12,
+});
+
+const Anuncio = styled(Box)({
+  width: '85%',
+  padding: '10px',
+  margin: '20px auto',
+  border: '3px solid #220B39',
+});
+
+const AnuncioTitle = styled(Typography)({
+  fontSize: '25px',
+  color: '#fff',
+});
+
+const TextAnuncio = styled(Typography)({
+  fontSize: '14px',
+  color: '#777',
+});
+
+const SelectEstado = styled(Select)({
+  width: '90%',
+  margin: '10px auto 10px auto',
+  padding: '0',
+  display: 'block',
+  borderRadius: '20px',
+  color: '#fff',
+  background: '#27F49E',
+});
+
+const Estados = styled(MenuItem)({
+  textAlign: 'center',
+  fontSize: '16px',
+  background: '#220B39',
+  color: '#fff',
+  '&:hover': {
+    background: '#220B39',
+  },
+});
+
+const ContainerResumen = styled(Box)({
+  width: '75%',
+  margin: '0 auto 30px auto',
+  textAlign: 'left',
+});
+
+const TitleEstadisticas = styled(Typography)({
+  fontSize: '20px',
+  color: '#fff',
+});
+
+const EstadisticaCuenta = styled(Typography)({
+  margin: '7px 0',
+  fontSize: '15px',
+  color: '#777',
 });
 
 const Column2 = styled(Box)({

@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Box, Typography, useTheme, IconButton, CardMedia, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import cancha from '../../assets/images/Cancha.png';
+import { AthleteData } from './index';
 
-const Stats = () => {
+const Stats: React.FC<{ athlete?: AthleteData }> = ({ athlete }) => {
   const [valuePosition, setValuePosition] = useState('di');
   useEffect(() => {
     if (valuePosition === 'dd') {
@@ -26,9 +27,9 @@ const Stats = () => {
       });
     } else if (valuePosition === 'di') {
       setVacanteData({
-        edad: 18,
-        altura: 190,
-        peso: 88,
+        edad: athlete?.age ?? 18,
+        altura: athlete?.height ?? 190,
+        peso: athlete?.weight ?? 88,
         pierna: 'IZQ',
         posición: 'DI',
         aceleración: 70,
@@ -37,10 +38,10 @@ const Stats = () => {
         tiro: 90,
         pases: 61,
         quite: 98,
-        fortaleza: 72,
-        liderazgo: 71,
-        vision: 70,
-        templanza: 73,
+        fortaleza: athlete?.strength ?? 72,
+        liderazgo: athlete?.leadership ?? 71,
+        vision: athlete?.gameVision ?? 70,
+        templanza: athlete?.temperance ?? 73,
       });
     }
   }, [valuePosition]);

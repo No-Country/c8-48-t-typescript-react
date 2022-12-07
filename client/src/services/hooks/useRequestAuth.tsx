@@ -38,10 +38,11 @@ interface postRegisterAthlete {
 interface LoggedUser {
   email: string;
   fullName: string;
+  idAthlete?: string;
 }
 
 interface LoginResponse {
-  ok: boolean;
+  success: boolean;
   message?: string[];
   jwt: string;
   data?: LoggedUser;
@@ -68,14 +69,14 @@ export default function useRequestAuth() {
         .post('api/auth/login', body)
         .then((res) => {
           const response: LoginResponse = res.data;
-          if (!response.ok) {
+          if (!response.success) {
             errorAlert(handleMessageError(response.message));
             cleanToken();
           }
-          localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem('user', JSON.stringify(response.data));
           setToken(response.jwt);
           successAlert('Has Ingresado exitosamente');
-          return true;
+          return response;
         })
         .catch((error) => {
           if (error.response?.status === 400) {
@@ -92,7 +93,7 @@ export default function useRequestAuth() {
               ),
             );
           }
-          return false;
+          return { success: false, data: { idAthlete: null } };
         }),
     [],
   );

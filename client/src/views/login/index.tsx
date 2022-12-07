@@ -22,9 +22,11 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const state: boolean = await postLogin({ email: values.name, password: values.lastName });
-      if (state) {
-        navigate('/');
+      const res = await postLogin({ email: values.name, password: values.lastName });
+      if (res.success) {
+        const path = res.data?.idAthlete ? '/athlete-profile/' + res.data.idAthlete : '/';
+        console.log(path);
+        navigate(path);
       }
     },
   });

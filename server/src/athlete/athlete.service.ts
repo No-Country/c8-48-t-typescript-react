@@ -62,7 +62,7 @@ export class AthleteService {
     const dataHelper = new DataHelper();
     const athletes = await this.athletesRepository.findOne({
       where: { idAthlete: id },
-      relations: { user: true, country: true },
+      relations: { user: true, country: true, academicAthlete: true },
       select: this.select,
     });
 

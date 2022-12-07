@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
-  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -15,7 +14,6 @@ import { DataHelper } from '../shared/helper/DataHelper';
 import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
 import { AcademicAthlete } from './entities/academicAthlete.entity';
 import { handleDBErrors } from '../shared/helper/ErrorExceptionDB';
-import { countries } from '../seed/data/country-data';
 
 @Injectable()
 export class AthleteService {

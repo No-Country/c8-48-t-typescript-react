@@ -1,15 +1,15 @@
 import { Box, styled, Typography, Select, MenuItem } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import flag from '../../assets/images/Bandera.png';
+import { AthleteData as Athlete } from './index';
 
-const SideBar = () => (
+const SideBar: React.FC<{ athlete?: Athlete }> = ({ athlete }) => (
   <Box sx={{ mr: 3, py: 3, width: '45vh' }}>
     <InfoAthlete>
       <HeaderInfoAthlete>
         <OriginAthlete>
           <div style={{ display: 'flex', alignContent: 'center' }}>
-            <img style={{ width: 30, height: 20, marginLeft: 20 }} src={flag} />
-            <CountryAthlete>Col</CountryAthlete>
+            <img style={{ width: 50, height: 20, marginLeft: 20 }} src={flag} />
           </div>
           <EditIcon sx={{ color: 'secondary.dark', marginRight: '20px' }} />
         </OriginAthlete>
@@ -17,7 +17,10 @@ const SideBar = () => (
       <ImgAthlete>
         <img
           style={{ width: '100%', height: 190, margin: 'auto', display: 'block' }}
-          src="https://fcf.com.co/wp-content/uploads/1991/07/James-Rodriguez-2-445x400.png"
+          src={
+            athlete?.user.urlProfile ??
+            'https://fcf.com.co/wp-content/uploads/1991/07/James-Rodriguez-2-445x400.png'
+          }
         />
       </ImgAthlete>
       <DataAthlete>
@@ -27,7 +30,7 @@ const SideBar = () => (
           <AthleteData>Estudio</AthleteData>
         </ContainerData>
         <ContainerData>
-          <DataAthleteNew>18</DataAthleteNew>
+          <DataAthleteNew>{athlete?.age ?? 0}</DataAthleteNew>
           <DataAthleteNew>DELANTERO</DataAthleteNew>
           <DataAthleteNew>ING</DataAthleteNew>
         </ContainerData>

@@ -15,6 +15,7 @@ const routesApp: JSX.Element = (
     <Route path="error-50x" element={<Error50X />} />
     <Route path="university-profile" element={<UniversityProfile />} />
     <Route path="athlete-profile" element={<AthleteProfile />} />
+    <Route path="athlete-profile/:athleteId" element={<AthleteProfile />} />
   </Route>
 );
 

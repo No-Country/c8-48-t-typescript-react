@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { rootBackEnd } from '../../constants/links';
 import SideBar from './SideBar';
@@ -14,36 +14,49 @@ const client = axios.create({
   },
 });
 
+type UserData = {
+  email: string;
+  fullName: string;
+  urlProfile?: string;
+};
+export interface AthleteData {
+  idAthlete: string;
+  age?: number;
+  gameVision?: number;
+  height?: number;
+  idCountry?: number;
+  leadership?: number;
+  strength?: number;
+  temperance?: number;
+  user: UserData;
+  weight?: number;
+}
+
 const AthleteProfile = () => {
-  const [athlete, setAthlete] = useState({ age: 0 });
+  const [athlete, setAthlete] = useState<AthleteData>();
   const navigate = useNavigate();
+  const { athleteId } = useParams();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token?.length) navigate('/auth/login/athlete');
-    // const athleteId = localStorage.getItem('athleteId');
-    // if (!athleteId?.length) navigate('/auth/login/athlete');
   }, []);
   useEffect(() => {
-    const getAthleteProfile = async (athleteId = 'e96a2199-9ec1-443f-b57a-3e994d2cd1d3') => {
+    const getAthleteProfile = async (athleteId = '059d9adc-90bd-42e8-b912-4dc69b06378f') => {
       const athlete = await client.get(`/api/athlete/${athleteId}`);
-      console.log({ athlete });
+      // TODO: handle error
       const athleteProfile = athlete.data;
-      setAthlete(athleteProfile);
+      setAthlete(athleteProfile.data);
     };
-    const athleteId = localStorage.getItem('athleteId');
     if (athleteId) getAthleteProfile(athleteId);
   }, []);
 
-  // const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
-
-  console.log(athlete);
   return (
     <Box sx={{ display: 'flex', margin: '1rem auto', maxWidth: 1200 }}>
-      <SideBar />
+      <SideBar athlete={athlete} />
       <Box>
-        <Stats />
-        <AcademicData />
+        <Stats athlete={athlete} />
+        <AcademicData athlete={athlete} />
       </Box>
     </Box>
   );

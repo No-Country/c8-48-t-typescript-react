@@ -1,8 +1,10 @@
-import { Box, Button, Typography, useTheme, IconButton } from '@mui/material';
+import { Box, Button, Typography, useTheme, IconButton, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
+import { AthleteData as Athlete } from './index';
 
-const AcademicData = () => {
+const AcademicData: React.FC<{ athlete?: Athlete }> = ({ athlete }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState<File>();
   const [fileDataURL, setFileDataURL] = useState('');
 
@@ -25,6 +27,12 @@ const AcademicData = () => {
     };
   }, [file]);
   const theme = useTheme();
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log({ athlete, form: event.target });
+  };
+
   return (
     <Box
       sx={{
@@ -46,106 +54,215 @@ const AcademicData = () => {
         alignItems: 'center',
       }}
     >
-      <Box sx={{ bgcolor: 'primary.dark', p: 3, width: '850px' }}>
-        <IconButton
-          sx={{
-            position: 'absolute',
-            color: 'secondary.dark',
-            right: 40,
-            top: 10,
-          }}
+      {athlete && isEditing ? (
+        <Box
+          component="form"
+          onSubmit={onSubmit}
+          sx={{ bgcolor: 'primary.dark', p: 3, width: '850px' }}
         >
-          <EditIcon />
-        </IconButton>
-        <Typography
-          sx={{
-            color: 'secondary.main',
-            fontSize: 17,
-            fontWeight: 700,
-            letterSpacing: '0.46px',
-            mb: 2,
-          }}
-        >
-          UNIVERSIDAD
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 5 }}>
-          <Box sx={{ color: 'secondary.main' }}>
-            <Typography sx={acontecimientosStyle}>PROMEDIO</Typography>
-            <Typography sx={acontecimientosStyle}>ÁREA DE ESTUDIO</Typography>
-          </Box>
-          <Box sx={{ ml: 4 }}>
-            <Typography sx={acontecimientosDataStyle}>{`> 8.00`}</Typography>
-            <Typography sx={acontecimientosDataStyle}>ARTE, ARQUITECTURA Y DISEÑO (ARQ)</Typography>
-            <Typography sx={acontecimientosDataStyle}>
-              CS EXACTAS, INGENIERÍA, y SISTEMAS (ING)
-            </Typography>
-          </Box>
-          {/* UPLOAD zz */}
-          <Box
+          <Typography
             sx={{
-              width: '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              bgcolor: 'primary.dark',
+              color: 'secondary.main',
+              fontSize: 17,
+              fontWeight: 700,
+              letterSpacing: '0.46px',
+              mb: 2,
             }}
           >
-            <Button
-              sx={{
-                fontSize: { lg: '14px', md: '12px', sm: '11px', xs: '10px' },
-                bgcolor: 'primary.light',
-                color: 'secondary.main',
-                height: '200px',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'relative',
-                alignItems: 'center',
-                justifyContent: 'center',
-                p: 5,
-                '&:hover': {},
-              }}
-              variant="contained"
-              component="label"
-              size="small"
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  border: `solid 3px ${theme.palette.primary.main}`,
-                  width: '80%',
-                  height: '80%',
-                  p: 5,
-                }}
+            UNIVERSIDAD
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 5 }}>
+            <Box sx={{ color: 'secondary.main' }}>
+              <Typography sx={acontecimientosStyle}>PROMEDIO</Typography>
+              <Typography sx={acontecimientosStyle}>ÁREA DE ESTUDIO</Typography>
+            </Box>
+            <Box sx={{ ml: 4 }}>
+              <TextField
+                sx={acontecimientosDataStyle}
+                id="academic-gpa"
+                label="Promedio"
+                variant="outlined"
               />
-              <Typography sx={{ color: 'white' }}>
-                {fileDataURL ? (
-                  'Archivo PDF listo'
-                ) : (
-                  <>
-                    CARGA TU
-                    <br />
-                    HISTORIAL
-                    <br />
-                    ACADÉMICO
-                  </>
-                )}
+              {/* <Typography sx={acontecimientosDataStyle}>{`> 8.00`}</Typography> */}
+              <Typography sx={acontecimientosDataStyle}>
+                ARTE, ARQUITECTURA Y DISEÑO (ARQ)
               </Typography>
-              <input
-                name="avatar"
-                type="file"
-                accept="application/pdf"
-                hidden
-                onChange={(e) => {
-                  const { files } = e.target;
-                  if (files instanceof FileList) {
-                    setFile(files[0]);
-                  }
+              <Typography sx={acontecimientosDataStyle}>
+                CS EXACTAS, INGENIERÍA, y SISTEMAS (ING)
+              </Typography>
+            </Box>
+            {/* UPLOAD zz */}
+            <Box
+              sx={{
+                width: '50%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                bgcolor: 'primary.dark',
+              }}
+            >
+              <Button
+                sx={{
+                  fontSize: { lg: '14px', md: '12px', sm: '11px', xs: '10px' },
+                  bgcolor: 'primary.light',
+                  color: 'secondary.main',
+                  height: '200px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  p: 5,
+                  '&:hover': {},
                 }}
-              />
-            </Button>
+                variant="contained"
+                component="label"
+                size="small"
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    border: `solid 3px ${theme.palette.primary.main}`,
+                    width: '80%',
+                    height: '80%',
+                    p: 5,
+                  }}
+                />
+                <Typography sx={{ color: 'white' }}>
+                  {fileDataURL ? (
+                    'Archivo PDF listo'
+                  ) : (
+                    <>
+                      CARGA TU
+                      <br />
+                      HISTORIAL
+                      <br />
+                      ACADÉMICO
+                    </>
+                  )}
+                </Typography>
+                <input
+                  name="avatar"
+                  type="file"
+                  accept="application/pdf"
+                  hidden
+                  onChange={(e) => {
+                    const { files } = e.target;
+                    if (files instanceof FileList) {
+                      setFile(files[0]);
+                    }
+                  }}
+                />
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      ) : (
+        <Box sx={{ bgcolor: 'primary.dark', p: 3, width: '850px' }}>
+          <IconButton
+            onClick={() => setIsEditing(true)}
+            sx={{
+              position: 'absolute',
+              color: 'secondary.dark',
+              right: 40,
+              top: 10,
+            }}
+          >
+            <EditIcon />
+          </IconButton>
+          <Typography
+            sx={{
+              color: 'secondary.main',
+              fontSize: 17,
+              fontWeight: 700,
+              letterSpacing: '0.46px',
+              mb: 2,
+            }}
+          >
+            UNIVERSIDAD
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 5 }}>
+            <Box sx={{ color: 'secondary.main' }}>
+              <Typography sx={acontecimientosStyle}>PROMEDIO</Typography>
+              <Typography sx={acontecimientosStyle}>ÁREA DE ESTUDIO</Typography>
+            </Box>
+            <Box sx={{ ml: 4 }}>
+              <Typography sx={acontecimientosDataStyle}>{`> 8.00`}</Typography>
+              <Typography sx={acontecimientosDataStyle}>
+                ARTE, ARQUITECTURA Y DISEÑO (ARQ)
+              </Typography>
+              <Typography sx={acontecimientosDataStyle}>
+                CS EXACTAS, INGENIERÍA, y SISTEMAS (ING)
+              </Typography>
+            </Box>
+            {/* UPLOAD zz */}
+            <Box
+              sx={{
+                width: '50%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                bgcolor: 'primary.dark',
+              }}
+            >
+              <Button
+                sx={{
+                  fontSize: { lg: '14px', md: '12px', sm: '11px', xs: '10px' },
+                  bgcolor: 'primary.light',
+                  color: 'secondary.main',
+                  height: '200px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  p: 5,
+                  '&:hover': {},
+                }}
+                variant="contained"
+                component="label"
+                size="small"
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    border: `solid 3px ${theme.palette.primary.main}`,
+                    width: '80%',
+                    height: '80%',
+                    p: 5,
+                  }}
+                />
+                <Typography sx={{ color: 'white' }}>
+                  {fileDataURL ? (
+                    'Archivo PDF listo'
+                  ) : (
+                    <>
+                      CARGA TU
+                      <br />
+                      HISTORIAL
+                      <br />
+                      ACADÉMICO
+                    </>
+                  )}
+                </Typography>
+                <input
+                  name="avatar"
+                  type="file"
+                  accept="application/pdf"
+                  hidden
+                  onChange={(e) => {
+                    const { files } = e.target;
+                    if (files instanceof FileList) {
+                      setFile(files[0]);
+                    }
+                  }}
+                />
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      )}
+
       {/* Minimum required  */}
       <Box sx={{ display: 'flex', width: '850px', justifyContent: 'end' }}>
         <Typography sx={{ color: `${theme.palette.secondary.main}`, mt: 2, p: 1 }}>
@@ -164,7 +281,7 @@ const AcademicData = () => {
           }}
         >
           {' '}
-          ARQ-ING 8.00
+          CS. EXACTAS 8.00
         </Typography>
       </Box>
       {/* Close minimum required */}

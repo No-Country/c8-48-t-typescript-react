@@ -5,16 +5,20 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Athlete } from './athlete.entity';
 
-type studyLevel = 'SECUNDARIO INCOMPLETA' | 'SECUNDARIA COMPLETA';
+import { Athlete } from './athlete.entity';
+import { StudyLevel } from '../types/studyLevel.type';
 
 @Entity('AcademicAthletes')
 export class AcademicAthlete {
   @PrimaryGeneratedColumn('uuid')
   idAcademicAthlete: string;
-  @Column('text')
-  studyLevel: studyLevel;
+  @Column({
+    type: 'enum',
+    enum: StudyLevel,
+    default: StudyLevel.SECUNDARIA_INCOMPLETA,
+  })
+  studyLevel: StudyLevel;
   @Column('numeric', { precision: 5, scale: 2 })
   average: number;
   @Column('text')

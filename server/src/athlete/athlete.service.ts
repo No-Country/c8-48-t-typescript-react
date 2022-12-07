@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -11,12 +12,18 @@ import { Athlete } from './entities/athlete.entity';
 import { User } from '../auth/entities/user.entity';
 import { CreateAthleteDto } from './dto/create-athlete.dto';
 import { DataHelper } from '../shared/helper/DataHelper';
+import { UpdateAcademicAthleteDto } from './dto/update-academicAthlete';
+import { AcademicAthlete } from './entities/academicAthlete.entity';
+import { handleDBErrors } from '../shared/helper/ErrorExceptionDB';
+import { countries } from '../seed/data/country-data';
 
 @Injectable()
 export class AthleteService {
   constructor(
     @InjectRepository(Athlete)
     private readonly athletesRepository: Repository<Athlete>,
+    @InjectRepository(AcademicAthlete)
+    private readonly academicAthleteRepository: Repository<AcademicAthlete>,
   ) {}
 
   private readonly select = {
@@ -24,7 +31,6 @@ export class AthleteService {
     age: true,
     height: true,
     weight: true,
-    idCountry: true,
     strength: true,
     gameVision: true,
     leadership: true,
@@ -58,7 +64,7 @@ export class AthleteService {
     const dataHelper = new DataHelper();
     const athletes = await this.athletesRepository.findOne({
       where: { idAthlete: id },
-      relations: { user: true },
+      relations: { user: true, country: true },
       select: this.select,
     });
 
@@ -111,5 +117,54 @@ export class AthleteService {
         'Error interno, contacte al administrador',
       );
     }
+  }
+
+  async createAcademicAthlete(
+    updateAcademicAthleteDto: UpdateAcademicAthleteDto,
+    idAthlete: string,
+  ) {
+    try {
+      const academicAthlete = this.academicAthleteRepository.create({
+        ...updateAcademicAthleteDto,
+        athlete: { idAthlete: idAthlete },
+      });
+      await this.academicAthleteRepository.save(academicAthlete);
+      return academicAthlete;
+    } catch (error) {
+      handleDBErrors(error);
+    }
+  }
+
+  async updateAcademicAthlete(
+    updateAcademicAthleteDto: UpdateAcademicAthleteDto,
+    idAthlete: string,
+  ) {
+    const dataHelper = new DataHelper();
+    const academicAthlete = await this.academicAthleteRepository.findOne({
+      where: {
+        athlete: { idAthlete: idAthlete },
+      },
+    });
+
+    if (!academicAthlete) {
+      dataHelper.success = true;
+      dataHelper.data = await this.createAcademicAthlete(
+        updateAcademicAthleteDto,
+        idAthlete,
+      );
+    } else {
+      await this.academicAthleteRepository.update(
+        {
+          athlete: { idAthlete: idAthlete },
+        },
+        {
+          ...updateAcademicAthleteDto,
+        },
+      );
+      dataHelper.success = true;
+      dataHelper.data = updateAcademicAthleteDto;
+    }
+
+    return dataHelper;
   }
 }

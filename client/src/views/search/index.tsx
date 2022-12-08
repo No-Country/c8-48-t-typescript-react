@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { errorLogin } from '../../services/alerts';
 import useRequestAuth from '../../services/hooks/useRequestAuth';
+import { AthleteData } from '../AthleteProfile';
 import { CardFilter } from './components/Cards';
 
 const SearchView = () => {
   const [searchParams] = useSearchParams();
   const { search } = useParams();
   const { searchAthlete, searchUniversity } = useRequestAuth();
-  const [athletes, setAthletes] = useState(null);
+  const [athletes, setAthletes] = useState([]);
   // const [universities, setUniversities] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,13 +22,9 @@ const SearchView = () => {
   }, []);
   useEffect(() => {
     const getAthleteSearch = async (search = '') => {
-      await fetch(
-        'https://nc-backend-production.up.railway.app/api/athlete/search/' +
-          search,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        },
-      )
+      await fetch('https://nc-backend-production.up.railway.app/api/athlete/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
         .then((res) => {
           const json = res.json();
           return json;
@@ -48,15 +45,7 @@ const SearchView = () => {
     <MainContainer>
       <PrincipalContainer>
         {!!athletes &&
-          athletes.map((e) => {
-            return (
-              <CardFilter
-                variation="athlete"
-                id={e.idUser}
-                fullName={e.fullName}
-              />
-            );
-          })}
+          athletes.map((athlete: AthleteData) => athlete && <CardFilter variation="athlete" />)}
         {/* {universities && universities?.map(() => <CardFilter variation="university" />)} */}
       </PrincipalContainer>
     </MainContainer>

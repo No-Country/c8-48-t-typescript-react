@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 //   variation?: 'university' | 'athlete';
 // };
 
-export const CardFilter = ({ variation = '', id, fullName }: any) => {
+export const CardFilter = ({ id, fullName, variation = '' }: any) => {
+  const navigate = useNavigate();
   const width = 312;
   const isVariationAthlete = variation === 'athlete';
-  const navigate = useNavigate();
 
   if (variation === '') return <></>;
   return (
@@ -46,23 +46,11 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
             <Typography color="#D3D3D3">ARG</Typography>
           </Box>
           {isVariationAthlete && (
-            <Box
-              width="auto"
-              display="flex"
-              flexDirection="row"
-              justifyContent="center"
-              p={0}
-            >
-              <Typography
-                sx={{ backgroundColor: '#2F0343', color: '#FFFFFF' }}
-                p={1}
-              >
+            <Box width="auto" display="flex" flexDirection="row" justifyContent="center" p={0}>
+              <Typography sx={{ backgroundColor: '#2F0343', color: '#FFFFFF' }} p={1}>
                 71
               </Typography>
-              <Typography
-                sx={{ backgroundColor: '#2D064C', color: '#FFFFFF' }}
-                p={1}
-              >
+              <Typography sx={{ backgroundColor: '#2D064C', color: '#FFFFFF' }} p={1}>
                 8.75
               </Typography>
             </Box>
@@ -70,11 +58,7 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
         </Box>
 
         <Box>
-          <img
-            src="https://thispersondoesnotexist.com/image"
-            height={width}
-            width={width}
-          />
+          <img src="https://thispersondoesnotexist.com/image" height={width} width={width} />
         </Box>
         <Box
           display="flex"
@@ -105,12 +89,7 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
             {fullName}
           </Typography>
         </Box>
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          px="8px"
-        >
+        <Box display="flex" flexDirection="row" justifyContent="space-between" px="8px">
           {isVariationAthlete && (
             <>
               <Box display="flex" flexDirection="column" alignItems="center">

@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material';
 import { useFormik } from 'formik';
+import { errorLogin } from '../services/alerts';
 
 const Layout = (props: any) => {
   const formik = useFormik({
@@ -31,11 +32,20 @@ const Layout = (props: any) => {
       search: '',
     },
     onSubmit: async (values: any) => {
-      console.log('file: DefaultLayout.tsx:34  onSubmit:  values', values);
       if (values.search.length > 0) {
-        navigate(`/search`);
+        if (!localStorage.getItem('token')) {
+          navigate('/');
+          errorLogin();
+        } else {
+          navigate(`/search`);
+        }
       } else {
-        navigate(`/search`);
+        if (!localStorage.getItem('token')) {
+          navigate('/');
+          errorLogin();
+        } else {
+          navigate(`/search`);
+        }
       }
     },
   });
@@ -201,7 +211,8 @@ const Layout = (props: any) => {
             {/* search bar */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <form
-                onSubmit={() => {
+                onSubmit={(e) => {
+                  e.preventDefault();
                   formik.handleSubmit();
                 }}
               >

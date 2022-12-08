@@ -11,3 +11,7 @@ export const errorAlert = (text = '') => {
 export const errorServerAlert = () => {
   Swal.fire('Error', 'Algo sucedió con el servidor 😅', 'error');
 };
+
+export const errorLogin = () => {
+  Swal.fire('Error', 'Necesita ingresar como usuario', 'error');
+};

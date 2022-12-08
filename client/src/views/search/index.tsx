@@ -1,14 +1,23 @@
 import { Box, styled, Typography } from '@mui/material';
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { errorLogin } from '../../services/alerts';
 import useRequestAuth from '../../services/hooks/useRequestAuth';
 import { CardFilter } from './components/Cards';
 import { ListFilter } from './components/List';
 
 const SearchView = () => {
   const [searchParams] = useSearchParams();
-  const { searchAthlete, searchUniversity } = useRequestAuth();
-  // console.log(searchAthlete(searchParams.get('search')));
+  const { searchAthlete } = useRequestAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      searchParams.delete('search');
+      navigate('/');
+      errorLogin();
+    }
+  }, [searchAthlete]);
+  console.log(searchAthlete(searchParams.get('search')));
 
   return (
     <MainContainer>

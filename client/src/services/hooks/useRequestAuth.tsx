@@ -136,31 +136,38 @@ export default function useRequestAuth() {
     [setRegisterAthleteData],
   );
 
-  const searchAthlete = useCallback(
-    (search: string) => {
-      client
-        .post('api/athlete/search/' + search)
-        .then((res) => {
-          setRegisterAthleteData(res.data);
-          console.log(res.data);
-        })
-        .catch((error) => console.log({ error }));
-    },
-    [searchAthlete],
-  );
+  const searchAthlete = (search: string | null) => {
+    client
+      .head('api/athlete/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        console.log({ error });
+        if (error.response.status === 401) localStorage.clear();
 
-  const searchUniversity = useCallback(
-    (search: string) => {
-      client
-        .get('api/university/search/' + search)
-        .then((res) => {
-          setRegisterAthleteData(res.data);
-          console.log(res.data);
-        })
-        .catch((error) => console.log({ error }));
-    },
-    [searchUniversity],
-  );
+        return false;
+      });
+  };
+  const searchUniversity = (search: string | null) => {
+    client
+      .head('api/university/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        console.log({ error });
+        if (error.response.status === 401) localStorage.clear();
+
+        return false;
+      });
+  };
 
   return {
     postRegisterAthlete,

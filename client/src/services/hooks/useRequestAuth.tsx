@@ -68,12 +68,14 @@ export default function useRequestAuth() {
       await client
         .post('api/auth/login', body)
         .then((res) => {
+          console.log('file: useRequestAuth.tsx:72  .then  res', res);
+
           const response: LoginResponse = res.data;
           if (!response.success) {
             errorAlert(handleMessageError(response.message));
             cleanToken();
           }
-          localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('user', JSON.stringify(res.data.data));
           setToken(response.jwt);
           successAlert('Has Ingresado exitosamente');
           return response;
@@ -128,11 +130,46 @@ export default function useRequestAuth() {
     [setRegisterAthleteData],
   );
 
+  const searchAthlete = (search: string | null) => {
+    client
+      .head('api/athlete/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        console.log({ error });
+        if (error.response.status === 401) localStorage.clear();
+
+        return false;
+      });
+  };
+  const searchUniversity = (search: string | null) => {
+    client
+      .head('api/university/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .catch((error) => {
+        console.log({ error });
+        if (error.response.status === 401) localStorage.clear();
+
+        return false;
+      });
+  };
+
   return {
     postRegisterAthlete,
     postRegisterUniversity,
     registerAthleteData,
     postLogin,
     registerUniversityData,
+    searchAthlete,
+    searchUniversity,
   };
 }

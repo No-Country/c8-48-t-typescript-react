@@ -21,6 +21,7 @@ export class AthleteService {
     private readonly athletesRepository: Repository<Athlete>,
     @InjectRepository(AcademicAthlete)
     private readonly academicAthleteRepository: Repository<AcademicAthlete>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   private readonly select = {
@@ -91,6 +92,30 @@ export class AthleteService {
     dataHelper.success = true;
     dataHelper.data = athletes;
     return dataHelper;
+  }
+
+  async findSearch(search: string, body: any) {
+    const user = this.userRepository.createQueryBuilder('user');
+    user.innerJoinAndSelect('user.athlete', 'athlete');
+    if (search) {
+      user
+        .leftJoinAndSelect('athlete.country', 'country')
+        .leftJoinAndSelect('athlete.academicAthlete', 'academicAthlete')
+        .where('user.fullName LIKE :search')
+        .orWhere('country.name LIKE :search')
+        .orWhere('athlete.position LIKE :search')
+        .orWhere('academicAthlete.careerInterest LIKE :search')
+        .andWhere('user.isActive is true')
+        .setParameter('search', `%${search}%`);
+    }
+
+    if (body?.fullName) user.orWhere(`user.fullName LIKE ${body?.fullName}`);
+    if (body?.country) user.orWhere(`country.name LIKE ${body?.country}`);
+    if (body?.position) user.orWhere(`athlete.position LIKE ${body?.position}`);
+    if (body?.career)
+      user.orWhere(`academicAthlete.careerInterest LIKE LIKE ${body?.career}`);
+
+    return user.getMany();
   }
 
   async update(id: string, updateAthleteDto: UpdateAthleteDto) {

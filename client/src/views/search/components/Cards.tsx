@@ -51,6 +51,35 @@ export const CardFilter = ({ variation = '' }: any) => {
           )}
         </Box>
         <Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="start"
+            justifyContent="end"
+            position="fixed"
+            height={width}
+          >
+            <Typography
+              sx={{
+                fontWeight: 'normal',
+                font: 'Roboto',
+                fontSize: '20px',
+                color: '#FFFFFF',
+              }}
+            >
+              Universidad
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 'normal',
+                font: 'Roboto',
+                fontSize: '20px',
+                color: '#FFFFFF',
+              }}
+            >
+              Nombre de la universidad
+            </Typography>
+          </Box>
           <img src="https://thispersondoesnotexist.com/image" height={width} width={width} />
         </Box>
         <Box display="flex" flexDirection="row" justifyContent="space-between" px="8px">

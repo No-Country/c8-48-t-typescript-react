@@ -16,6 +16,18 @@ import { CreateScholarshipUniversityDto } from './dto/create-scholarshipUniversi
 @Controller('university')
 export class UniversityController {
   constructor(private readonly universityService: UniversityService) {}
+
+  @Get('/search/:search')
+  @UseGuards(AuthGuard('jwt'))
+  findSearch(@Param('search') search = '', @Body() body: any) {
+    return this.universityService.findSearch(search, body);
+  }
+  @Get('/search')
+  @UseGuards(AuthGuard('jwt'))
+  findSearchAll() {
+    return this.universityService.findSearch('', null);
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id', ParseUUIDPipe) id: string) {

@@ -22,6 +22,18 @@ export class AthleteController {
     return this.athleteService.findAll();
   }
 
+  @Get('/search/:search')
+  @UseGuards(AuthGuard('jwt'))
+  findSearch(@Param('search') search = '', @Body() body: any) {
+    console.log(search);
+    return this.athleteService.findSearch(search, body);
+  }
+  @Get('/search')
+  @UseGuards(AuthGuard('jwt'))
+  findSearchAll() {
+    return this.athleteService.findSearch('', null);
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id', ParseUUIDPipe) id: string) {

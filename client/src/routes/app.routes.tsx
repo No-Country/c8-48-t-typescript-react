@@ -10,6 +10,7 @@ const UniversityProfile = lazy(() => import('../views/UniversityProfile/Universi
 
 const routesApp: JSX.Element = (
   <Route path="/" element={<DefaultLayout />}>
+    <Route path="search" element={<SearchView />} />
     <Route path="search/:search" element={<SearchView />} />
     <Route path="error-404" element={<Error404 />} />
     <Route path="error-50x" element={<Error50X />} />

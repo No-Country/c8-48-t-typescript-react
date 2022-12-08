@@ -21,9 +21,9 @@ export const ListFilter = ({ title, elements = [] }: ListFilterTypes) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {elements.map((e) => {
+          {elements.map((e, i) => {
             return (
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton sx={{ pl: 4 }} key={i}>
                 {/* <ListItemIcon>
                       <StarBorder />
                     </ListItemIcon> */}

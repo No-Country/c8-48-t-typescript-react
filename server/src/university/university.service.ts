@@ -21,11 +21,11 @@ export class UniversityService {
     private readonly universityRepository: Repository<University>,
     @InjectRepository(ScholarshipUniversity)
     private readonly scholarshipUniversityRepository: Repository<ScholarshipUniversity>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   private readonly select = {
     idUniversity: true,
-
     website: true,
     linkedin: true,
     description: true,
@@ -35,6 +35,24 @@ export class UniversityService {
       urlProfile: true,
     },
   };
+
+  async findSearch(search: string, body: any) {
+    const user = this.userRepository.createQueryBuilder('user');
+    user.innerJoinAndSelect('user.university', 'university');
+    if (search) {
+      user
+        .leftJoinAndSelect('university.country', 'country')
+        .where('user.fullName LIKE :search')
+        .orWhere('country.name LIKE :search')
+        .andWhere('user.isActive is true')
+        .setParameter('search', `%${search}%`);
+    }
+
+    if (body?.fullName) user.orWhere(`user.fullName LIKE ${body?.fullName}`);
+    if (body?.country) user.orWhere(`country.name LIKE ${body?.country}`);
+
+    return user.getMany();
+  }
 
   async create(createUniversityDto: CreateUniversityDto, user: User) {
     try {

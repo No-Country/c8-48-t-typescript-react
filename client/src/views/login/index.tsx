@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, styled, TextField, Typography } from '@mui/material';
+import { Box, Button, styled, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import CustomizedSnackbars from '../../components/StackComponent';
@@ -38,9 +38,7 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
         </Typography>
         <CustomTextField formik={formik} name={'name'} label={'Email Address'} />
         <CustomTextField formik={formik} name={'lastName'} label={'Password'} type="password" />
-        <Box width="100%" maxWidth="600px">
-          <Checkbox sx={{ mb: '20px' }} />
-        </Box>
+
         <Button
           color="primary"
           variant="contained"

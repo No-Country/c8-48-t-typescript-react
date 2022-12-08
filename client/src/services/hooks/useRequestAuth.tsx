@@ -54,26 +54,30 @@ interface RegisterUniversityData {
 }
 
 export default function useRequestAuth() {
-  const [registerAthleteData, setRegisterAthleteData] = useState<RegisterAthleteData>({
-    fullName: '',
-    email: '',
-  });
-  const [registerUniversityData, setRegisterUniversityData] = useState<RegisterUniversityData>({
-    fullName: '',
-    email: '',
-  });
+  const [registerAthleteData, setRegisterAthleteData] =
+    useState<RegisterAthleteData>({
+      fullName: '',
+      email: '',
+    });
+  const [registerUniversityData, setRegisterUniversityData] =
+    useState<RegisterUniversityData>({
+      fullName: '',
+      email: '',
+    });
 
   const postLogin = useCallback(
     async (body: postLoginBody) =>
       await client
         .post('api/auth/login', body)
         .then((res) => {
+          console.log('file: useRequestAuth.tsx:72  .then  res', res);
+
           const response: LoginResponse = res.data;
           if (!response.success) {
             errorAlert(handleMessageError(response.message));
             cleanToken();
           }
-          localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('user', JSON.stringify(res.data.data));
           setToken(response.jwt);
           successAlert('Has Ingresado exitosamente');
           return response;
@@ -82,14 +86,18 @@ export default function useRequestAuth() {
           if (error.response?.status === 400) {
             errorAlert(
               handleMessageError(
-                error.response?.data?.message ?? ['Hubo problemas con los datos proporcionados'],
+                error.response?.data?.message ?? [
+                  'Hubo problemas con los datos proporcionados',
+                ],
               ),
             );
           }
           if (error.response?.status === 401) {
             errorAlert(
               handleMessageError(
-                error.response?.data?.message ?? ['Las credenciales proporcionadas son inválidas'],
+                error.response?.data?.message ?? [
+                  'Las credenciales proporcionadas son inválidas',
+                ],
               ),
             );
           }

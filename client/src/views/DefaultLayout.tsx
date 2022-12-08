@@ -29,7 +29,13 @@ const Layout = (props: any) => {
   const navigate = useNavigate();
   // pages
   const pages = ['BECAS', 'PLANES', 'AYUDA'];
-  const menuResponsivePages = ['Iniciar Sesión', 'Registrarse', 'Becas', 'Planes', 'Ayuda'];
+  const menuResponsivePages = [
+    'Iniciar Sesión',
+    'Registrarse',
+    'Becas',
+    'Planes',
+    'Ayuda',
+  ];
   // Responsive Menu
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -49,7 +55,9 @@ const Layout = (props: any) => {
     setSignupEl(null);
   };
   const handleNavigateSignUp = (route: string) => {
-    route === 'university' ? navigate('auth/sign-up/university') : navigate('auth/sign-up/athlete');
+    route === 'university'
+      ? navigate('auth/sign-up/university')
+      : navigate('auth/sign-up/athlete');
   };
   // Login button
   const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
@@ -61,7 +69,13 @@ const Layout = (props: any) => {
     setLoginEl(null);
   };
 
-  const userLogged = () => JSON.parse(localStorage.getItem('user') ?? '{}');
+  const userLogged = () =>
+    JSON.parse(
+      localStorage.getItem('user') &&
+        localStorage.getItem('user') !== 'undefined'
+        ? localStorage.getItem('user')
+        : null,
+    );
 
   return (
     <Box height="100%" width="100vw">
@@ -223,7 +237,7 @@ const Layout = (props: any) => {
                   );
                 })}
               </Box>
-              {userLogged().fullName ? (
+              {userLogged()?.fullName ? (
                 <>
                   <IconButton aria-label="notifications">
                     <MarkunreadOutlinedIcon />
@@ -233,13 +247,29 @@ const Layout = (props: any) => {
                     <Link
                       color="primary"
                       href={
-                        userLogged().rol === 'athlete' ? '/athlete-profile' : 'university-profile'
+                        userLogged().rol === 'athlete'
+                          ? '/athlete-profile'
+                          : 'university-profile'
                       }
                       sx={linkStyle}
                     >
                       {userLogged().fullName}
                     </Link>
                   </IconButton>
+                  <Button
+                    sx={{
+                      letterSpacing: '0.46px',
+                      fontSize: { lg: 13, md: 12 },
+                    }}
+                    color="primary"
+                    size="small"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate('/');
+                    }}
+                  >
+                    Cerrar Sesion
+                  </Button>
                 </>
               ) : (
                 <>
@@ -265,12 +295,20 @@ const Layout = (props: any) => {
                     }}
                   >
                     <MenuItem>
-                      <Link color="primary" href="/auth/login/athlete" sx={linkStyle}>
+                      <Link
+                        color="primary"
+                        href="/auth/login/athlete"
+                        sx={linkStyle}
+                      >
                         Deportista
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                      <Link color="primary" href="/auth/login/university" sx={linkStyle}>
+                      <Link
+                        color="primary"
+                        href="/auth/login/university"
+                        sx={linkStyle}
+                      >
                         Universidad
                       </Link>
                     </MenuItem>
@@ -298,12 +336,22 @@ const Layout = (props: any) => {
                     }}
                   >
                     <MenuItem>
-                      <Link color="primary" href="/auth/sign-up/athlete" sx={linkStyle}>
+                      <Link
+                        color="primary"
+                        href="/auth/sign-up/athlete"
+                        sx={linkStyle}
+                      >
                         Deportista
                       </Link>
                     </MenuItem>
-                    <MenuItem onClick={() => handleNavigateSignUp('university')}>
-                      <Link color="primary" href="/auth/sign-up/university" sx={linkStyle}>
+                    <MenuItem
+                      onClick={() => handleNavigateSignUp('university')}
+                    >
+                      <Link
+                        color="primary"
+                        href="/auth/sign-up/university"
+                        sx={linkStyle}
+                      >
                         Universidad
                       </Link>
                     </MenuItem>

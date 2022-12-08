@@ -25,7 +25,6 @@ const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' 
       const res = await postLogin({ email: values.name, password: values.lastName });
       if (res.success) {
         const path = res.data?.idAthlete ? '/athlete-profile/' + res.data.idAthlete : '/';
-        console.log(path);
         navigate(path);
       }
     },

@@ -7,7 +7,6 @@ export default function Slider(slides: { slides: any[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [opacity, setOpacity] = useState(1);
   setTimeout(() => setOpacity(1), 250);
-  console.log(opacity, 'opacity');
   const changeOpacity = () => {
     setOpacity(0);
   };

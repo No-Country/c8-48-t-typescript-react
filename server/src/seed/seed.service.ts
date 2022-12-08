@@ -32,7 +32,7 @@ export class SeedService {
 
       await Promise.all(insertPromise);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     return true;

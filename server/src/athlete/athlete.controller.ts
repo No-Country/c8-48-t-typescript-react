@@ -25,7 +25,6 @@ export class AthleteController {
   @Get('/search/:search')
   @UseGuards(AuthGuard('jwt'))
   findSearch(@Param('search') search = '', @Body() body: any) {
-    console.log(search);
     return this.athleteService.findSearch(search, body);
   }
   @Get('/search')

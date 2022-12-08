@@ -106,7 +106,6 @@ export default function useRequestAuth() {
         .post('api/auth/register/athlete', body)
         .then((res) => {
           setRegisterAthleteData(res.data);
-          console.log(res.data);
         })
         .catch((error) => console.log({ error }));
     },
@@ -130,33 +129,31 @@ export default function useRequestAuth() {
     [setRegisterAthleteData],
   );
 
-  const searchAthlete = (search: string | null) => {
+  const searchAthlete: any = (search: string | null) => {
     client
-      .head('api/athlete/search/' + search, {
+      .get('/api/athlete/search/' + search, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .catch((error) => {
-        console.log({ error });
+        console.error({ error });
         if (error.response.status === 401) localStorage.clear();
 
         return false;
       });
   };
   const searchUniversity = (search: string | null) => {
-    client
-      .head('api/university/search/' + search, {
+    return client
+      .get('/api/university/search/' + search, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .catch((error) => {
-        console.log({ error });
+        console.error({ error });
         if (error.response.status === 401) localStorage.clear();
 
         return false;

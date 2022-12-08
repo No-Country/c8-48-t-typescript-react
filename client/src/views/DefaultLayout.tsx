@@ -37,7 +37,7 @@ const Layout = (props: any) => {
           navigate('/');
           errorLogin();
         } else {
-          navigate(`/search`);
+          navigate(`/search/` + values.search);
         }
       } else {
         if (!localStorage.getItem('token')) {

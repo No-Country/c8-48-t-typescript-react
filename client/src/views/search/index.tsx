@@ -33,7 +33,6 @@ const SearchView = () => {
           return json;
         })
         .then((res) => {
-          console.log('file: index.tsx:36  .then  res', res);
           setAthletes(res);
         })
         .catch(console.error);
@@ -45,11 +44,19 @@ const SearchView = () => {
     // });
   }, [search, searchAthlete, searchUniversity, athletes]);
 
-  console.log('athletes', athletes);
   return (
     <MainContainer>
       <PrincipalContainer>
-        {!!athletes && athletes.map(() => <CardFilter variation="athlete" />)}
+        {!!athletes &&
+          athletes.map((e) => {
+            return (
+              <CardFilter
+                variation="athlete"
+                id={e.idUser}
+                fullName={e.fullName}
+              />
+            );
+          })}
         {/* {universities && universities?.map(() => <CardFilter variation="university" />)} */}
       </PrincipalContainer>
     </MainContainer>

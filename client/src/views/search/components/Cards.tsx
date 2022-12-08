@@ -19,6 +19,10 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
         Width: width,
         height: 'fit-content',
         margin: '16px',
+        cursor: 'pointer',
+      }}
+      onClick={() => {
+        navigate('/athlete-profile/' + id);
       }}
     >
       <CardContent
@@ -80,15 +84,17 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
           width={width}
           padding="10px"
         >
-          <Typography
-            sx={{
-              fontWeight: 'normal',
-              font: 'Roboto',
-              fontSize: '14px',
-            }}
-          >
-            Universidad
-          </Typography>
+          {!isVariationAthlete && (
+            <Typography
+              sx={{
+                fontWeight: 'normal',
+                font: 'Roboto',
+                fontSize: '14px',
+              }}
+            >
+              Universidad
+            </Typography>
+          )}
           <Typography
             sx={{
               fontWeight: 'normal',
@@ -96,7 +102,7 @@ export const CardFilter = ({ variation = '', id, fullName }: any) => {
               fontSize: '20px',
             }}
           >
-            Nombre de la universidad
+            {fullName}
           </Typography>
         </Box>
         <Box

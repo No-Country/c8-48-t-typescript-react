@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -18,7 +19,7 @@ export class Athlete {
   @Column('smallint', { nullable: true })
   age: number;
 
-  @OneToOne(() => Country, (country) => country.code)
+  @ManyToOne(() => Country, (country) => country.code)
   @JoinColumn()
   country: string;
 

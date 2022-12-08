@@ -4,6 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -13,7 +14,7 @@ export class University {
   @PrimaryGeneratedColumn('uuid')
   idUniversity: string;
 
-  @OneToOne(() => Country, (country) => country.code)
+  @ManyToOne(() => Country, (country) => country.code)
   @JoinColumn()
   country: string;
 

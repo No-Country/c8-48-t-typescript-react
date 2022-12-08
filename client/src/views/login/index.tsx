@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  styled,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, styled, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import CustomizedSnackbars from '../../components/StackComponent';
@@ -18,11 +11,7 @@ const validationSchema = yup.object({
   lastName: yup.string().required('Apellido es requerido'),
 });
 
-const Login = ({
-  variation = 'athlete',
-}: {
-  variation: 'athlete' | 'university';
-}) => {
+const Login = ({ variation = 'athlete' }: { variation: 'athlete' | 'university' }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { postLogin } = useRequestAuth();
@@ -42,30 +31,13 @@ const Login = ({
     },
   });
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      justifyContent="center"
-      width="100%"
-      mt="20px"
-      p={4}
-    >
+    <Box display="flex" flexDirection="row" justifyContent="center" width="100%" mt="20px" p={4}>
       <MainContainer>
         <Typography variant="h3" fontWeight="bold" mb={2}>
-          Comienza a encontrar{' '}
-          {variation === 'university' ? 'talento' : 'becas'} ya
+          Comienza a encontrar {variation === 'university' ? 'talento' : 'becas'} ya
         </Typography>
-        <CustomTextField
-          formik={formik}
-          name={'name'}
-          label={'Email Address'}
-        />
-        <CustomTextField
-          formik={formik}
-          name={'lastName'}
-          label={'Password'}
-          type="password"
-        />
+        <CustomTextField formik={formik} name={'name'} label={'Email Address'} />
+        <CustomTextField formik={formik} name={'lastName'} label={'Password'} type="password" />
 
         <Button
           color="primary"

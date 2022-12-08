@@ -81,12 +81,6 @@ const OriginAthlete = styled(Box)({
   justifyContent: 'space-between',
 });
 
-const CountryAthlete = styled(Typography)({
-  marginLeft: 10,
-  fontSize: '1em',
-  color: '#fff',
-});
-
 const ImgAthlete = styled(Box)({
   width: '85%',
   height: 200,

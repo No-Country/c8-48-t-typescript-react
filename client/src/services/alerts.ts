@@ -13,5 +13,5 @@ export const errorServerAlert = () => {
 };
 
 export const errorLogin = () => {
-  Swal.fire('Error', 'Necesita ingresar como usuario', 'error');
+  Swal.fire('Error', 'Ingresa como usuario', 'error');
 };

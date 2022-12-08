@@ -54,16 +54,14 @@ interface RegisterUniversityData {
 }
 
 export default function useRequestAuth() {
-  const [registerAthleteData, setRegisterAthleteData] =
-    useState<RegisterAthleteData>({
-      fullName: '',
-      email: '',
-    });
-  const [registerUniversityData, setRegisterUniversityData] =
-    useState<RegisterUniversityData>({
-      fullName: '',
-      email: '',
-    });
+  const [registerAthleteData, setRegisterAthleteData] = useState<RegisterAthleteData>({
+    fullName: '',
+    email: '',
+  });
+  const [registerUniversityData, setRegisterUniversityData] = useState<RegisterUniversityData>({
+    fullName: '',
+    email: '',
+  });
 
   const postLogin = useCallback(
     async (body: postLoginBody) =>
@@ -86,18 +84,14 @@ export default function useRequestAuth() {
           if (error.response?.status === 400) {
             errorAlert(
               handleMessageError(
-                error.response?.data?.message ?? [
-                  'Hubo problemas con los datos proporcionados',
-                ],
+                error.response?.data?.message ?? ['Hubo problemas con los datos proporcionados'],
               ),
             );
           }
           if (error.response?.status === 401) {
             errorAlert(
               handleMessageError(
-                error.response?.data?.message ?? [
-                  'Las credenciales proporcionadas son inválidas',
-                ],
+                error.response?.data?.message ?? ['Las credenciales proporcionadas son inválidas'],
               ),
             );
           }

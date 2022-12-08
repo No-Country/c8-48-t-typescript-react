@@ -21,6 +21,7 @@ export class UniversityService {
     private readonly universityRepository: Repository<University>,
     @InjectRepository(ScholarshipUniversity)
     private readonly scholarshipUniversityRepository: Repository<ScholarshipUniversity>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   private readonly select = {

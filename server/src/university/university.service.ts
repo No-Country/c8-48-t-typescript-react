@@ -10,12 +10,17 @@ import { CreateUniversityDto } from './dto/create-university.dto';
 import { University } from './entities/university.entity';
 import { UpdateUniversityDto } from './dto/update-university.dto';
 import { DataHelper } from '../shared/helper/DataHelper';
+import { CreateScholarshipUniversityDto } from './dto/create-scholarshipUniversity.dto';
+import { ScholarshipUniversity } from './entities/scholarshipUniversity.entity';
+import { handleDBErrors } from '../shared/helper/ErrorExceptionDB';
 
 @Injectable()
 export class UniversityService {
   constructor(
     @InjectRepository(University)
     private readonly universityRepository: Repository<University>,
+    @InjectRepository(ScholarshipUniversity)
+    private readonly scholarshipUniversityRepository: Repository<ScholarshipUniversity>,
   ) {}
 
   private readonly select = {
@@ -77,6 +82,37 @@ export class UniversityService {
     }
     dataHelper.success = true;
     dataHelper.data = university;
+    return dataHelper;
+  }
+
+  async createScholarship(
+    createScholarshipUniversityDto: CreateScholarshipUniversityDto,
+    idUniversity: string,
+  ) {
+    const dataHelper = new DataHelper();
+    const scholarshipUniversity = this.scholarshipUniversityRepository.create({
+      ...createScholarshipUniversityDto,
+      university: { idUniversity: idUniversity },
+    });
+
+    try {
+      await this.scholarshipUniversityRepository.save(scholarshipUniversity);
+      dataHelper.success = true;
+      dataHelper.data = scholarshipUniversity;
+    } catch (error) {
+      handleDBErrors(error);
+    }
+
+    return dataHelper;
+  }
+
+  async getScholarships(idUniversity: string) {
+    const dataHelper = new DataHelper();
+    const scholarships = await this.scholarshipUniversityRepository.find({
+      where: { university: { idUniversity: idUniversity } },
+    });
+    dataHelper.success = true;
+    dataHelper.data = scholarships;
     return dataHelper;
   }
 }

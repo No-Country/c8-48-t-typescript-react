@@ -83,19 +83,10 @@ export const CardFilter = ({ variation = '' }: any) => {
           <img src="https://thispersondoesnotexist.com/image" height={width} width={width} />
         </Box>
         <Box>
-          <img
-            src="https://thispersondoesnotexist.com/image"
-            height={width}
-            width={width}
-          />
+          <img src="https://thispersondoesnotexist.com/image" height={width} width={width} />
         </Box>
 
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          px="8px"
-        >
+        <Box display="flex" flexDirection="row" justifyContent="space-between" px="8px">
           {isVariationAthlete && (
             <>
               <Box display="flex" flexDirection="column" alignItems="center">

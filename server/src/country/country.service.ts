@@ -28,7 +28,7 @@ export class CountryService {
     try {
       await this.countryRepository.delete({});
     } catch (error) {
-      console.log(error);
+      console.error(error);
       handleDBErrors(error);
     }
   }

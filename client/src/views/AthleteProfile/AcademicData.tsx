@@ -30,7 +30,6 @@ const AcademicData: React.FC<{ athlete?: Athlete }> = ({ athlete }) => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ athlete, form: event.target });
   };
 
   return (

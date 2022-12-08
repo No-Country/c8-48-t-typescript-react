@@ -68,8 +68,6 @@ export default function useRequestAuth() {
       await client
         .post('api/auth/login', body)
         .then((res) => {
-          console.log('file: useRequestAuth.tsx:72  .then  res', res);
-
           const response: LoginResponse = res.data;
           if (!response.success) {
             errorAlert(handleMessageError(response.message));
@@ -107,7 +105,7 @@ export default function useRequestAuth() {
         .then((res) => {
           setRegisterAthleteData(res.data);
         })
-        .catch((error) => console.log({ error }));
+        .catch((error) => console.error({ error }));
     },
     [setRegisterAthleteData],
   );
@@ -124,7 +122,7 @@ export default function useRequestAuth() {
         .then((res) => {
           setRegisterUniversityData(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     },
     [setRegisterAthleteData],
   );

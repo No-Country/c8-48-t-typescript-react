@@ -10,7 +10,7 @@ const SearchView = () => {
   const { search } = useParams();
   const { searchAthlete, searchUniversity } = useRequestAuth();
   const [athletes, setAthletes] = useState([]);
-  const [universities, setUniversities] = useState([]);
+  // const [universities, setUniversities] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -18,21 +18,37 @@ const SearchView = () => {
       navigate('/');
       errorLogin();
     }
-  }, [searchAthlete, searchUniversity]);
-  useEffect(() => {
-    searchAthlete(search || '')?.then((res = []) => {
-      setAthletes(res || []);
-    });
-    searchUniversity(search || '')?.then((res) => {
-      setUniversities(res || []);
-    });
   }, []);
+  useEffect(() => {
+    const getAthleteSearch = async (search = '') => {
+      console.log({ search });
+      await fetch('https://nc-backend-production.up.railway.app/api/athlete/search/' + search, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+        .then((res) => {
+          const json = res.json();
+          console.log(json);
+          return json;
+        })
+        .then((res) => {
+          console.log({ res });
+          setAthletes(res.data);
+        })
+        .catch(console.error);
+    };
 
+    if (searchAthlete && search) getAthleteSearch(search);
+    // searchUniversity(search || '')?.then((res) => {
+    //   setUniversities(res || []);
+    // });
+  }, [search, searchAthlete, searchUniversity]);
+
+  console.warn({ athletes, search });
   return (
     <MainContainer>
       <PrincipalContainer>
         {athletes && athletes?.map(() => <CardFilter variation="athlete" />)}
-        {universities && universities?.map(() => <CardFilter variation="university" />)}
+        {/* {universities && universities?.map(() => <CardFilter variation="university" />)} */}
       </PrincipalContainer>
     </MainContainer>
   );

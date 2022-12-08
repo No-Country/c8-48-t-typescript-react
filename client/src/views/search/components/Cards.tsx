@@ -40,20 +40,70 @@ export const CardFilter = ({ variation = '' }: any) => {
             <Typography color="#D3D3D3">ARG</Typography>
           </Box>
           {isVariationAthlete && (
-            <Box width="auto" display="flex" flexDirection="row" justifyContent="center" p={0}>
-              <Typography sx={{ backgroundColor: '#2F0343', color: '#FFFFFF' }} p={1}>
+            <Box
+              width="auto"
+              display="flex"
+              flexDirection="row"
+              justifyContent="center"
+              p={0}
+            >
+              <Typography
+                sx={{ backgroundColor: '#2F0343', color: '#FFFFFF' }}
+                p={1}
+              >
                 71
               </Typography>
-              <Typography sx={{ backgroundColor: '#2D064C', color: '#FFFFFF' }} p={1}>
+              <Typography
+                sx={{ backgroundColor: '#2D064C', color: '#FFFFFF' }}
+                p={1}
+              >
                 8.75
               </Typography>
             </Box>
           )}
         </Box>
         <Box>
-          <img src="https://thispersondoesnotexist.com/image" height={width} width={width} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="start"
+            justifyContent="end"
+            position="fixed"
+            height={width}
+          >
+            <Typography
+              sx={{
+                fontWeight: 'normal',
+                font: 'Roboto',
+                fontSize: '20px',
+                color: '#FFFFFF',
+              }}
+            >
+              Universidad
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 'normal',
+                font: 'Roboto',
+                fontSize: '20px',
+                color: '#FFFFFF',
+              }}
+            >
+              Nombre de la universidad
+            </Typography>
+          </Box>
+          <img
+            src="https://thispersondoesnotexist.com/image"
+            height={width}
+            width={width}
+          />
         </Box>
-        <Box display="flex" flexDirection="row" justifyContent="space-between" px="8px">
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          px="8px"
+        >
           {isVariationAthlete && (
             <>
               <Box display="flex" flexDirection="column" alignItems="center">

@@ -9,7 +9,7 @@ const SearchView = () => {
   const [searchParams] = useSearchParams();
   const { search } = useParams();
   const { searchAthlete, searchUniversity } = useRequestAuth();
-  const [athletes, setAthletes] = useState([]);
+  const [athletes, setAthletes] = useState(null);
   // const [universities, setUniversities] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -21,33 +21,35 @@ const SearchView = () => {
   }, []);
   useEffect(() => {
     const getAthleteSearch = async (search = '') => {
-      console.log({ search });
-      await fetch('https://nc-backend-production.up.railway.app/api/athlete/search/' + search, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      })
+      await fetch(
+        'https://nc-backend-production.up.railway.app/api/athlete/search/' +
+          search,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        },
+      )
         .then((res) => {
           const json = res.json();
-          console.log(json);
           return json;
         })
         .then((res) => {
-          console.log({ res });
-          setAthletes(res.data);
+          console.log('file: index.tsx:36  .then  res', res);
+          setAthletes(res);
         })
         .catch(console.error);
     };
 
-    if (searchAthlete && search) getAthleteSearch(search);
+    if (!athletes && search) getAthleteSearch(search);
     // searchUniversity(search || '')?.then((res) => {
     //   setUniversities(res || []);
     // });
-  }, [search, searchAthlete, searchUniversity]);
+  }, [search, searchAthlete, searchUniversity, athletes]);
 
-  console.warn({ athletes, search });
+  console.log('athletes', athletes);
   return (
     <MainContainer>
       <PrincipalContainer>
-        {athletes && athletes?.map(() => <CardFilter variation="athlete" />)}
+        {!!athletes && athletes.map(() => <CardFilter variation="athlete" />)}
         {/* {universities && universities?.map(() => <CardFilter variation="university" />)} */}
       </PrincipalContainer>
     </MainContainer>
@@ -71,4 +73,5 @@ const PrincipalContainer = styled(Box)(() => ({
   flexWrap: 'wrap',
   height: '100vh',
   width: '100%',
+  margin: 10,
 }));

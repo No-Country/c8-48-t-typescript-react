@@ -23,8 +23,22 @@ import {
   Link,
 } from '@mui/material';
 import { useTheme } from '@mui/material';
+import { useFormik } from 'formik';
 
 const Layout = (props: any) => {
+  const formik = useFormik({
+    initialValues: {
+      search: '',
+    },
+    onSubmit: async (values: any) => {
+      console.log('file: DefaultLayout.tsx:34  onSubmit:  values', values);
+      if (values.search.length > 0) {
+        navigate(`/search`);
+      } else {
+        navigate(`/search`);
+      }
+    },
+  });
   const theme = useTheme();
   const navigate = useNavigate();
   // pages
@@ -61,6 +75,7 @@ const Layout = (props: any) => {
   };
   // Login button
   const [loginEl, setLoginEl] = useState<null | HTMLElement>(null);
+
   const openLogin = Boolean(loginEl);
   const handleClickLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
     setLoginEl(event.currentTarget);
@@ -186,9 +201,8 @@ const Layout = (props: any) => {
             {/* search bar */}
             <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <form
-                onSubmit={(e: React.FormEvent) => {
-                  const data = new FormData(e.target as HTMLFormElement);
-                  navigate(`search/${data.get('search-input')}`);
+                onSubmit={() => {
+                  formik.handleSubmit();
                 }}
               >
                 <Search>
@@ -196,7 +210,10 @@ const Layout = (props: any) => {
                     <SearchIcon />
                   </SearchIconWrapper>
                   <StyledInputBase
-                    id="search-input"
+                    value={formik.values['search']}
+                    onChange={formik.handleChange}
+                    name={'search'}
+                    id={'search'}
                     placeholder="Buscar…"
                     inputProps={{ 'aria-label': 'search' }}
                   />

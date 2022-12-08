@@ -1,10 +1,14 @@
 import { Box, styled, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import useRequestAuth from '../../services/hooks/useRequestAuth';
 import { CardFilter } from './components/Cards';
 import { ListFilter } from './components/List';
 
 const SearchView = () => {
-  // const params = useParams();
-  // const search = params?.search;
+  const [searchParams] = useSearchParams();
+  const { searchAthlete, searchUniversity } = useRequestAuth();
+  // console.log(searchAthlete(searchParams.get('search')));
 
   return (
     <MainContainer>

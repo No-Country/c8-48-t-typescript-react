@@ -136,11 +136,39 @@ export default function useRequestAuth() {
     [setRegisterAthleteData],
   );
 
+  const searchAthlete = useCallback(
+    (search: string) => {
+      client
+        .post('api/athlete/search/' + search)
+        .then((res) => {
+          setRegisterAthleteData(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => console.log({ error }));
+    },
+    [searchAthlete],
+  );
+
+  const searchUniversity = useCallback(
+    (search: string) => {
+      client
+        .get('api/university/search/' + search)
+        .then((res) => {
+          setRegisterAthleteData(res.data);
+          console.log(res.data);
+        })
+        .catch((error) => console.log({ error }));
+    },
+    [searchUniversity],
+  );
+
   return {
     postRegisterAthlete,
     postRegisterUniversity,
     registerAthleteData,
     postLogin,
     registerUniversityData,
+    searchAthlete,
+    searchUniversity,
   };
 }
